@@ -20,7 +20,7 @@ else
 endif
 
 DEB_CONFIGURE_EXTRA_FLAGS += --disable-scrollkeeper \
-		--enable-ipv6=no \
+		--enable-ipv6=yes \
 		--with-at-spi-registryd-directory=/usr/lib/at-spi \
 		--with-default-path=/usr/local/bin:/usr/bin:/bin:/usr/games \
 		--with-custom-conf=/etc/gdm3/daemon.conf \

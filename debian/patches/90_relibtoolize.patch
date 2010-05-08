@@ -5,10 +5,10 @@ autoheader
 autoconf
 rm -rf autom4te.cache/ config.h.in~
 
-Index: gdm3-2.30.2/aclocal.m4
+Index: gdm-2.30.2/aclocal.m4
 ===================================================================
---- gdm3-2.30.2.orig/aclocal.m4	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/aclocal.m4	2010-06-02 19:00:46.000000000 +0200
+--- gdm-2.30.2.orig/aclocal.m4	2010-05-08 14:15:24.497608905 +0200
++++ gdm-2.30.2/aclocal.m4	2010-05-08 14:31:39.405109356 +0200
 @@ -13,8 +13,8 @@
  
  m4_ifndef([AC_AUTOCONF_VERSION],
@@ -20,7 +20,7 @@ Index: gdm3-2.30.2/aclocal.m4
  You have another version of autoconf.  It may work, but is not guaranteed to.
  If you have problems, you may need to regenerate the build system entirely.
  To do so, use the procedure documented by the package, typically `autoreconf'.])])
-@@ -705,7 +705,7 @@
+@@ -705,7 +705,7 @@ IT_PO_SUBDIR([po])
  AC_DEFUN([IT_PO_SUBDIR],
  [AC_PREREQ([2.53])dnl We use ac_top_srcdir inside AC_CONFIG_COMMANDS.
  dnl
@@ -29,7 +29,7 @@ Index: gdm3-2.30.2/aclocal.m4
  dnl of config.status.
  AC_CONFIG_COMMANDS_PRE([
    AC_CONFIG_COMMANDS([$1/stamp-it], [
-@@ -748,7955 +748,6 @@
+@@ -748,7955 +748,6 @@ AU_ALIAS([AC_PROG_INTLTOOL], [IT_PROG_IN
  # AC_DEFUN([AC_PROG_INTLTOOL], ...)
  
  
@@ -7985,7 +7985,7 @@ Index: gdm3-2.30.2/aclocal.m4
  # nls.m4 serial 3 (gettext-0.15)
  dnl Copyright (C) 1995-2003, 2005-2006 Free Software Foundation, Inc.
  dnl This file is free software; the Free Software Foundation
-@@ -8797,14 +848,16 @@
+@@ -8797,14 +848,16 @@ fi])
  # _PKG_CONFIG([VARIABLE], [COMMAND], [MODULES])
  # ---------------------------------------------
  m4_define([_PKG_CONFIG],
@@ -8010,7 +8010,7 @@ Index: gdm3-2.30.2/aclocal.m4
  fi[]dnl
  ])# _PKG_CONFIG
  
-@@ -8848,9 +901,9 @@
+@@ -8848,9 +901,9 @@ See the pkg-config man page for more det
  if test $pkg_failed = yes; then
          _PKG_SHORT_ERRORS_SUPPORTED
          if test $_pkg_short_errors_supported = yes; then
@@ -8022,7 +8022,7 @@ Index: gdm3-2.30.2/aclocal.m4
          fi
  	# Put the nasty error message in config.log where it belongs
  	echo "$$1[]_PKG_ERRORS" >&AS_MESSAGE_LOG_FD
-@@ -9929,4 +1982,9 @@
+@@ -9929,4 +1982,9 @@ AC_SUBST([am__tar])
  AC_SUBST([am__untar])
  ]) # _AM_PROG_TAR
  
@@ -8032,11 +8032,11 @@ Index: gdm3-2.30.2/aclocal.m4
 +m4_include([m4/ltversion.m4])
 +m4_include([m4/lt~obsolete.m4])
  m4_include([acinclude.m4])
-Index: gdm3-2.30.2/common/Makefile.in
+Index: gdm-2.30.2/common/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/common/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/common/Makefile.in	2010-06-02 19:00:46.000000000 +0200
-@@ -43,8 +43,10 @@
+--- gdm-2.30.2.orig/common/Makefile.in	2010-05-08 14:15:24.481610015 +0200
++++ gdm-2.30.2/common/Makefile.in	2010-05-08 14:31:39.409108469 +0200
+@@ -43,8 +43,10 @@ noinst_PROGRAMS = test-settings-server$(
  subdir = common
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -8049,7 +8049,7 @@ Index: gdm3-2.30.2/common/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -233,10 +235,13 @@
+@@ -233,10 +235,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -8063,7 +8063,7 @@ Index: gdm3-2.30.2/common/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -301,6 +306,7 @@
+@@ -301,6 +306,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -8071,10 +8071,10 @@ Index: gdm3-2.30.2/common/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/config.guess
+Index: gdm-2.30.2/config.guess
 ===================================================================
---- gdm3-2.30.2.orig/config.guess	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/config.guess	2010-06-02 19:00:46.000000000 +0200
+--- gdm-2.30.2.orig/config.guess	2010-05-08 14:15:24.465608680 +0200
++++ gdm-2.30.2/config.guess	2010-05-08 14:31:39.409108469 +0200
 @@ -1,10 +1,10 @@
  #! /bin/sh
  # Attempt to guess a canonical system name.
@@ -8088,7 +8088,7 @@ Index: gdm3-2.30.2/config.guess
  
  # This file is free software; you can redistribute it and/or modify it
  # under the terms of the GNU General Public License as published by
-@@ -56,8 +56,9 @@
+@@ -56,8 +56,9 @@ version="\
  GNU config.guess ($timestamp)
  
  Originally written by Per Bothner.
@@ -8100,10 +8100,10 @@ Index: gdm3-2.30.2/config.guess
  
  This is free software; see the source for copying conditions.  There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
-Index: gdm3-2.30.2/config.sub
+Index: gdm-2.30.2/config.sub
 ===================================================================
---- gdm3-2.30.2.orig/config.sub	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/config.sub	2010-06-02 19:00:46.000000000 +0200
+--- gdm-2.30.2.orig/config.sub	2010-05-08 14:15:24.453612324 +0200
++++ gdm-2.30.2/config.sub	2010-05-08 14:31:39.409108469 +0200
 @@ -1,10 +1,10 @@
  #! /bin/sh
  # Configuration validation subroutine script.
@@ -8117,7 +8117,7 @@ Index: gdm3-2.30.2/config.sub
  
  # This file is (in principle) common to ALL GNU software.
  # The presence of a machine in this file suggests that SOME GNU software
-@@ -75,8 +75,9 @@
+@@ -75,8 +75,9 @@ Report bugs and patches to <config-patch
  version="\
  GNU config.sub ($timestamp)
  
@@ -8129,7 +8129,7 @@ Index: gdm3-2.30.2/config.sub
  
  This is free software; see the source for copying conditions.  There is NO
  warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
-@@ -380,7 +381,8 @@
+@@ -380,7 +381,8 @@ case $basic_machine in
  	| sparclite-* \
  	| sparcv8-* | sparcv9-* | sparcv9b-* | sparcv9v-* | strongarm-* | sv1-* | sx?-* \
  	| tahoe-* | thumb-* \
@@ -8139,7 +8139,7 @@ Index: gdm3-2.30.2/config.sub
  	| tron-* \
  	| ubicom32-* \
  	| v850-* | v850e-* | vax-* \
-@@ -1085,6 +1087,11 @@
+@@ -1085,6 +1087,11 @@ case $basic_machine in
  		basic_machine=tic6x-unknown
  		os=-coff
  		;;
@@ -8151,7 +8151,7 @@ Index: gdm3-2.30.2/config.sub
  	tile*)
  		basic_machine=tile-unknown
  		os=-linux-gnu
-@@ -1435,6 +1442,8 @@
+@@ -1435,6 +1442,8 @@ case $os in
  	-dicos*)
  		os=-dicos
  		;;
@@ -8160,10 +8160,10 @@ Index: gdm3-2.30.2/config.sub
  	-none)
  		;;
  	*)
-Index: gdm3-2.30.2/configure
+Index: gdm-2.30.2/configure
 ===================================================================
---- gdm3-2.30.2.orig/configure	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/configure	2010-06-02 19:00:46.000000000 +0200
+--- gdm-2.30.2.orig/configure	2010-05-08 14:15:24.437611477 +0200
++++ gdm-2.30.2/configure	2010-05-08 14:31:39.473607589 +0200
 @@ -1,20 +1,24 @@
  #! /bin/sh
  # Guess values for system-dependent variables and create Makefiles.
@@ -8195,7 +8195,7 @@ Index: gdm3-2.30.2/configure
    emulate sh
    NULLCMD=:
    # Pre-4.2 versions of Zsh do word splitting on ${1+"$@"}, which
-@@ -22,23 +26,15 @@
+@@ -22,23 +26,15 @@ if test -n "${ZSH_VERSION+set}" && (emul
    alias -g '${1+"$@"}'='"$@"'
    setopt NO_GLOB_SUBST
  else
@@ -8224,7 +8224,7 @@ Index: gdm3-2.30.2/configure
  as_nl='
  '
  export as_nl
-@@ -46,7 +42,13 @@
+@@ -46,7 +42,13 @@ export as_nl
  as_echo='\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
  as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo
  as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo$as_echo
@@ -8239,7 +8239,7 @@ Index: gdm3-2.30.2/configure
    as_echo='printf %s\n'
    as_echo_n='printf %s'
  else
-@@ -57,7 +59,7 @@
+@@ -57,7 +59,7 @@ else
      as_echo_body='eval expr "X$1" : "X\\(.*\\)"'
      as_echo_n_body='eval
        arg=$1;
@@ -8248,7 +8248,7 @@ Index: gdm3-2.30.2/configure
        *"$as_nl"*)
  	expr "X$arg" : "X\\(.*\\)$as_nl";
  	arg=`expr "X$arg" : ".*$as_nl\\(.*\\)"`;;
-@@ -80,13 +82,6 @@
+@@ -80,13 +82,6 @@ if test "${PATH_SEPARATOR+set}" != set;
    }
  fi
  
@@ -8262,7 +8262,7 @@ Index: gdm3-2.30.2/configure
  
  # IFS
  # We need space, tab and new line, in precisely that order.  Quoting is
-@@ -96,15 +91,15 @@
+@@ -96,15 +91,15 @@ fi
  IFS=" ""	$as_nl"
  
  # Find who we are.  Look in the path if we contain no directory separator.
@@ -8281,7 +8281,7 @@ Index: gdm3-2.30.2/configure
  IFS=$as_save_IFS
  
       ;;
-@@ -116,12 +111,16 @@
+@@ -116,12 +111,16 @@ if test "x$as_myself" = x; then
  fi
  if test ! -f "$as_myself"; then
    $as_echo "$as_myself: error: cannot find myself; rerun with an absolute file name" >&2
@@ -8302,7 +8302,7 @@ Index: gdm3-2.30.2/configure
  done
  PS1='$ '
  PS2='> '
-@@ -133,330 +132,301 @@
+@@ -133,330 +132,301 @@ export LC_ALL
  LANGUAGE=C
  export LANGUAGE
  
@@ -8880,7 +8880,7 @@ Index: gdm3-2.30.2/configure
    sed -n '
      p
      /[$]LINENO/=
-@@ -473,8 +443,7 @@
+@@ -473,8 +443,7 @@ test \$exitcode = 0") || {
        s/-\n.*//
      ' >$as_me.lineno &&
    chmod +x "$as_me.lineno" ||
@@ -8890,7 +8890,7 @@ Index: gdm3-2.30.2/configure
  
    # Don't try to exec as it changes $[0], causing all sort of problems
    # (the dirname of $[0] is not the place where we might find the
-@@ -484,29 +453,18 @@
+@@ -484,29 +453,18 @@ test \$exitcode = 0") || {
    exit
  }
  
@@ -8925,7 +8925,7 @@ Index: gdm3-2.30.2/configure
  
  rm -f conf$$ conf$$.exe conf$$.file
  if test -d conf$$.dir; then
-@@ -536,7 +494,7 @@
+@@ -536,7 +494,7 @@ rm -f conf$$ conf$$.exe conf$$.dir/conf$
  rmdir conf$$.dir 2>/dev/null
  
  if mkdir -p . 2>/dev/null; then
@@ -8934,7 +8934,7 @@ Index: gdm3-2.30.2/configure
  else
    test -d ./-p && rmdir ./-p
    as_mkdir_p=false
-@@ -555,10 +513,10 @@
+@@ -555,10 +513,10 @@ else
        if test -d "$1"; then
  	test -d "$1/.";
        else
@@ -8947,7 +8947,7 @@ Index: gdm3-2.30.2/configure
  	???[sx]*):;;*)false;;esac;fi
      '\'' sh
    '
-@@ -573,7 +531,6 @@
+@@ -573,7 +531,6 @@ as_tr_sh="eval sed 'y%*+%pp%;s%[^_$as_cr
  
  
  
@@ -8955,7 +8955,7 @@ Index: gdm3-2.30.2/configure
  # Check that we are running under the correct shell.
  SHELL=${CONFIG_SHELL-/bin/sh}
  
-@@ -722,7 +679,8 @@
+@@ -722,7 +679,8 @@ fi
  
  
  
@@ -8965,7 +8965,7 @@ Index: gdm3-2.30.2/configure
  
  # Name of the host.
  # hostname on some systems (SVR3.2, Linux) returns a bogus exit status,
-@@ -740,7 +698,6 @@
+@@ -740,7 +698,6 @@ cross_compiling=no
  subdirs=
  MFLAGS=
  MAKEFLAGS=
@@ -8973,7 +8973,7 @@ Index: gdm3-2.30.2/configure
  
  # Identity of this package.
  PACKAGE_NAME='gdm'
-@@ -748,6 +705,7 @@
+@@ -748,6 +705,7 @@ PACKAGE_TARNAME='gdm'
  PACKAGE_VERSION='2.30.2'
  PACKAGE_STRING='gdm 2.30.2'
  PACKAGE_BUGREPORT='http://bugzilla.gnome.org/enter_bug.cgi?product=gdm'
@@ -8981,7 +8981,7 @@ Index: gdm3-2.30.2/configure
  
  ac_unique_file="daemon/gdm-manager.c"
  # Factoring default headers for most tests.
-@@ -848,6 +806,7 @@
+@@ -848,6 +806,7 @@ XDMCP_SUPPORT_TRUE
  XDMCP_LIBS
  PAM_LIBS
  HAVE_PAM
@@ -8989,7 +8989,7 @@ Index: gdm3-2.30.2/configure
  PAM_PREFIX
  GDM_GROUPNAME
  GDM_USERNAME
-@@ -881,6 +840,8 @@
+@@ -881,6 +840,8 @@ LIBXKLAVIER_LIBS
  LIBXKLAVIER_CFLAGS
  SIMPLE_GREETER_LIBS
  SIMPLE_GREETER_CFLAGS
@@ -8998,7 +8998,7 @@ Index: gdm3-2.30.2/configure
  HAVE_DEVICEKIT_POWER
  DEVKIT_POWER_LIBS
  DEVKIT_POWER_CFLAGS
-@@ -1064,6 +1025,7 @@
+@@ -1064,6 +1025,7 @@ bindir
  program_transform_name
  prefix
  exec_prefix
@@ -9006,7 +9006,7 @@ Index: gdm3-2.30.2/configure
  PACKAGE_BUGREPORT
  PACKAGE_STRING
  PACKAGE_VERSION
-@@ -1111,6 +1073,7 @@
+@@ -1111,6 +1073,7 @@ enable_ipv6
  with_user
  with_group
  with_pam_prefix
@@ -9014,7 +9014,7 @@ Index: gdm3-2.30.2/configure
  with_dbus_sys
  with_dbus_services
  enable_rbac_shutdown
-@@ -1159,6 +1122,8 @@
+@@ -1159,6 +1122,8 @@ GCONF_CFLAGS
  GCONF_LIBS
  DEVKIT_POWER_CFLAGS
  DEVKIT_POWER_LIBS
@@ -9023,7 +9023,7 @@ Index: gdm3-2.30.2/configure
  SIMPLE_GREETER_CFLAGS
  SIMPLE_GREETER_LIBS
  LIBXKLAVIER_CFLAGS
-@@ -1277,8 +1242,7 @@
+@@ -1277,8 +1242,7 @@ do
      ac_useropt=`expr "x$ac_option" : 'x-*disable-\(.*\)'`
      # Reject names that are not valid shell variable names.
      expr "x$ac_useropt" : ".*[^-+._$as_cr_alnum]" >/dev/null &&
@@ -9033,7 +9033,7 @@ Index: gdm3-2.30.2/configure
      ac_useropt_orig=$ac_useropt
      ac_useropt=`$as_echo "$ac_useropt" | sed 's/[-+.]/_/g'`
      case $ac_user_opts in
-@@ -1304,8 +1268,7 @@
+@@ -1304,8 +1268,7 @@ do
      ac_useropt=`expr "x$ac_option" : 'x-*enable-\([^=]*\)'`
      # Reject names that are not valid shell variable names.
      expr "x$ac_useropt" : ".*[^-+._$as_cr_alnum]" >/dev/null &&
@@ -9043,7 +9043,7 @@ Index: gdm3-2.30.2/configure
      ac_useropt_orig=$ac_useropt
      ac_useropt=`$as_echo "$ac_useropt" | sed 's/[-+.]/_/g'`
      case $ac_user_opts in
-@@ -1509,8 +1472,7 @@
+@@ -1509,8 +1472,7 @@ do
      ac_useropt=`expr "x$ac_option" : 'x-*with-\([^=]*\)'`
      # Reject names that are not valid shell variable names.
      expr "x$ac_useropt" : ".*[^-+._$as_cr_alnum]" >/dev/null &&
@@ -9053,7 +9053,7 @@ Index: gdm3-2.30.2/configure
      ac_useropt_orig=$ac_useropt
      ac_useropt=`$as_echo "$ac_useropt" | sed 's/[-+.]/_/g'`
      case $ac_user_opts in
-@@ -1526,8 +1488,7 @@
+@@ -1526,8 +1488,7 @@ do
      ac_useropt=`expr "x$ac_option" : 'x-*without-\(.*\)'`
      # Reject names that are not valid shell variable names.
      expr "x$ac_useropt" : ".*[^-+._$as_cr_alnum]" >/dev/null &&
@@ -9063,7 +9063,7 @@ Index: gdm3-2.30.2/configure
      ac_useropt_orig=$ac_useropt
      ac_useropt=`$as_echo "$ac_useropt" | sed 's/[-+.]/_/g'`
      case $ac_user_opts in
-@@ -1557,17 +1518,17 @@
+@@ -1557,17 +1518,17 @@ do
    | --x-librar=* | --x-libra=* | --x-libr=* | --x-lib=* | --x-li=* | --x-l=*)
      x_libraries=$ac_optarg ;;
  
@@ -9087,7 +9087,7 @@ Index: gdm3-2.30.2/configure
      eval $ac_envvar=\$ac_optarg
      export $ac_envvar ;;
  
-@@ -1584,15 +1545,13 @@
+@@ -1584,15 +1545,13 @@ done
  
  if test -n "$ac_prev"; then
    ac_option=--`echo $ac_prev | sed 's/_/-/g'`
@@ -9105,7 +9105,7 @@ Index: gdm3-2.30.2/configure
      *)     $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2 ;;
    esac
  fi
-@@ -1615,8 +1574,7 @@
+@@ -1615,8 +1574,7 @@ do
      [\\/$]* | ?:[\\/]* )  continue;;
      NONE | '' ) case $ac_var in *prefix ) continue;; esac;;
    esac
@@ -9115,7 +9115,7 @@ Index: gdm3-2.30.2/configure
  done
  
  # There might be people who depend on the old broken behavior: `$host'
-@@ -1646,11 +1604,9 @@
+@@ -1646,11 +1604,9 @@ test "$silent" = yes && exec 6>/dev/null
  ac_pwd=`pwd` && test -n "$ac_pwd" &&
  ac_ls_di=`ls -di .` &&
  ac_pwd_ls_di=`cd "$ac_pwd" && ls -di .` ||
@@ -9129,7 +9129,7 @@ Index: gdm3-2.30.2/configure
  
  
  # Find the source files, if location was not specified.
-@@ -1689,13 +1645,11 @@
+@@ -1689,13 +1645,11 @@ else
  fi
  if test ! -r "$srcdir/$ac_unique_file"; then
    test "$ac_srcdir_defaulted" = yes && srcdir="$ac_confdir or .."
@@ -9145,7 +9145,7 @@ Index: gdm3-2.30.2/configure
  	pwd)`
  # When building in place, set srcdir=.
  if test "$ac_abs_confdir" = "$ac_pwd"; then
-@@ -1869,6 +1823,8 @@
+@@ -1869,6 +1823,8 @@ Optional Packages:
    --with-group=<username> specify gdm's user name
    --with-pam-prefix=<prefix>
                            specify where pam files go
@@ -9154,7 +9154,7 @@ Index: gdm3-2.30.2/configure
    --with-dbus-sys=<dir>   where D-BUS system.d directory is
    --with-dbus-services=<dir>
                            where D-BUS services directory is
-@@ -1897,7 +1853,7 @@
+@@ -1897,7 +1853,7 @@ Some influential environment variables:
    LDFLAGS     linker flags, e.g. -L<lib dir> if you have libraries in a
                nonstandard directory <lib dir>
    LIBS        libraries to pass to the linker, e.g. -l<library>
@@ -9163,7 +9163,7 @@ Index: gdm3-2.30.2/configure
                you have headers in a nonstandard directory <include dir>
    CPP         C preprocessor
    CXX         C++ compiler command
-@@ -1930,6 +1886,10 @@
+@@ -1930,6 +1886,10 @@ Some influential environment variables:
                C compiler flags for DEVKIT_POWER, overriding pkg-config
    DEVKIT_POWER_LIBS
                linker flags for DEVKIT_POWER, overriding pkg-config
@@ -9174,7 +9174,7 @@ Index: gdm3-2.30.2/configure
    SIMPLE_GREETER_CFLAGS
                C compiler flags for SIMPLE_GREETER, overriding pkg-config
    SIMPLE_GREETER_LIBS
-@@ -2016,457 +1976,960 @@
+@@ -2016,457 +1976,960 @@ test -n "$ac_init_help" && exit $ac_stat
  if $ac_init_version; then
    cat <<\_ACEOF
  gdm configure 2.30.2
@@ -10504,7 +10504,7 @@ Index: gdm3-2.30.2/configure
      # by default.
      for ac_prog in ginstall scoinst install; do
        for ac_exec_ext in '' $ac_executable_extensions; do
-@@ -2499,7 +2962,7 @@
+@@ -2499,7 +2962,7 @@ case $as_dir/ in
      ;;
  esac
  
@@ -10513,7 +10513,7 @@ Index: gdm3-2.30.2/configure
  IFS=$as_save_IFS
  
  rm -rf conftest.one conftest.two conftest.dir
-@@ -2515,7 +2978,7 @@
+@@ -2515,7 +2978,7 @@ fi
      INSTALL=$ac_install_sh
    fi
  fi
@@ -10522,7 +10522,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$INSTALL" >&6; }
  
  # Use test -z because SunOS4 sh mishandles braces in ${var-val}.
-@@ -2526,7 +2989,7 @@
+@@ -2526,7 +2989,7 @@ test -z "$INSTALL_SCRIPT" && INSTALL_SCR
  
  test -z "$INSTALL_DATA" && INSTALL_DATA='${INSTALL} -m 644'
  
@@ -10531,7 +10531,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking whether build environment is sane... " >&6; }
  # Just in case
  sleep 1
-@@ -2537,15 +3000,11 @@
+@@ -2537,15 +3000,11 @@ am_lf='
  '
  case `pwd` in
    *[\\\"\#\$\&\'\`$am_lf]*)
@@ -10549,7 +10549,7 @@ Index: gdm3-2.30.2/configure
  esac
  
  # Do `set' in a subshell so we don't clobber the current shell's
-@@ -2567,11 +3026,8 @@
+@@ -2567,11 +3026,8 @@ if (
        # if, for instance, CONFIG_SHELL is bash and it inherits a
        # broken ls alias from the environment.  This has actually
        # happened.  Such a system could not be considered "sane".
@@ -10563,7 +10563,7 @@ Index: gdm3-2.30.2/configure
     fi
  
     test "$2" = conftest.file
-@@ -2580,13 +3036,10 @@
+@@ -2580,13 +3036,10 @@ then
     # Ok.
     :
  else
@@ -10580,7 +10580,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "yes" >&6; }
  test "$program_prefix" != NONE &&
    program_transform_name="s&^&$program_prefix&;$program_transform_name"
-@@ -2614,7 +3067,7 @@
+@@ -2614,7 +3067,7 @@ if eval "$MISSING --run true"; then
    am_missing_run="$MISSING --run "
  else
    am_missing_run=
@@ -10589,7 +10589,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: \`missing' script is too old or missing" >&2;}
  fi
  
-@@ -2635,9 +3088,9 @@
+@@ -2635,9 +3088,9 @@ if test "$cross_compiling" != no; then
    if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}strip", so it can be a program name with args.
  set dummy ${ac_tool_prefix}strip; ac_word=$2
@@ -10601,7 +10601,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$STRIP"; then
-@@ -2648,24 +3101,24 @@
+@@ -2648,24 +3101,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -10631,7 +10631,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -2675,9 +3128,9 @@
+@@ -2675,9 +3128,9 @@ if test -z "$ac_cv_prog_STRIP"; then
    ac_ct_STRIP=$STRIP
    # Extract the first word of "strip", so it can be a program name with args.
  set dummy strip; ac_word=$2
@@ -10643,7 +10643,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_STRIP"; then
-@@ -2688,24 +3141,24 @@
+@@ -2688,24 +3141,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -10673,7 +10673,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -2714,7 +3167,7 @@
+@@ -2714,7 +3167,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -10682,7 +10682,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -2727,10 +3180,10 @@
+@@ -2727,10 +3180,10 @@ fi
  fi
  INSTALL_STRIP_PROGRAM="\$(install_sh) -c -s"
  
@@ -10695,7 +10695,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    as_save_IFS=$IFS; IFS=$PATH_SEPARATOR
-@@ -2738,7 +3191,7 @@
+@@ -2738,7 +3191,7 @@ for as_dir in $PATH$PATH_SEPARATOR/opt/s
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -10704,7 +10704,7 @@ Index: gdm3-2.30.2/configure
  	 for ac_exec_ext in '' $ac_executable_extensions; do
  	   { test -f "$as_dir/$ac_prog$ac_exec_ext" && $as_test_x "$as_dir/$ac_prog$ac_exec_ext"; } || continue
  	   case `"$as_dir/$ac_prog$ac_exec_ext" --version 2>&1` in #(
-@@ -2750,11 +3203,12 @@
+@@ -2750,11 +3203,12 @@ do
  	   esac
  	 done
         done
@@ -10718,7 +10718,7 @@ Index: gdm3-2.30.2/configure
    if test "${ac_cv_path_mkdir+set}" = set; then
      MKDIR_P="$ac_cv_path_mkdir -p"
    else
-@@ -2762,11 +3216,10 @@
+@@ -2762,11 +3216,10 @@ fi
      # value for MKDIR_P within a source directory, because that will
      # break other packages using the cache if that directory is
      # removed, or if the value is a relative name.
@@ -10731,7 +10731,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$MKDIR_P" >&6; }
  
  mkdir_p="$MKDIR_P"
-@@ -2779,9 +3232,9 @@
+@@ -2779,9 +3232,9 @@ for ac_prog in gawk mawk nawk awk
  do
    # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
@@ -10743,7 +10743,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$AWK"; then
-@@ -2792,24 +3245,24 @@
+@@ -2792,24 +3245,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -10773,7 +10773,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -2817,11 +3270,11 @@
+@@ -2817,11 +3270,11 @@ fi
    test -n "$AWK" && break
  done
  
@@ -10787,7 +10787,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    cat >conftest.make <<\_ACEOF
-@@ -2839,11 +3292,11 @@
+@@ -2839,11 +3292,11 @@ esac
  rm -f conftest.make
  fi
  if eval test \$ac_cv_prog_make_${ac_make}_set = yes; then
@@ -10801,7 +10801,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
    SET_MAKE="MAKE=${MAKE-make}"
  fi
-@@ -2863,9 +3316,7 @@
+@@ -2863,9 +3316,7 @@ if test "`cd $srcdir && pwd`" != "`pwd`"
    am__isrc=' -I$(srcdir)'
    # test to see if srcdir already configured
    if test -f $srcdir/config.status; then
@@ -10812,7 +10812,7 @@ Index: gdm3-2.30.2/configure
    fi
  fi
  
-@@ -2922,7 +3373,7 @@
+@@ -2922,7 +3373,7 @@ am__tar='${AMTAR} chof - "$$tardir"'; am
  
  
  # Check whether --enable-silent-rules was given.
@@ -10821,7 +10821,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_silent_rules;
  fi
  
-@@ -2934,16 +3385,16 @@
+@@ -2934,16 +3385,16 @@ esac
  AM_BACKSLASH='\'
  
  
@@ -10841,7 +10841,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$USE_MAINTAINER_MODE" >&6; }
     if test $USE_MAINTAINER_MODE = yes; then
    MAINTAINER_MODE_TRUE=
-@@ -2970,7 +3421,7 @@
+@@ -2970,7 +3421,7 @@ am__doit:
  .PHONY: am__doit
  END
  # If we don't find an include directive, just comment out the code.
@@ -10850,7 +10850,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking for style of include used by $am_make... " >&6; }
  am__include="#"
  am__quote=
-@@ -2998,12 +3449,12 @@
+@@ -2998,12 +3449,12 @@ if test "$am__include" = "#"; then
  fi
  
  
@@ -10865,7 +10865,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_dependency_tracking;
  fi
  
-@@ -3028,9 +3479,9 @@
+@@ -3028,9 +3479,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}gcc", so it can be a program name with args.
  set dummy ${ac_tool_prefix}gcc; ac_word=$2
@@ -10877,7 +10877,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$CC"; then
-@@ -3041,24 +3492,24 @@
+@@ -3041,24 +3492,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -10907,7 +10907,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -3068,9 +3519,9 @@
+@@ -3068,9 +3519,9 @@ if test -z "$ac_cv_prog_CC"; then
    ac_ct_CC=$CC
    # Extract the first word of "gcc", so it can be a program name with args.
  set dummy gcc; ac_word=$2
@@ -10919,7 +10919,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_CC"; then
-@@ -3081,24 +3532,24 @@
+@@ -3081,24 +3532,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -10949,7 +10949,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -3107,7 +3558,7 @@
+@@ -3107,7 +3558,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -10958,7 +10958,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -3121,9 +3572,9 @@
+@@ -3121,9 +3572,9 @@ if test -z "$CC"; then
            if test -n "$ac_tool_prefix"; then
      # Extract the first word of "${ac_tool_prefix}cc", so it can be a program name with args.
  set dummy ${ac_tool_prefix}cc; ac_word=$2
@@ -10970,7 +10970,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$CC"; then
-@@ -3134,24 +3585,24 @@
+@@ -3134,24 +3585,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -11000,7 +11000,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -3161,9 +3612,9 @@
+@@ -3161,9 +3612,9 @@ fi
  if test -z "$CC"; then
    # Extract the first word of "cc", so it can be a program name with args.
  set dummy cc; ac_word=$2
@@ -11012,7 +11012,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$CC"; then
-@@ -3175,18 +3626,18 @@
+@@ -3175,18 +3626,18 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -11034,7 +11034,7 @@ Index: gdm3-2.30.2/configure
  IFS=$as_save_IFS
  
  if test $ac_prog_rejected = yes; then
-@@ -3205,10 +3656,10 @@
+@@ -3205,10 +3656,10 @@ fi
  fi
  CC=$ac_cv_prog_CC
  if test -n "$CC"; then
@@ -11047,7 +11047,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -3220,9 +3671,9 @@
+@@ -3220,9 +3671,9 @@ if test -z "$CC"; then
    do
      # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
  set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -11059,7 +11059,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$CC"; then
-@@ -3233,24 +3684,24 @@
+@@ -3233,24 +3684,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -11089,7 +11089,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -3264,9 +3715,9 @@
+@@ -3264,9 +3715,9 @@ if test -z "$CC"; then
  do
    # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
@@ -11101,7 +11101,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_CC"; then
-@@ -3277,24 +3728,24 @@
+@@ -3277,24 +3728,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -11131,7 +11131,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -3307,7 +3758,7 @@
+@@ -3307,7 +3758,7 @@ done
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -11140,7 +11140,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -3318,57 +3769,37 @@
+@@ -3318,57 +3769,37 @@ fi
  fi
  
  
@@ -11218,7 +11218,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -3384,8 +3815,8 @@
+@@ -3384,8 +3815,8 @@ ac_clean_files="$ac_clean_files a.out a.
  # Try to create an executable without -o first, disregard a.out.
  # It will help us diagnose broken compilers, and finding out an intuition
  # of exeext.
@@ -11229,7 +11229,7 @@ Index: gdm3-2.30.2/configure
  ac_link_default=`$as_echo "$ac_link" | sed 's/ -o *conftest[^ ]*//'`
  
  # The possible output files:
-@@ -3401,17 +3832,17 @@
+@@ -3401,17 +3832,17 @@ do
  done
  rm -f $ac_rmfiles
  
@@ -11252,7 +11252,7 @@ Index: gdm3-2.30.2/configure
    # Autoconf-2.13 could set the ac_cv_exeext variable to `no'.
  # So ignore a value of `no', otherwise this would lead to `EXEEXT = no'
  # in a Makefile.  We should not override ac_cv_exeext if it was cached,
-@@ -3428,7 +3859,7 @@
+@@ -3428,7 +3859,7 @@ do
  	# certainly right.
  	break;;
      *.* )
@@ -11261,7 +11261,7 @@ Index: gdm3-2.30.2/configure
  	then :; else
  	   ac_cv_exeext=`expr "$ac_file" : '[^.]*\(\..*\)'`
  	fi
-@@ -3447,84 +3878,42 @@
+@@ -3447,84 +3878,42 @@ test "$ac_cv_exeext" = no && ac_cv_exeex
  else
    ac_file=''
  fi
@@ -11367,7 +11367,7 @@ Index: gdm3-2.30.2/configure
    # If both `conftest.exe' and `conftest' are `present' (well, observable)
  # catch `conftest.exe'.  For instance with Cygwin, `ls conftest' will
  # work properly (i.e., refer to `conftest.exe'), while it won't with
-@@ -3539,32 +3928,83 @@
+@@ -3539,32 +3928,83 @@ for ac_file in conftest.exe conftest con
    esac
  done
  else
@@ -11467,7 +11467,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -3576,17 +4016,17 @@
+@@ -3576,17 +4016,17 @@ main ()
  }
  _ACEOF
  rm -f conftest.o conftest.obj
@@ -11490,7 +11490,7 @@ Index: gdm3-2.30.2/configure
    for ac_file in conftest.o conftest.obj conftest.*; do
    test -f "$ac_file" || continue;
    case $ac_file in
-@@ -3599,31 +4039,23 @@
+@@ -3599,31 +4039,23 @@ else
    $as_echo "$as_me: failed program was:" >&5
  sed 's/^/| /' conftest.$ac_ext >&5
  
@@ -11529,7 +11529,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -3637,37 +4069,16 @@
+@@ -3637,37 +4069,16 @@ main ()
    return 0;
  }
  _ACEOF
@@ -11570,7 +11570,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_c_compiler_gnu" >&6; }
  if test $ac_compiler_gnu = yes; then
    GCC=yes
-@@ -3676,20 +4087,16 @@
+@@ -3676,20 +4087,16 @@ else
  fi
  ac_test_CFLAGS=${CFLAGS+set}
  ac_save_CFLAGS=$CFLAGS
@@ -11594,7 +11594,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -3700,35 +4107,11 @@
+@@ -3700,35 +4107,11 @@ main ()
    return 0;
  }
  _ACEOF
@@ -11633,7 +11633,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -3739,36 +4122,12 @@
+@@ -3739,36 +4122,12 @@ main ()
    return 0;
  }
  _ACEOF
@@ -11674,7 +11674,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -3779,42 +4138,17 @@
+@@ -3779,42 +4138,17 @@ main ()
    return 0;
  }
  _ACEOF
@@ -11719,7 +11719,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_prog_cc_g" >&6; }
  if test "$ac_test_CFLAGS" = set; then
    CFLAGS=$ac_save_CFLAGS
-@@ -3831,18 +4165,14 @@
+@@ -3831,18 +4165,14 @@ else
      CFLAGS=
    fi
  fi
@@ -11741,7 +11741,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #include <stdarg.h>
  #include <stdio.h>
-@@ -3899,32 +4229,9 @@
+@@ -3899,32 +4229,9 @@ for ac_arg in '' -qlanglvl=extc89 -qlang
  	-Ae "-Aa -D_HPUX_SOURCE" "-Xc -D__EXTENSIONS__"
  do
    CC="$ac_save_CC $ac_arg"
@@ -11775,7 +11775,7 @@ Index: gdm3-2.30.2/configure
  rm -f core conftest.err conftest.$ac_objext
    test "x$ac_cv_prog_cc_c89" != "xno" && break
  done
-@@ -3935,17 +4242,19 @@
+@@ -3935,17 +4242,19 @@ fi
  # AC_CACHE_VAL
  case "x$ac_cv_prog_cc_c89" in
    x)
@@ -11798,7 +11798,7 @@ Index: gdm3-2.30.2/configure
  
  ac_ext=c
  ac_cpp='$CPP $CPPFLAGS'
-@@ -3955,9 +4264,9 @@
+@@ -3955,9 +4264,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  depcc="$CC"   am_compiler_list=
  
@@ -11810,7 +11810,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -z "$AMDEP_TRUE" && test -f "$am_depcomp"; then
-@@ -4065,7 +4374,7 @@
+@@ -4065,7 +4374,7 @@ else
  fi
  
  fi
@@ -11819,7 +11819,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$am_cv_CC_dependencies_compiler_type" >&6; }
  CCDEPMODE=depmode=$am_cv_CC_dependencies_compiler_type
  
-@@ -4086,14 +4395,14 @@
+@@ -4086,14 +4395,14 @@ ac_cpp='$CPP $CPPFLAGS'
  ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
  ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
  ac_compiler_gnu=$ac_cv_c_compiler_gnu
@@ -11836,7 +11836,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
        # Double quotes because CPP needs to be expanded
-@@ -4108,11 +4417,7 @@
+@@ -4108,11 +4417,7 @@ do
    # <limits.h> exists even on freestanding compilers.
    # On the NeXT, cc -E runs the code through the compiler's parser,
    # not just through cpp. "Syntax error" is here to catch this case.
@@ -11849,7 +11849,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef __STDC__
  # include <limits.h>
-@@ -4121,78 +4426,34 @@
+@@ -4121,78 +4426,34 @@ cat >>conftest.$ac_ext <<_ACEOF
  #endif
  		     Syntax error
  _ACEOF
@@ -11933,7 +11933,7 @@ Index: gdm3-2.30.2/configure
    break
  fi
  
-@@ -4204,7 +4465,7 @@
+@@ -4204,7 +4465,7 @@ fi
  else
    ac_cv_prog_CPP=$CPP
  fi
@@ -11942,7 +11942,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$CPP" >&6; }
  ac_preproc_ok=false
  for ac_c_preproc_warn_flag in '' yes
-@@ -4215,11 +4476,7 @@
+@@ -4215,11 +4476,7 @@ do
    # <limits.h> exists even on freestanding compilers.
    # On the NeXT, cc -E runs the code through the compiler's parser,
    # not just through cpp. "Syntax error" is here to catch this case.
@@ -11955,7 +11955,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef __STDC__
  # include <limits.h>
-@@ -4228,87 +4485,40 @@
+@@ -4228,87 +4485,40 @@ cat >>conftest.$ac_ext <<_ACEOF
  #endif
  		     Syntax error
  _ACEOF
@@ -12052,7 +12052,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  ac_ext=c
-@@ -4318,9 +4528,9 @@
+@@ -4318,9 +4528,9 @@ ac_link='$CC -o conftest$ac_exeext $CFLA
  ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  
@@ -12064,7 +12064,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -z "$GREP"; then
-@@ -4331,7 +4541,7 @@
+@@ -4331,7 +4541,7 @@ for as_dir in $PATH$PATH_SEPARATOR/usr/x
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -12073,7 +12073,7 @@ Index: gdm3-2.30.2/configure
      for ac_exec_ext in '' $ac_executable_extensions; do
        ac_path_GREP="$as_dir/$ac_prog$ac_exec_ext"
        { test -f "$ac_path_GREP" && $as_test_x "$ac_path_GREP"; } || continue
-@@ -4351,7 +4561,7 @@
+@@ -4351,7 +4561,7 @@ case `"$ac_path_GREP" --version 2>&1` in
      $as_echo 'GREP' >> "conftest.nl"
      "$ac_path_GREP" -e 'GREP$' -e '-(cannot match)-' < "conftest.nl" >"conftest.out" 2>/dev/null || break
      diff "conftest.out" "conftest.nl" >/dev/null 2>&1 || break
@@ -12082,7 +12082,7 @@ Index: gdm3-2.30.2/configure
      if test $ac_count -gt ${ac_path_GREP_max-0}; then
        # Best one so far, save it but keep looking for a better one
        ac_cv_path_GREP="$ac_path_GREP"
-@@ -4366,26 +4576,24 @@
+@@ -4366,26 +4576,24 @@ esac
        $ac_path_GREP_found && break 3
      done
    done
@@ -12114,7 +12114,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if echo a | $GREP -E '(a|b)' >/dev/null 2>&1
-@@ -4399,7 +4607,7 @@
+@@ -4399,7 +4607,7 @@ for as_dir in $PATH$PATH_SEPARATOR/usr/x
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -12123,7 +12123,7 @@ Index: gdm3-2.30.2/configure
      for ac_exec_ext in '' $ac_executable_extensions; do
        ac_path_EGREP="$as_dir/$ac_prog$ac_exec_ext"
        { test -f "$ac_path_EGREP" && $as_test_x "$ac_path_EGREP"; } || continue
-@@ -4419,7 +4627,7 @@
+@@ -4419,7 +4627,7 @@ case `"$ac_path_EGREP" --version 2>&1` i
      $as_echo 'EGREP' >> "conftest.nl"
      "$ac_path_EGREP" 'EGREP$' < "conftest.nl" >"conftest.out" 2>/dev/null || break
      diff "conftest.out" "conftest.nl" >/dev/null 2>&1 || break
@@ -12132,7 +12132,7 @@ Index: gdm3-2.30.2/configure
      if test $ac_count -gt ${ac_path_EGREP_max-0}; then
        # Best one so far, save it but keep looking for a better one
        ac_cv_path_EGREP="$ac_path_EGREP"
-@@ -4434,12 +4642,10 @@
+@@ -4434,12 +4642,10 @@ esac
        $ac_path_EGREP_found && break 3
      done
    done
@@ -12147,7 +12147,7 @@ Index: gdm3-2.30.2/configure
    fi
  else
    ac_cv_path_EGREP=$EGREP
-@@ -4447,21 +4653,17 @@
+@@ -4447,21 +4653,17 @@ fi
  
     fi
  fi
@@ -12173,7 +12173,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #include <stdlib.h>
  #include <stdarg.h>
-@@ -4476,48 +4678,23 @@
+@@ -4476,48 +4678,23 @@ main ()
    return 0;
  }
  _ACEOF
@@ -12227,7 +12227,7 @@ Index: gdm3-2.30.2/configure
  else
    ac_cv_header_stdc=no
  fi
-@@ -4527,18 +4704,14 @@
+@@ -4527,18 +4704,14 @@ fi
  
  if test $ac_cv_header_stdc = yes; then
    # ISC 2.0.2 stdlib.h does not declare free, contrary to ANSI.
@@ -12249,7 +12249,7 @@ Index: gdm3-2.30.2/configure
  else
    ac_cv_header_stdc=no
  fi
-@@ -4548,14 +4721,10 @@
+@@ -4548,14 +4721,10 @@ fi
  
  if test $ac_cv_header_stdc = yes; then
    # /bin/cc in Irix-4.0.5 gets non-ANSI ctype macros unless using -ansi.
@@ -12266,7 +12266,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #include <ctype.h>
  #include <stdlib.h>
-@@ -4582,428 +4751,143 @@
+@@ -4582,428 +4751,143 @@ main ()
    return 0;
  }
  _ACEOF
@@ -12785,7 +12785,7 @@ Index: gdm3-2.30.2/configure
  else
    ac_cv_header_stdc=no
  fi
-@@ -5013,18 +4897,14 @@
+@@ -5013,18 +4897,14 @@ fi
  
  if test $ac_cv_header_stdc = yes; then
    # ISC 2.0.2 stdlib.h does not declare free, contrary to ANSI.
@@ -12807,7 +12807,7 @@ Index: gdm3-2.30.2/configure
  else
    ac_cv_header_stdc=no
  fi
-@@ -5034,14 +4914,10 @@
+@@ -5034,14 +4914,10 @@ fi
  
  if test $ac_cv_header_stdc = yes; then
    # /bin/cc in Irix-4.0.5 gets non-ANSI ctype macros unless using -ansi.
@@ -12824,7 +12824,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #include <ctype.h>
  #include <stdlib.h>
-@@ -5068,51 +4944,22 @@
+@@ -5068,51 +4944,22 @@ main ()
    return 0;
  }
  _ACEOF
@@ -12883,7 +12883,7 @@ Index: gdm3-2.30.2/configure
  
  fi
  
-@@ -5130,9 +4977,9 @@
+@@ -5130,9 +4977,9 @@ if test -z "$CXX"; then
    do
      # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
  set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -12895,7 +12895,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$CXX"; then
-@@ -5143,24 +4990,24 @@
+@@ -5143,24 +4990,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -12925,7 +12925,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -5174,9 +5021,9 @@
+@@ -5174,9 +5021,9 @@ if test -z "$CXX"; then
  do
    # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
@@ -12937,7 +12937,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_CXX"; then
-@@ -5187,24 +5034,24 @@
+@@ -5187,24 +5034,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -12967,7 +12967,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -5217,7 +5064,7 @@
+@@ -5217,7 +5064,7 @@ done
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -12976,7 +12976,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -5228,53 +5075,36 @@
+@@ -5228,53 +5075,36 @@ fi
    fi
  fi
  # Provide some information about the compiler.
@@ -13049,7 +13049,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -5288,37 +5118,16 @@
+@@ -5288,37 +5118,16 @@ main ()
    return 0;
  }
  _ACEOF
@@ -13090,7 +13090,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_cxx_compiler_gnu" >&6; }
  if test $ac_compiler_gnu = yes; then
    GXX=yes
-@@ -5327,20 +5136,16 @@
+@@ -5327,20 +5136,16 @@ else
  fi
  ac_test_CXXFLAGS=${CXXFLAGS+set}
  ac_save_CXXFLAGS=$CXXFLAGS
@@ -13114,7 +13114,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -5351,35 +5156,11 @@
+@@ -5351,35 +5156,11 @@ main ()
    return 0;
  }
  _ACEOF
@@ -13153,7 +13153,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -5390,36 +5171,12 @@
+@@ -5390,36 +5171,12 @@ main ()
    return 0;
  }
  _ACEOF
@@ -13194,7 +13194,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -5430,42 +5187,17 @@
+@@ -5430,42 +5187,17 @@ main ()
    return 0;
  }
  _ACEOF
@@ -13239,7 +13239,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_prog_cxx_g" >&6; }
  if test "$ac_test_CXXFLAGS" = set; then
    CXXFLAGS=$ac_save_CXXFLAGS
-@@ -5490,9 +5222,9 @@
+@@ -5490,9 +5222,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  depcc="$CXX"  am_compiler_list=
  
@@ -13251,7 +13251,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -z "$AMDEP_TRUE" && test -f "$am_depcomp"; then
-@@ -5600,7 +5332,7 @@
+@@ -5600,7 +5332,7 @@ else
  fi
  
  fi
@@ -13260,7 +13260,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$am_cv_CXX_dependencies_compiler_type" >&6; }
  CXXDEPMODE=depmode=$am_cv_CXX_dependencies_compiler_type
  
-@@ -5616,22 +5348,18 @@
+@@ -5616,22 +5348,18 @@ fi
  
  
  if test "x$CC" != xcc; then
@@ -13287,7 +13287,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -5647,63 +5375,63 @@
+@@ -5647,63 +5375,63 @@ _ACEOF
  # existing .o file with -o, though they will create one.
  ac_try='$CC -c conftest.$ac_ext -o conftest2.$ac_objext >&5'
  rm -f conftest2.*
@@ -13376,7 +13376,7 @@ Index: gdm3-2.30.2/configure
        then
  	# cc works too.
  	:
-@@ -5720,15 +5448,13 @@
+@@ -5720,15 +5448,13 @@ rm -f core conftest*
  
  fi
  if eval test \$ac_cv_prog_cc_${ac_cc}_c_o = yes; then
@@ -13395,7 +13395,7 @@ Index: gdm3-2.30.2/configure
  
  fi
  
-@@ -5749,14 +5475,14 @@
+@@ -5749,14 +5475,14 @@ fi
  
  case `pwd` in
    *\ * | *\	*)
@@ -13413,7 +13413,7 @@ Index: gdm3-2.30.2/configure
  
  
  
-@@ -5774,35 +5500,27 @@
+@@ -5774,35 +5500,27 @@ ltmain="$ac_aux_dir/ltmain.sh"
  
  # Make sure we can run config.sub.
  $SHELL "$ac_aux_dir/config.sub" sun4 >/dev/null 2>&1 ||
@@ -13456,7 +13456,7 @@ Index: gdm3-2.30.2/configure
  esac
  build=$ac_cv_build
  ac_save_IFS=$IFS; IFS='-'
-@@ -5818,28 +5536,24 @@
+@@ -5818,28 +5536,24 @@ IFS=$ac_save_IFS
  case $build_os in *\ *) build_os=`echo "$build_os" | sed 's/ /-/g'`;; esac
  
  
@@ -13490,7 +13490,7 @@ Index: gdm3-2.30.2/configure
  esac
  host=$ac_cv_host
  ac_save_IFS=$IFS; IFS='-'
-@@ -5855,9 +5569,9 @@
+@@ -5855,9 +5569,9 @@ IFS=$ac_save_IFS
  case $host_os in *\ *) host_os=`echo "$host_os" | sed 's/ /-/g'`;; esac
  
  
@@ -13502,7 +13502,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
              ac_script=s/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/
-@@ -5865,7 +5579,7 @@
+@@ -5865,7 +5579,7 @@ else
         ac_script="$ac_script$as_nl$ac_script"
       done
       echo "$ac_script" 2>/dev/null | sed 99q >conftest.sed
@@ -13511,7 +13511,7 @@ Index: gdm3-2.30.2/configure
       if test -z "$SED"; then
    ac_path_SED_found=false
    # Loop through the user's path and test for each of PROGNAME-LIST
-@@ -5874,7 +5588,7 @@
+@@ -5874,7 +5588,7 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -13520,7 +13520,7 @@ Index: gdm3-2.30.2/configure
      for ac_exec_ext in '' $ac_executable_extensions; do
        ac_path_SED="$as_dir/$ac_prog$ac_exec_ext"
        { test -f "$ac_path_SED" && $as_test_x "$ac_path_SED"; } || continue
-@@ -5894,7 +5608,7 @@
+@@ -5894,7 +5608,7 @@ case `"$ac_path_SED" --version 2>&1` in
      $as_echo '' >> "conftest.nl"
      "$ac_path_SED" -f conftest.sed < "conftest.nl" >"conftest.out" 2>/dev/null || break
      diff "conftest.out" "conftest.nl" >/dev/null 2>&1 || break
@@ -13529,7 +13529,7 @@ Index: gdm3-2.30.2/configure
      if test $ac_count -gt ${ac_path_SED_max-0}; then
        # Best one so far, save it but keep looking for a better one
        ac_cv_path_SED="$ac_path_SED"
-@@ -5909,19 +5623,17 @@
+@@ -5909,19 +5623,17 @@ esac
        $ac_path_SED_found && break 3
      done
    done
@@ -13552,7 +13552,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_path_SED" >&6; }
   SED="$ac_cv_path_SED"
    rm -f conftest.sed
-@@ -5939,9 +5651,9 @@
+@@ -5939,9 +5651,9 @@ Xsed="$SED -e 1s/^X//"
  
  
  
@@ -13564,7 +13564,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if echo 'ab*c' | $GREP -F 'ab*c' >/dev/null 2>&1
-@@ -5955,7 +5667,7 @@
+@@ -5955,7 +5667,7 @@ for as_dir in $PATH$PATH_SEPARATOR/usr/x
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -13573,7 +13573,7 @@ Index: gdm3-2.30.2/configure
      for ac_exec_ext in '' $ac_executable_extensions; do
        ac_path_FGREP="$as_dir/$ac_prog$ac_exec_ext"
        { test -f "$ac_path_FGREP" && $as_test_x "$ac_path_FGREP"; } || continue
-@@ -5975,7 +5687,7 @@
+@@ -5975,7 +5687,7 @@ case `"$ac_path_FGREP" --version 2>&1` i
      $as_echo 'FGREP' >> "conftest.nl"
      "$ac_path_FGREP" FGREP < "conftest.nl" >"conftest.out" 2>/dev/null || break
      diff "conftest.out" "conftest.nl" >/dev/null 2>&1 || break
@@ -13582,7 +13582,7 @@ Index: gdm3-2.30.2/configure
      if test $ac_count -gt ${ac_path_FGREP_max-0}; then
        # Best one so far, save it but keep looking for a better one
        ac_cv_path_FGREP="$ac_path_FGREP"
-@@ -5990,12 +5702,10 @@
+@@ -5990,12 +5702,10 @@ esac
        $ac_path_FGREP_found && break 3
      done
    done
@@ -13597,7 +13597,7 @@ Index: gdm3-2.30.2/configure
    fi
  else
    ac_cv_path_FGREP=$FGREP
-@@ -6003,7 +5713,7 @@
+@@ -6003,7 +5713,7 @@ fi
  
     fi
  fi
@@ -13606,7 +13606,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_path_FGREP" >&6; }
   FGREP="$ac_cv_path_FGREP"
  
-@@ -6029,7 +5739,7 @@
+@@ -6029,7 +5739,7 @@ test -z "$GREP" && GREP=grep
  
  
  # Check whether --with-gnu-ld was given.
@@ -13615,7 +13615,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_gnu_ld; test "$withval" = no || with_gnu_ld=yes
  else
    with_gnu_ld=no
-@@ -6038,7 +5748,7 @@
+@@ -6038,7 +5748,7 @@ fi
  ac_prog=ld
  if test "$GCC" = yes; then
    # Check if gcc -print-prog-name=ld gives a path.
@@ -13624,7 +13624,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking for ld used by $CC... " >&6; }
    case $host in
    *-*-mingw*)
-@@ -6068,13 +5778,13 @@
+@@ -6068,13 +5778,13 @@ $as_echo_n "checking for ld used by $CC.
      ;;
    esac
  elif test "$with_gnu_ld" = yes; then
@@ -13641,7 +13641,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -z "$LD"; then
-@@ -6105,18 +5815,16 @@
+@@ -6105,18 +5815,16 @@ fi
  
  LD="$lt_cv_path_LD"
  if test -n "$LD"; then
@@ -13665,7 +13665,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    # I'd rather use --version here, but apparently some GNU lds only accept -v.
-@@ -6129,7 +5837,7 @@
+@@ -6129,7 +5837,7 @@ case `$LD -v 2>&1 </dev/null` in
    ;;
  esac
  fi
@@ -13674,7 +13674,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_gnu_ld" >&6; }
  with_gnu_ld=$lt_cv_prog_gnu_ld
  
-@@ -6141,9 +5849,9 @@
+@@ -6141,9 +5849,9 @@ with_gnu_ld=$lt_cv_prog_gnu_ld
  
  
  
@@ -13686,7 +13686,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$NM"; then
-@@ -6190,7 +5898,7 @@
+@@ -6190,7 +5898,7 @@ else
    : ${lt_cv_path_NM=no}
  fi
  fi
@@ -13695,7 +13695,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_path_NM" >&6; }
  if test "$lt_cv_path_NM" != "no"; then
    NM="$lt_cv_path_NM"
-@@ -6201,9 +5909,9 @@
+@@ -6201,9 +5909,9 @@ else
    do
      # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
  set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -13707,7 +13707,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$DUMPBIN"; then
-@@ -6214,24 +5922,24 @@
+@@ -6214,24 +5922,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -13737,7 +13737,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -6245,9 +5953,9 @@
+@@ -6245,9 +5953,9 @@ if test -z "$DUMPBIN"; then
  do
    # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
@@ -13749,7 +13749,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_DUMPBIN"; then
-@@ -6258,24 +5966,24 @@
+@@ -6258,24 +5966,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -13779,7 +13779,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -6288,7 +5996,7 @@
+@@ -6288,7 +5996,7 @@ done
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -13788,7 +13788,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -6308,44 +6016,44 @@
+@@ -6308,44 +6016,44 @@ test -z "$NM" && NM=nm
  
  
  
@@ -13844,7 +13844,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
      i=0
-@@ -6463,10 +6171,10 @@
+@@ -6463,10 +6171,10 @@ else
  fi
  
  if test -n $lt_cv_sys_max_cmd_len ; then
@@ -13857,7 +13857,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "none" >&6; }
  fi
  max_cmd_len=$lt_cv_sys_max_cmd_len
-@@ -6480,7 +6188,7 @@
+@@ -6480,7 +6188,7 @@ max_cmd_len=$lt_cv_sys_max_cmd_len
  : ${MV="mv -f"}
  : ${RM="rm -f"}
  
@@ -13866,7 +13866,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking whether the shell understands some XSI constructs... " >&6; }
  # Try some XSI features
  xsi_shell=no
-@@ -6490,17 +6198,17 @@
+@@ -6490,17 +6198,17 @@ xsi_shell=no
      && eval 'test $(( 1 + 1 )) -eq 2 \
      && test "${#_lt_dummy}" -eq 5' ) >/dev/null 2>&1 \
    && xsi_shell=yes
@@ -13887,7 +13887,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_shell_append" >&6; }
  
  
-@@ -6535,14 +6243,14 @@
+@@ -6535,14 +6243,14 @@ esac
  
  
  
@@ -13905,7 +13905,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_ld_reload_flag" >&6; }
  reload_flag=$lt_cv_ld_reload_flag
  case $reload_flag in
-@@ -6571,9 +6279,9 @@
+@@ -6571,9 +6279,9 @@ esac
  if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}objdump", so it can be a program name with args.
  set dummy ${ac_tool_prefix}objdump; ac_word=$2
@@ -13917,7 +13917,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$OBJDUMP"; then
-@@ -6584,24 +6292,24 @@
+@@ -6584,24 +6292,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -13947,7 +13947,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -6611,9 +6319,9 @@
+@@ -6611,9 +6319,9 @@ if test -z "$ac_cv_prog_OBJDUMP"; then
    ac_ct_OBJDUMP=$OBJDUMP
    # Extract the first word of "objdump", so it can be a program name with args.
  set dummy objdump; ac_word=$2
@@ -13959,7 +13959,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_OBJDUMP"; then
-@@ -6624,24 +6332,24 @@
+@@ -6624,24 +6332,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -13989,7 +13989,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -6650,7 +6358,7 @@
+@@ -6650,7 +6358,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -13998,7 +13998,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -6670,9 +6378,9 @@
+@@ -6670,9 +6378,9 @@ test -z "$OBJDUMP" && OBJDUMP=objdump
  
  
  
@@ -14010,7 +14010,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_file_magic_cmd='$MAGIC_CMD'
-@@ -6787,11 +6495,11 @@
+@@ -6787,11 +6495,11 @@ irix5* | irix6* | nonstopux*)
    ;;
  
  # This must be Linux ELF.
@@ -14024,7 +14024,7 @@ Index: gdm3-2.30.2/configure
    if echo __ELF__ | $CC -E - | $GREP __ELF__ > /dev/null; then
      lt_cv_deplibs_check_method='match_pattern /lib[^/]+(\.so\.[0-9]+\.[0-9]+|_pic\.a)$'
    else
-@@ -6866,7 +6574,7 @@
+@@ -6866,7 +6574,7 @@ tpf*)
  esac
  
  fi
@@ -14033,7 +14033,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_deplibs_check_method" >&6; }
  file_magic_cmd=$lt_cv_file_magic_cmd
  deplibs_check_method=$lt_cv_deplibs_check_method
-@@ -6886,9 +6594,9 @@
+@@ -6886,9 +6594,9 @@ test -z "$deplibs_check_method" && depli
  if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}ar", so it can be a program name with args.
  set dummy ${ac_tool_prefix}ar; ac_word=$2
@@ -14045,7 +14045,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$AR"; then
-@@ -6899,24 +6607,24 @@
+@@ -6899,24 +6607,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14075,7 +14075,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -6926,9 +6634,9 @@
+@@ -6926,9 +6634,9 @@ if test -z "$ac_cv_prog_AR"; then
    ac_ct_AR=$AR
    # Extract the first word of "ar", so it can be a program name with args.
  set dummy ar; ac_word=$2
@@ -14087,7 +14087,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_AR"; then
-@@ -6939,24 +6647,24 @@
+@@ -6939,24 +6647,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14117,7 +14117,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -6965,7 +6673,7 @@
+@@ -6965,7 +6673,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14126,7 +14126,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -6991,9 +6699,9 @@
+@@ -6991,9 +6699,9 @@ test -z "$AR_FLAGS" && AR_FLAGS=cru
  if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}strip", so it can be a program name with args.
  set dummy ${ac_tool_prefix}strip; ac_word=$2
@@ -14138,7 +14138,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$STRIP"; then
-@@ -7004,24 +6712,24 @@
+@@ -7004,24 +6712,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14168,7 +14168,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7031,9 +6739,9 @@
+@@ -7031,9 +6739,9 @@ if test -z "$ac_cv_prog_STRIP"; then
    ac_ct_STRIP=$STRIP
    # Extract the first word of "strip", so it can be a program name with args.
  set dummy strip; ac_word=$2
@@ -14180,7 +14180,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_STRIP"; then
-@@ -7044,24 +6752,24 @@
+@@ -7044,24 +6752,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14210,7 +14210,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7070,7 +6778,7 @@
+@@ -7070,7 +6778,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14219,7 +14219,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -7090,9 +6798,9 @@
+@@ -7090,9 +6798,9 @@ test -z "$STRIP" && STRIP=:
  if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}ranlib", so it can be a program name with args.
  set dummy ${ac_tool_prefix}ranlib; ac_word=$2
@@ -14231,7 +14231,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$RANLIB"; then
-@@ -7103,24 +6811,24 @@
+@@ -7103,24 +6811,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14261,7 +14261,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7130,9 +6838,9 @@
+@@ -7130,9 +6838,9 @@ if test -z "$ac_cv_prog_RANLIB"; then
    ac_ct_RANLIB=$RANLIB
    # Extract the first word of "ranlib", so it can be a program name with args.
  set dummy ranlib; ac_word=$2
@@ -14273,7 +14273,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_RANLIB"; then
-@@ -7143,24 +6851,24 @@
+@@ -7143,24 +6851,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14303,7 +14303,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7169,7 +6877,7 @@
+@@ -7169,7 +6877,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14312,7 +14312,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -7247,9 +6955,9 @@
+@@ -7247,9 +6955,9 @@ compiler=$CC
  
  
  # Check for command to grab the raw symbol name followed by C symbol from nm.
@@ -14324,7 +14324,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
  
-@@ -7365,18 +7073,18 @@
+@@ -7365,18 +7073,18 @@ void nm_test_func(void){}
  int main(){nm_test_var='a';nm_test_func();return(0);}
  _LT_EOF
  
@@ -14349,7 +14349,7 @@ Index: gdm3-2.30.2/configure
        # Try sorting and uniquifying the output.
        if sort "$nlist" | uniq > "$nlist"T; then
  	mv -f "$nlist"T "$nlist"
-@@ -7429,11 +7137,11 @@
+@@ -7429,11 +7137,11 @@ _LT_EOF
  	  lt_save_CFLAGS="$CFLAGS"
  	  LIBS="conftstm.$ac_objext"
  	  CFLAGS="$CFLAGS$lt_prog_compiler_no_builtin_flag"
@@ -14364,7 +14364,7 @@ Index: gdm3-2.30.2/configure
  	    pipe_works=yes
  	  fi
  	  LIBS="$lt_save_LIBS"
-@@ -7467,10 +7175,10 @@
+@@ -7467,10 +7175,10 @@ if test -z "$lt_cv_sys_global_symbol_pip
    lt_cv_sys_global_symbol_to_cdecl=
  fi
  if test -z "$lt_cv_sys_global_symbol_pipe$lt_cv_sys_global_symbol_to_cdecl"; then
@@ -14377,7 +14377,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "ok" >&6; }
  fi
  
-@@ -7496,7 +7204,7 @@
+@@ -7496,7 +7204,7 @@ fi
  
  
  # Check whether --enable-libtool-lock was given.
@@ -14386,7 +14386,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_libtool_lock;
  fi
  
-@@ -7508,11 +7216,11 @@
+@@ -7508,11 +7216,11 @@ case $host in
  ia64-*-hpux*)
    # Find out which ABI we are using.
    echo 'int i;' > conftest.$ac_ext
@@ -14401,7 +14401,7 @@ Index: gdm3-2.30.2/configure
      case `/usr/bin/file conftest.$ac_objext` in
        *ELF-32*)
  	HPUX_IA64_MODE="32"
-@@ -7526,12 +7234,12 @@
+@@ -7526,12 +7234,12 @@ ia64-*-hpux*)
    ;;
  *-*-irix6*)
    # Find out which ABI we are using.
@@ -14418,7 +14418,7 @@ Index: gdm3-2.30.2/configure
      if test "$lt_cv_prog_gnu_ld" = yes; then
        case `/usr/bin/file conftest.$ac_objext` in
  	*32-bit*)
-@@ -7565,11 +7273,11 @@
+@@ -7565,11 +7273,11 @@ x86_64-*kfreebsd*-gnu|x86_64-*linux*|ppc
  s390*-*linux*|s390*-*tpf*|sparc*-*linux*)
    # Find out which ABI we are using.
    echo 'int i;' > conftest.$ac_ext
@@ -14433,7 +14433,7 @@ Index: gdm3-2.30.2/configure
      case `/usr/bin/file conftest.o` in
        *32-bit*)
  	case $host in
-@@ -7618,9 +7326,9 @@
+@@ -7618,9 +7326,9 @@ s390*-*linux*|s390*-*tpf*|sparc*-*linux*
    # On SCO OpenServer 5, we need -belf to get full-featured binaries.
    SAVE_CFLAGS="$CFLAGS"
    CFLAGS="$CFLAGS -belf"
@@ -14445,7 +14445,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    ac_ext=c
-@@ -7629,11 +7337,7 @@
+@@ -7629,11 +7337,7 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS con
  ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
  ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
@@ -14458,7 +14458,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -7644,38 +7348,13 @@
+@@ -7644,38 +7348,13 @@ main ()
    return 0;
  }
  _ACEOF
@@ -14501,7 +14501,7 @@ Index: gdm3-2.30.2/configure
       ac_ext=c
  ac_cpp='$CPP $CPPFLAGS'
  ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-@@ -7683,7 +7362,7 @@
+@@ -7683,7 +7362,7 @@ ac_link='$CC -o conftest$ac_exeext $CFLA
  ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  fi
@@ -14510,7 +14510,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_cc_needs_belf" >&6; }
    if test x"$lt_cv_cc_needs_belf" != x"yes"; then
      # this is probably gcc 2.8.0, egcs 1.0 or newer; no need for -belf
-@@ -7693,11 +7372,11 @@
+@@ -7693,11 +7372,11 @@ $as_echo "$lt_cv_cc_needs_belf" >&6; }
  sparc*-*solaris*)
    # Find out which ABI we are using.
    echo 'int i;' > conftest.$ac_ext
@@ -14525,7 +14525,7 @@ Index: gdm3-2.30.2/configure
      case `/usr/bin/file conftest.o` in
      *64-bit*)
        case $lt_cv_prog_gnu_ld in
-@@ -7723,9 +7402,9 @@
+@@ -7723,9 +7402,9 @@ need_locks="$enable_libtool_lock"
      if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}dsymutil", so it can be a program name with args.
  set dummy ${ac_tool_prefix}dsymutil; ac_word=$2
@@ -14537,7 +14537,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$DSYMUTIL"; then
-@@ -7736,24 +7415,24 @@
+@@ -7736,24 +7415,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14567,7 +14567,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7763,9 +7442,9 @@
+@@ -7763,9 +7442,9 @@ if test -z "$ac_cv_prog_DSYMUTIL"; then
    ac_ct_DSYMUTIL=$DSYMUTIL
    # Extract the first word of "dsymutil", so it can be a program name with args.
  set dummy dsymutil; ac_word=$2
@@ -14579,7 +14579,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_DSYMUTIL"; then
-@@ -7776,24 +7455,24 @@
+@@ -7776,24 +7455,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14609,7 +14609,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7802,7 +7481,7 @@
+@@ -7802,7 +7481,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14618,7 +14618,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -7815,9 +7494,9 @@
+@@ -7815,9 +7494,9 @@ fi
      if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}nmedit", so it can be a program name with args.
  set dummy ${ac_tool_prefix}nmedit; ac_word=$2
@@ -14630,7 +14630,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$NMEDIT"; then
-@@ -7828,24 +7507,24 @@
+@@ -7828,24 +7507,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14660,7 +14660,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7855,9 +7534,9 @@
+@@ -7855,9 +7534,9 @@ if test -z "$ac_cv_prog_NMEDIT"; then
    ac_ct_NMEDIT=$NMEDIT
    # Extract the first word of "nmedit", so it can be a program name with args.
  set dummy nmedit; ac_word=$2
@@ -14672,7 +14672,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_NMEDIT"; then
-@@ -7868,24 +7547,24 @@
+@@ -7868,24 +7547,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14702,7 +14702,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7894,7 +7573,7 @@
+@@ -7894,7 +7573,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14711,7 +14711,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -7907,9 +7586,9 @@
+@@ -7907,9 +7586,9 @@ fi
      if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}lipo", so it can be a program name with args.
  set dummy ${ac_tool_prefix}lipo; ac_word=$2
@@ -14723,7 +14723,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$LIPO"; then
-@@ -7920,24 +7599,24 @@
+@@ -7920,24 +7599,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14753,7 +14753,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7947,9 +7626,9 @@
+@@ -7947,9 +7626,9 @@ if test -z "$ac_cv_prog_LIPO"; then
    ac_ct_LIPO=$LIPO
    # Extract the first word of "lipo", so it can be a program name with args.
  set dummy lipo; ac_word=$2
@@ -14765,7 +14765,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_LIPO"; then
-@@ -7960,24 +7639,24 @@
+@@ -7960,24 +7639,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14795,7 +14795,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -7986,7 +7665,7 @@
+@@ -7986,7 +7665,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14804,7 +14804,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -7999,9 +7678,9 @@
+@@ -7999,9 +7678,9 @@ fi
      if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}otool", so it can be a program name with args.
  set dummy ${ac_tool_prefix}otool; ac_word=$2
@@ -14816,7 +14816,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$OTOOL"; then
-@@ -8012,24 +7691,24 @@
+@@ -8012,24 +7691,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14846,7 +14846,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -8039,9 +7718,9 @@
+@@ -8039,9 +7718,9 @@ if test -z "$ac_cv_prog_OTOOL"; then
    ac_ct_OTOOL=$OTOOL
    # Extract the first word of "otool", so it can be a program name with args.
  set dummy otool; ac_word=$2
@@ -14858,7 +14858,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_OTOOL"; then
-@@ -8052,24 +7731,24 @@
+@@ -8052,24 +7731,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14888,7 +14888,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -8078,7 +7757,7 @@
+@@ -8078,7 +7757,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14897,7 +14897,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -8091,9 +7770,9 @@
+@@ -8091,9 +7770,9 @@ fi
      if test -n "$ac_tool_prefix"; then
    # Extract the first word of "${ac_tool_prefix}otool64", so it can be a program name with args.
  set dummy ${ac_tool_prefix}otool64; ac_word=$2
@@ -14909,7 +14909,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$OTOOL64"; then
-@@ -8104,24 +7783,24 @@
+@@ -8104,24 +7783,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14939,7 +14939,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -8131,9 +7810,9 @@
+@@ -8131,9 +7810,9 @@ if test -z "$ac_cv_prog_OTOOL64"; then
    ac_ct_OTOOL64=$OTOOL64
    # Extract the first word of "otool64", so it can be a program name with args.
  set dummy otool64; ac_word=$2
@@ -14951,7 +14951,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_OTOOL64"; then
-@@ -8144,24 +7823,24 @@
+@@ -8144,24 +7823,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -14981,7 +14981,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -8170,7 +7849,7 @@
+@@ -8170,7 +7849,7 @@ fi
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -14990,7 +14990,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -8206,9 +7885,9 @@
+@@ -8206,9 +7885,9 @@ fi
  
  
  
@@ -15002,7 +15002,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_apple_cc_single_mod=no
-@@ -8233,22 +7912,18 @@
+@@ -8233,22 +7912,18 @@ else
  	rm -f conftest.*
        fi
  fi
@@ -15029,7 +15029,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -8259,42 +7934,17 @@
+@@ -8259,42 +7934,17 @@ main ()
    return 0;
  }
  _ACEOF
@@ -15077,7 +15077,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_ld_exported_symbols_list" >&6; }
      case $host_os in
      rhapsody* | darwin1.[012])
-@@ -8331,62 +7981,13 @@
+@@ -8331,62 +7981,13 @@ $as_echo "$lt_cv_ld_exported_symbols_lis
      ;;
    esac
  
@@ -15145,7 +15145,7 @@ Index: gdm3-2.30.2/configure
  _ACEOF
  
  fi
-@@ -8409,9 +8010,9 @@
+@@ -8409,9 +8010,9 @@ if test -z "$CXX"; then
    do
      # Extract the first word of "$ac_tool_prefix$ac_prog", so it can be a program name with args.
  set dummy $ac_tool_prefix$ac_prog; ac_word=$2
@@ -15157,7 +15157,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$CXX"; then
-@@ -8422,24 +8023,24 @@
+@@ -8422,24 +8023,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -15187,7 +15187,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -8453,9 +8054,9 @@
+@@ -8453,9 +8054,9 @@ if test -z "$CXX"; then
  do
    # Extract the first word of "$ac_prog", so it can be a program name with args.
  set dummy $ac_prog; ac_word=$2
@@ -15199,7 +15199,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -n "$ac_ct_CXX"; then
-@@ -8466,24 +8067,24 @@
+@@ -8466,24 +8067,24 @@ for as_dir in $PATH
  do
    IFS=$as_save_IFS
    test -z "$as_dir" && as_dir=.
@@ -15229,7 +15229,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -8496,7 +8097,7 @@
+@@ -8496,7 +8097,7 @@ done
    else
      case $cross_compiling:$ac_tool_warned in
  yes:)
@@ -15238,7 +15238,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: using cross tools not prefixed with host triplet" >&2;}
  ac_tool_warned=yes ;;
  esac
-@@ -8507,53 +8108,36 @@
+@@ -8507,53 +8108,36 @@ fi
    fi
  fi
  # Provide some information about the compiler.
@@ -15311,7 +15311,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -8567,37 +8151,16 @@
+@@ -8567,37 +8151,16 @@ main ()
    return 0;
  }
  _ACEOF
@@ -15352,7 +15352,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_cxx_compiler_gnu" >&6; }
  if test $ac_compiler_gnu = yes; then
    GXX=yes
-@@ -8606,20 +8169,16 @@
+@@ -8606,20 +8169,16 @@ else
  fi
  ac_test_CXXFLAGS=${CXXFLAGS+set}
  ac_save_CXXFLAGS=$CXXFLAGS
@@ -15376,7 +15376,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -8630,35 +8189,11 @@
+@@ -8630,35 +8189,11 @@ main ()
    return 0;
  }
  _ACEOF
@@ -15415,7 +15415,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -8669,36 +8204,12 @@
+@@ -8669,36 +8204,12 @@ main ()
    return 0;
  }
  _ACEOF
@@ -15456,7 +15456,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -8709,42 +8220,17 @@
+@@ -8709,42 +8220,17 @@ main ()
    return 0;
  }
  _ACEOF
@@ -15501,7 +15501,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_prog_cxx_g" >&6; }
  if test "$ac_test_CXXFLAGS" = set; then
    CXXFLAGS=$ac_save_CXXFLAGS
-@@ -8769,9 +8255,9 @@
+@@ -8769,9 +8255,9 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  depcc="$CXX"  am_compiler_list=
  
@@ -15513,7 +15513,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -z "$AMDEP_TRUE" && test -f "$am_depcomp"; then
-@@ -8879,7 +8365,7 @@
+@@ -8879,7 +8365,7 @@ else
  fi
  
  fi
@@ -15522,7 +15522,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$am_cv_CXX_dependencies_compiler_type" >&6; }
  CXXDEPMODE=depmode=$am_cv_CXX_dependencies_compiler_type
  
-@@ -8902,10 +8388,10 @@
+@@ -8902,10 +8388,10 @@ ac_cpp='$CXXCPP $CPPFLAGS'
  ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
  ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
  ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
@@ -15535,7 +15535,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
        # Double quotes because CXXCPP needs to be expanded
-@@ -8920,11 +8406,7 @@
+@@ -8920,11 +8406,7 @@ do
    # <limits.h> exists even on freestanding compilers.
    # On the NeXT, cc -E runs the code through the compiler's parser,
    # not just through cpp. "Syntax error" is here to catch this case.
@@ -15548,7 +15548,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef __STDC__
  # include <limits.h>
-@@ -8933,78 +8415,34 @@
+@@ -8933,78 +8415,34 @@ cat >>conftest.$ac_ext <<_ACEOF
  #endif
  		     Syntax error
  _ACEOF
@@ -15632,7 +15632,7 @@ Index: gdm3-2.30.2/configure
    break
  fi
  
-@@ -9016,7 +8454,7 @@
+@@ -9016,7 +8454,7 @@ fi
  else
    ac_cv_prog_CXXCPP=$CXXCPP
  fi
@@ -15641,7 +15641,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$CXXCPP" >&6; }
  ac_preproc_ok=false
  for ac_cxx_preproc_warn_flag in '' yes
-@@ -9027,11 +8465,7 @@
+@@ -9027,11 +8465,7 @@ do
    # <limits.h> exists even on freestanding compilers.
    # On the NeXT, cc -E runs the code through the compiler's parser,
    # not just through cpp. "Syntax error" is here to catch this case.
@@ -15654,7 +15654,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef __STDC__
  # include <limits.h>
-@@ -9040,81 +8474,37 @@
+@@ -9040,81 +8474,37 @@ cat >>conftest.$ac_ext <<_ACEOF
  #endif
  		     Syntax error
  _ACEOF
@@ -15743,7 +15743,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
  _lt_caught_CXX_error=yes; }
  fi
-@@ -9144,7 +8534,7 @@
+@@ -9144,7 +8534,7 @@ fi
  
  
              # Check whether --enable-shared was given.
@@ -15752,7 +15752,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_shared; p=${PACKAGE-default}
      case $enableval in
      yes) enable_shared=yes ;;
-@@ -9175,7 +8565,7 @@
+@@ -9175,7 +8565,7 @@ fi
  
  
    # Check whether --enable-static was given.
@@ -15761,7 +15761,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_static; p=${PACKAGE-default}
      case $enableval in
      yes) enable_static=yes ;;
-@@ -9207,7 +8597,7 @@
+@@ -9207,7 +8597,7 @@ fi
  
  
  # Check whether --with-pic was given.
@@ -15770,7 +15770,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_pic; pic_mode="$withval"
  else
    pic_mode=default
-@@ -9223,7 +8613,7 @@
+@@ -9223,7 +8613,7 @@ test -z "$pic_mode" && pic_mode=default
  
  
    # Check whether --enable-fast-install was given.
@@ -15779,7 +15779,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_fast_install; p=${PACKAGE-default}
      case $enableval in
      yes) enable_fast_install=yes ;;
-@@ -9304,9 +8694,9 @@
+@@ -9304,9 +8694,9 @@ if test -n "${ZSH_VERSION+set}" ; then
     setopt NO_GLOB_SUBST
  fi
  
@@ -15791,7 +15791,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    rm -f .libs 2>/dev/null
-@@ -9319,7 +8709,7 @@
+@@ -9319,7 +8709,7 @@ else
  fi
  rmdir .libs 2>/dev/null
  fi
@@ -15800,7 +15800,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_objdir" >&6; }
  objdir=$lt_cv_objdir
  
-@@ -9412,9 +8802,9 @@
+@@ -9412,9 +8802,9 @@ test -z "$MAGIC_CMD" && MAGIC_CMD=file
  case $deplibs_check_method in
  file_magic*)
    if test "$file_magic_cmd" = '$MAGIC_CMD'; then
@@ -15812,7 +15812,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    case $MAGIC_CMD in
-@@ -9465,10 +8855,10 @@
+@@ -9465,10 +8855,10 @@ fi
  
  MAGIC_CMD="$lt_cv_path_MAGIC_CMD"
  if test -n "$MAGIC_CMD"; then
@@ -15825,7 +15825,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -9478,9 +8868,9 @@
+@@ -9478,9 +8868,9 @@ fi
  
  if test -z "$lt_cv_path_MAGIC_CMD"; then
    if test -n "$ac_tool_prefix"; then
@@ -15837,7 +15837,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    case $MAGIC_CMD in
-@@ -9531,10 +8921,10 @@
+@@ -9531,10 +8921,10 @@ fi
  
  MAGIC_CMD="$lt_cv_path_MAGIC_CMD"
  if test -n "$MAGIC_CMD"; then
@@ -15850,7 +15850,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -9604,6 +8994,10 @@
+@@ -9604,6 +8994,10 @@ _lt_linker_boilerplate=`cat conftest.err
  $RM -r conftest*
  
  
@@ -15861,7 +15861,7 @@ Index: gdm3-2.30.2/configure
  if test -n "$compiler"; then
  
  lt_prog_compiler_no_builtin_flag=
-@@ -9611,9 +9005,9 @@
+@@ -9611,9 +9005,9 @@ lt_prog_compiler_no_builtin_flag=
  if test "$GCC" = yes; then
    lt_prog_compiler_no_builtin_flag=' -fno-builtin'
  
@@ -15873,7 +15873,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_rtti_exceptions=no
-@@ -9629,11 +9023,11 @@
+@@ -9629,11 +9023,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -15887,7 +15887,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s "$ac_outfile"; then
       # The compiler can only warn and ignore the option if not recognized
       # So say no if there are warnings other than the usual output.
-@@ -9646,7 +9040,7 @@
+@@ -9646,7 +9040,7 @@ else
     $RM conftest*
  
  fi
@@ -15896,7 +15896,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_rtti_exceptions" >&6; }
  
  if test x"$lt_cv_prog_compiler_rtti_exceptions" = xyes; then
-@@ -9666,7 +9060,7 @@
+@@ -9666,7 +9060,7 @@ fi
  lt_prog_compiler_pic=
  lt_prog_compiler_static=
  
@@ -15905,7 +15905,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking for $compiler option to produce PIC... " >&6; }
  
    if test "$GCC" = yes; then
-@@ -9798,7 +9192,7 @@
+@@ -9798,7 +9192,7 @@ $as_echo_n "checking for $compiler optio
        lt_prog_compiler_static='-non_shared'
        ;;
  
@@ -15914,7 +15914,7 @@ Index: gdm3-2.30.2/configure
        case $cc_basename in
        # old Intel for x86_64 which still supported -KPIC.
        ecc*)
-@@ -9938,7 +9332,7 @@
+@@ -9938,7 +9332,7 @@ case $host_os in
      lt_prog_compiler_pic="$lt_prog_compiler_pic -DPIC"
      ;;
  esac
@@ -15923,7 +15923,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_prog_compiler_pic" >&6; }
  
  
-@@ -9950,9 +9344,9 @@
+@@ -9950,9 +9344,9 @@ $as_echo "$lt_prog_compiler_pic" >&6; }
  # Check to make sure the PIC flag actually works.
  #
  if test -n "$lt_prog_compiler_pic"; then
@@ -15935,7 +15935,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_pic_works=no
-@@ -9968,11 +9362,11 @@
+@@ -9968,11 +9362,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -15949,7 +15949,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s "$ac_outfile"; then
       # The compiler can only warn and ignore the option if not recognized
       # So say no if there are warnings other than the usual output.
-@@ -9985,7 +9379,7 @@
+@@ -9985,7 +9379,7 @@ else
     $RM conftest*
  
  fi
@@ -15958,7 +15958,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_pic_works" >&6; }
  
  if test x"$lt_cv_prog_compiler_pic_works" = xyes; then
-@@ -10009,9 +9403,9 @@
+@@ -10009,9 +9403,9 @@ fi
  # Check to make sure the static flag actually works.
  #
  wl=$lt_prog_compiler_wl eval lt_tmp_static_flag=\"$lt_prog_compiler_static\"
@@ -15970,7 +15970,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_static_works=no
-@@ -10037,7 +9431,7 @@
+@@ -10037,7 +9431,7 @@ else
     LDFLAGS="$save_LDFLAGS"
  
  fi
@@ -15979,7 +15979,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_static_works" >&6; }
  
  if test x"$lt_cv_prog_compiler_static_works" = xyes; then
-@@ -10052,9 +9446,9 @@
+@@ -10052,9 +9446,9 @@ fi
  
  
  
@@ -15991,7 +15991,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_c_o=no
-@@ -10073,11 +9467,11 @@
+@@ -10073,11 +9467,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -16005,7 +16005,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s out/conftest2.$ac_objext
     then
       # The compiler can only warn and ignore the option if not recognized
-@@ -10099,7 +9493,7 @@
+@@ -10099,7 +9493,7 @@ else
     $RM conftest*
  
  fi
@@ -16014,7 +16014,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_c_o" >&6; }
  
  
-@@ -10107,9 +9501,9 @@
+@@ -10107,9 +9501,9 @@ $as_echo "$lt_cv_prog_compiler_c_o" >&6;
  
  
  
@@ -16026,7 +16026,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_c_o=no
-@@ -10128,11 +9522,11 @@
+@@ -10128,11 +9522,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -16040,7 +16040,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s out/conftest2.$ac_objext
     then
       # The compiler can only warn and ignore the option if not recognized
-@@ -10154,7 +9548,7 @@
+@@ -10154,7 +9548,7 @@ else
     $RM conftest*
  
  fi
@@ -16049,7 +16049,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_c_o" >&6; }
  
  
-@@ -10163,7 +9557,7 @@
+@@ -10163,7 +9557,7 @@ $as_echo "$lt_cv_prog_compiler_c_o" >&6;
  hard_links="nottested"
  if test "$lt_cv_prog_compiler_c_o" = no && test "$need_locks" != no; then
    # do not overwrite the value of need_locks provided by the user
@@ -16058,7 +16058,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking if we can lock with hard links... " >&6; }
    hard_links=yes
    $RM conftest*
-@@ -10171,10 +9565,10 @@
+@@ -10171,10 +9565,10 @@ $as_echo_n "checking if we can lock with
    touch conftest.a
    ln conftest.a conftest.b 2>&5 || hard_links=no
    ln conftest.a conftest.b 2>/dev/null && hard_links=no
@@ -16071,7 +16071,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: \`$CC' does not support \`-c -o', so \`make -j' may be unsafe" >&2;}
      need_locks=warn
    fi
-@@ -10187,7 +9581,7 @@
+@@ -10187,7 +9581,7 @@ fi
  
  
  
@@ -16080,7 +16080,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking whether the $compiler linker ($LD) supports shared libraries... " >&6; }
  
    runpath_var=
-@@ -10247,6 +9641,9 @@
+@@ -10247,6 +9641,9 @@ $as_echo_n "checking whether the $compil
    openbsd*)
      with_gnu_ld=no
      ;;
@@ -16090,7 +16090,7 @@ Index: gdm3-2.30.2/configure
    esac
  
    ld_shlibs=yes
-@@ -10268,6 +9665,7 @@
+@@ -10268,6 +9665,7 @@ $as_echo_n "checking whether the $compil
      fi
      supports_anon_versioning=no
      case `$LD -v 2>&1` in
@@ -16098,7 +16098,7 @@ Index: gdm3-2.30.2/configure
        *\ [01].* | *\ 2.[0-9].* | *\ 2.10.*) ;; # catch versions < 2.11
        *\ 2.11.93.0.2\ *) supports_anon_versioning=yes ;; # RH7.3 ...
        *\ 2.11.92.0.12\ *) supports_anon_versioning=yes ;; # Mandrake 8.2 ...
-@@ -10359,7 +9757,7 @@
+@@ -10359,7 +9757,7 @@ _LT_EOF
        archive_expsym_cmds='sed "s,^,_," $export_symbols >$output_objdir/$soname.expsym~$CC -shared $pic_flag $libobjs $deplibs $compiler_flags ${wl}-h,$soname ${wl}--retain-symbols-file,$output_objdir/$soname.expsym ${wl}--image-base,`expr ${RANDOM-$$} % 4096 / 2 \* 262144 + 1342177280` -o $lib'
        ;;
  
@@ -16107,7 +16107,7 @@ Index: gdm3-2.30.2/configure
        tmp_diet=no
        if test "$host_os" = linux-dietlibc; then
  	case $cc_basename in
-@@ -10429,7 +9827,7 @@
+@@ -10429,7 +9827,7 @@ _LT_EOF
        fi
        ;;
  
@@ -16116,7 +16116,7 @@ Index: gdm3-2.30.2/configure
        if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
  	archive_cmds='$LD -Bshareable $libobjs $deplibs $linker_flags -o $lib'
  	wlarc=
-@@ -10604,6 +10002,7 @@
+@@ -10604,6 +10002,7 @@ _LT_EOF
  	if test "$aix_use_runtimelinking" = yes; then
  	  shared_flag="$shared_flag "'${wl}-G'
  	fi
@@ -16124,7 +16124,7 @@ Index: gdm3-2.30.2/configure
        else
  	# not using gcc
  	if test "$host_cpu" = ia64; then
-@@ -10629,11 +10028,7 @@
+@@ -10629,11 +10028,7 @@ _LT_EOF
  	allow_undefined_flag='-berok'
          # Determine the default libpath from the value encoded in an
          # empty executable.
@@ -16137,7 +16137,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -10644,27 +10039,7 @@
+@@ -10644,27 +10039,7 @@ main ()
    return 0;
  }
  _ACEOF
@@ -16166,7 +16166,7 @@ Index: gdm3-2.30.2/configure
  
  lt_aix_libpath_sed='
      /Import File Strings/,/^$/ {
-@@ -10678,16 +10053,9 @@
+@@ -10678,16 +10053,9 @@ aix_libpath=`dump -H conftest$ac_exeext
  if test -z "$aix_libpath"; then
    aix_libpath=`dump -HX64 conftest$ac_exeext 2>/dev/null | $SED -n -e "$lt_aix_libpath_sed"`
  fi
@@ -16185,7 +16185,7 @@ Index: gdm3-2.30.2/configure
  if test -z "$aix_libpath"; then aix_libpath="/usr/lib:/lib"; fi
  
          hardcode_libdir_flag_spec='${wl}-blibpath:$libdir:'"$aix_libpath"
-@@ -10700,11 +10068,7 @@
+@@ -10700,11 +10068,7 @@ if test -z "$aix_libpath"; then aix_libp
  	else
  	 # Determine the default libpath from the value encoded in an
  	 # empty executable.
@@ -16198,7 +16198,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -10715,27 +10079,7 @@
+@@ -10715,27 +10079,7 @@ main ()
    return 0;
  }
  _ACEOF
@@ -16227,7 +16227,7 @@ Index: gdm3-2.30.2/configure
  
  lt_aix_libpath_sed='
      /Import File Strings/,/^$/ {
-@@ -10749,16 +10093,9 @@
+@@ -10749,16 +10093,9 @@ aix_libpath=`dump -H conftest$ac_exeext
  if test -z "$aix_libpath"; then
    aix_libpath=`dump -HX64 conftest$ac_exeext 2>/dev/null | $SED -n -e "$lt_aix_libpath_sed"`
  fi
@@ -16246,7 +16246,7 @@ Index: gdm3-2.30.2/configure
  if test -z "$aix_libpath"; then aix_libpath="/usr/lib:/lib"; fi
  
  	 hardcode_libdir_flag_spec='${wl}-blibpath:$libdir:'"$aix_libpath"
-@@ -10970,42 +10307,16 @@
+@@ -10970,42 +10307,16 @@ if test -z "$aix_libpath"; then aix_libp
  	# implicitly export all symbols.
          save_LDFLAGS="$LDFLAGS"
          LDFLAGS="$LDFLAGS -shared ${wl}-exported_symbol ${wl}foo ${wl}-update_registry ${wl}/dev/null"
@@ -16294,7 +16294,7 @@ Index: gdm3-2.30.2/configure
          LDFLAGS="$save_LDFLAGS"
        else
  	archive_cmds='$CC -shared $libobjs $deplibs $compiler_flags -soname $soname `test -n "$verstring" && $ECHO "X-set_version $verstring" | $Xsed` -update_registry ${output_objdir}/so_locations -o $lib'
-@@ -11018,7 +10329,7 @@
+@@ -11018,7 +10329,7 @@ rm -f core conftest.err conftest.$ac_obj
        link_all_deplibs=yes
        ;;
  
@@ -16303,7 +16303,7 @@ Index: gdm3-2.30.2/configure
        if echo __ELF__ | $CC -E - | $GREP __ELF__ >/dev/null; then
  	archive_cmds='$LD -Bshareable -o $lib $libobjs $deplibs $linker_flags'  # a.out
        else
-@@ -11261,7 +10572,7 @@
+@@ -11261,7 +10572,7 @@ rm -f core conftest.err conftest.$ac_obj
      fi
    fi
  
@@ -16312,7 +16312,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ld_shlibs" >&6; }
  test "$ld_shlibs" = no && can_build_shared=no
  
-@@ -11298,16 +10609,16 @@
+@@ -11298,16 +10609,16 @@ x|xyes)
        # Test whether the compiler implicitly links with -lc since on some
        # systems, -lgcc has to come before -lc. If gcc already passes -lc
        # to ld, don't add -lc before -lgcc.
@@ -16333,7 +16333,7 @@ Index: gdm3-2.30.2/configure
          soname=conftest
          lib=conftest
          libobjs=conftest.$ac_objext
-@@ -11321,11 +10632,11 @@
+@@ -11321,11 +10632,11 @@ $as_echo_n "checking whether -lc should
          libname=conftest
          lt_save_allow_undefined_flag=$allow_undefined_flag
          allow_undefined_flag=
@@ -16348,7 +16348,7 @@ Index: gdm3-2.30.2/configure
          then
  	  archive_cmds_need_lc=no
          else
-@@ -11336,7 +10647,7 @@
+@@ -11336,7 +10647,7 @@ $as_echo_n "checking whether -lc should
          cat conftest.err 1>&5
        fi
        $RM conftest*
@@ -16357,7 +16357,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$archive_cmds_need_lc" >&6; }
        ;;
      esac
-@@ -11500,7 +10811,7 @@
+@@ -11500,7 +10811,7 @@ esac
  
  
  
@@ -16366,7 +16366,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking dynamic linker characteristics... " >&6; }
  
  if test "$GCC" = yes; then
-@@ -11908,7 +11219,7 @@
+@@ -11908,7 +11219,7 @@ linux*oldld* | linux*aout* | linux*coff*
    ;;
  
  # This must be Linux ELF.
@@ -16375,7 +16375,7 @@ Index: gdm3-2.30.2/configure
    version_type=linux
    need_lib_prefix=no
    need_version=no
-@@ -11922,11 +11233,7 @@
+@@ -11922,11 +11233,7 @@ linux* | k*bsd*-gnu)
    save_libdir=$libdir
    eval "libdir=/foo; wl=\"$lt_prog_compiler_wl\"; \
         LDFLAGS=\"\$LDFLAGS $hardcode_libdir_flag_spec\""
@@ -16388,7 +16388,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -11937,41 +11244,13 @@
+@@ -11937,41 +11244,13 @@ main ()
    return 0;
  }
  _ACEOF
@@ -16434,7 +16434,7 @@ Index: gdm3-2.30.2/configure
    LDFLAGS=$save_LDFLAGS
    libdir=$save_libdir
  
-@@ -11980,13 +11259,10 @@
+@@ -11980,13 +11259,10 @@ rm -f core conftest.err conftest.$ac_obj
    # before this can be enabled.
    hardcode_into_libs=yes
  
@@ -16449,7 +16449,7 @@ Index: gdm3-2.30.2/configure
    fi
  
    # We used to test for /lib/ld.so.1 and disable shared libraries on
-@@ -11998,6 +11274,18 @@
+@@ -11998,6 +11274,18 @@ rm -f core conftest.err conftest.$ac_obj
    dynamic_linker='GNU/Linux ld.so'
    ;;
  
@@ -16468,7 +16468,7 @@ Index: gdm3-2.30.2/configure
  netbsd*)
    version_type=sunos
    need_lib_prefix=no
-@@ -12186,7 +11474,7 @@
+@@ -12186,7 +11474,7 @@ uts4*)
    dynamic_linker=no
    ;;
  esac
@@ -16477,7 +16477,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$dynamic_linker" >&6; }
  test "$dynamic_linker" = no && can_build_shared=no
  
-@@ -12288,7 +11576,7 @@
+@@ -12288,7 +11576,7 @@ fi
  
  
  
@@ -16486,7 +16486,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking how to hardcode library paths into programs... " >&6; }
  hardcode_action=
  if test -n "$hardcode_libdir_flag_spec" ||
-@@ -12313,7 +11601,7 @@
+@@ -12313,7 +11601,7 @@ else
    # directories.
    hardcode_action=unsupported
  fi
@@ -16495,7 +16495,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$hardcode_action" >&6; }
  
  if test "$hardcode_action" = relink ||
-@@ -12358,18 +11646,14 @@
+@@ -12358,18 +11646,14 @@ else
  
    darwin*)
    # if libdl is installed we need to link against it
@@ -16517,7 +16517,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -12387,43 +11671,18 @@
+@@ -12387,43 +11671,18 @@ return dlopen ();
    return 0;
  }
  _ACEOF
@@ -16567,7 +16567,7 @@ Index: gdm3-2.30.2/configure
    lt_cv_dlopen="dlopen" lt_cv_dlopen_libs="-ldl"
  else
  
-@@ -12436,106 +11695,18 @@
+@@ -12436,106 +11695,18 @@ fi
      ;;
  
    *)
@@ -16679,7 +16679,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -12553,145 +11724,32 @@
+@@ -12553,145 +11724,32 @@ return shl_load ();
    return 0;
  }
  _ACEOF
@@ -16836,7 +16836,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -12709,57 +11767,28 @@
+@@ -12709,57 +11767,28 @@ return dlopen ();
    return 0;
  }
  _ACEOF
@@ -16903,7 +16903,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -12777,57 +11806,28 @@
+@@ -12777,57 +11806,28 @@ return dlopen ();
    return 0;
  }
  _ACEOF
@@ -16970,7 +16970,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -12845,43 +11845,18 @@
+@@ -12845,43 +11845,18 @@ return dld_link ();
    return 0;
  }
  _ACEOF
@@ -17020,7 +17020,7 @@ Index: gdm3-2.30.2/configure
    lt_cv_dlopen="dld_link" lt_cv_dlopen_libs="-ldld"
  fi
  
-@@ -12920,9 +11895,9 @@
+@@ -12920,9 +11895,9 @@ fi
      save_LIBS="$LIBS"
      LIBS="$lt_cv_dlopen_libs $LIBS"
  
@@ -17032,7 +17032,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    	  if test "$cross_compiling" = yes; then :
-@@ -12931,7 +11906,7 @@
+@@ -12931,7 +11906,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
@@ -17041,7 +17041,7 @@ Index: gdm3-2.30.2/configure
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -12990,11 +11965,11 @@
+@@ -12990,11 +11965,11 @@ int main ()
    return status;
  }
  _LT_EOF
@@ -17056,7 +17056,7 @@ Index: gdm3-2.30.2/configure
      (./conftest; exit; ) >&5 2>/dev/null
      lt_status=$?
      case x$lt_status in
-@@ -13011,14 +11986,14 @@
+@@ -13011,14 +11986,14 @@ rm -fr conftest*
  
  
  fi
@@ -17074,7 +17074,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    	  if test "$cross_compiling" = yes; then :
-@@ -13027,7 +12002,7 @@
+@@ -13027,7 +12002,7 @@ else
    lt_dlunknown=0; lt_dlno_uscore=1; lt_dlneed_uscore=2
    lt_status=$lt_dlunknown
    cat > conftest.$ac_ext <<_LT_EOF
@@ -17083,7 +17083,7 @@ Index: gdm3-2.30.2/configure
  #include "confdefs.h"
  
  #if HAVE_DLFCN_H
-@@ -13086,11 +12061,11 @@
+@@ -13086,11 +12061,11 @@ int main ()
    return status;
  }
  _LT_EOF
@@ -17098,7 +17098,7 @@ Index: gdm3-2.30.2/configure
      (./conftest; exit; ) >&5 2>/dev/null
      lt_status=$?
      case x$lt_status in
-@@ -13107,7 +12082,7 @@
+@@ -13107,7 +12082,7 @@ rm -fr conftest*
  
  
  fi
@@ -17107,7 +17107,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_dlopen_self_static" >&6; }
      fi
  
-@@ -13146,12 +12121,12 @@
+@@ -13146,12 +12121,12 @@ fi
  
  striplib=
  old_striplib=
@@ -17122,7 +17122,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "yes" >&6; }
  else
  # FIXME - insert some real tests, host_os isn't really good enough
-@@ -13160,15 +12135,15 @@
+@@ -13160,15 +12135,15 @@ else
      if test -n "$STRIP" ; then
        striplib="$STRIP -x"
        old_striplib="$STRIP -S"
@@ -17141,7 +17141,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
      ;;
    esac
-@@ -13186,12 +12161,12 @@
+@@ -13186,12 +12161,12 @@ fi
  
  
    # Report which library types will actually be built
@@ -17157,7 +17157,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking whether to build shared libraries... " >&6; }
    test "$can_build_shared" = "no" && enable_shared=no
  
-@@ -13212,14 +12187,14 @@
+@@ -13212,14 +12187,14 @@ $as_echo_n "checking whether to build sh
      fi
      ;;
    esac
@@ -17175,7 +17175,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$enable_static" >&6; }
  
  
-@@ -13360,7 +12335,7 @@
+@@ -13360,7 +12335,7 @@ cc_basename=`$ECHO "X$cc_temp" | $Xsed -
  
  
  # Check whether --with-gnu-ld was given.
@@ -17184,7 +17184,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_gnu_ld; test "$withval" = no || with_gnu_ld=yes
  else
    with_gnu_ld=no
-@@ -13369,7 +12344,7 @@
+@@ -13369,7 +12344,7 @@ fi
  ac_prog=ld
  if test "$GCC" = yes; then
    # Check if gcc -print-prog-name=ld gives a path.
@@ -17193,7 +17193,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking for ld used by $CC... " >&6; }
    case $host in
    *-*-mingw*)
-@@ -13399,13 +12374,13 @@
+@@ -13399,13 +12374,13 @@ $as_echo_n "checking for ld used by $CC.
      ;;
    esac
  elif test "$with_gnu_ld" = yes; then
@@ -17210,7 +17210,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    if test -z "$LD"; then
-@@ -13436,18 +12411,16 @@
+@@ -13436,18 +12411,16 @@ fi
  
  LD="$lt_cv_path_LD"
  if test -n "$LD"; then
@@ -17234,7 +17234,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    # I'd rather use --version here, but apparently some GNU lds only accept -v.
-@@ -13460,7 +12433,7 @@
+@@ -13460,7 +12433,7 @@ case `$LD -v 2>&1 </dev/null` in
    ;;
  esac
  fi
@@ -17243,7 +17243,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_gnu_ld" >&6; }
  with_gnu_ld=$lt_cv_prog_gnu_ld
  
-@@ -13515,7 +12488,7 @@
+@@ -13515,7 +12488,7 @@ with_gnu_ld=$lt_cv_prog_gnu_ld
      fi
  
      # PORTME: fill in a description of your system's C++ link characteristics
@@ -17252,7 +17252,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking whether the $compiler linker ($LD) supports shared libraries... " >&6; }
      ld_shlibs_CXX=yes
      case $host_os in
-@@ -13616,11 +12589,7 @@
+@@ -13616,11 +12589,7 @@ $as_echo_n "checking whether the $compil
            allow_undefined_flag_CXX='-berok'
            # Determine the default libpath from the value encoded in an empty
            # executable.
@@ -17265,7 +17265,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -13631,27 +12600,7 @@
+@@ -13631,27 +12600,7 @@ main ()
    return 0;
  }
  _ACEOF
@@ -17294,7 +17294,7 @@ Index: gdm3-2.30.2/configure
  
  lt_aix_libpath_sed='
      /Import File Strings/,/^$/ {
-@@ -13665,16 +12614,9 @@
+@@ -13665,16 +12614,9 @@ aix_libpath=`dump -H conftest$ac_exeext
  if test -z "$aix_libpath"; then
    aix_libpath=`dump -HX64 conftest$ac_exeext 2>/dev/null | $SED -n -e "$lt_aix_libpath_sed"`
  fi
@@ -17313,7 +17313,7 @@ Index: gdm3-2.30.2/configure
  if test -z "$aix_libpath"; then aix_libpath="/usr/lib:/lib"; fi
  
            hardcode_libdir_flag_spec_CXX='${wl}-blibpath:$libdir:'"$aix_libpath"
-@@ -13688,11 +12630,7 @@
+@@ -13688,11 +12630,7 @@ if test -z "$aix_libpath"; then aix_libp
            else
  	    # Determine the default libpath from the value encoded in an
  	    # empty executable.
@@ -17326,7 +17326,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -13703,27 +12641,7 @@
+@@ -13703,27 +12641,7 @@ main ()
    return 0;
  }
  _ACEOF
@@ -17355,7 +17355,7 @@ Index: gdm3-2.30.2/configure
  
  lt_aix_libpath_sed='
      /Import File Strings/,/^$/ {
-@@ -13737,16 +12655,9 @@
+@@ -13737,16 +12655,9 @@ aix_libpath=`dump -H conftest$ac_exeext
  if test -z "$aix_libpath"; then
    aix_libpath=`dump -HX64 conftest$ac_exeext 2>/dev/null | $SED -n -e "$lt_aix_libpath_sed"`
  fi
@@ -17374,7 +17374,7 @@ Index: gdm3-2.30.2/configure
  if test -z "$aix_libpath"; then aix_libpath="/usr/lib:/lib"; fi
  
  	    hardcode_libdir_flag_spec_CXX='${wl}-blibpath:$libdir:'"$aix_libpath"
-@@ -14031,7 +12942,7 @@
+@@ -14031,7 +12942,7 @@ if test -z "$aix_libpath"; then aix_libp
          inherit_rpath_CXX=yes
          ;;
  
@@ -17383,7 +17383,7 @@ Index: gdm3-2.30.2/configure
          case $cc_basename in
            KCC*)
  	    # Kuck and Associates, Inc. (KAI) C++ Compiler
-@@ -14490,7 +13401,7 @@
+@@ -14490,7 +13401,7 @@ if test -z "$aix_libpath"; then aix_libp
          ;;
      esac
  
@@ -17392,7 +17392,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ld_shlibs_CXX" >&6; }
      test "$ld_shlibs_CXX" = no && can_build_shared=no
  
-@@ -14518,11 +13429,11 @@
+@@ -14518,11 +13429,11 @@ private:
  };
  _LT_EOF
  
@@ -17407,7 +17407,7 @@ Index: gdm3-2.30.2/configure
    # Parse the compiler output and extract the necessary
    # objects, libraries and library flags.
  
-@@ -14703,7 +13614,7 @@
+@@ -14703,7 +13614,7 @@ fi
  lt_prog_compiler_pic_CXX=
  lt_prog_compiler_static_CXX=
  
@@ -17416,7 +17416,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking for $compiler option to produce PIC... " >&6; }
  
    # C++ specific cases for pic, static, wl, etc.
-@@ -14859,7 +13770,7 @@
+@@ -14859,7 +13770,7 @@ $as_echo_n "checking for $compiler optio
  	    ;;
  	esac
  	;;
@@ -17425,7 +17425,7 @@ Index: gdm3-2.30.2/configure
  	case $cc_basename in
  	  KCC*)
  	    # KAI C++ Compiler
-@@ -14923,7 +13834,7 @@
+@@ -14923,7 +13834,7 @@ $as_echo_n "checking for $compiler optio
  	    ;;
  	esac
  	;;
@@ -17434,7 +17434,7 @@ Index: gdm3-2.30.2/configure
  	;;
        *qnx* | *nto*)
          # QNX uses GNU C++, but need to define -shared option too, otherwise
-@@ -15020,7 +13931,7 @@
+@@ -15020,7 +13931,7 @@ case $host_os in
      lt_prog_compiler_pic_CXX="$lt_prog_compiler_pic_CXX -DPIC"
      ;;
  esac
@@ -17443,7 +17443,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_prog_compiler_pic_CXX" >&6; }
  
  
-@@ -15029,9 +13940,9 @@
+@@ -15029,9 +13940,9 @@ $as_echo "$lt_prog_compiler_pic_CXX" >&6
  # Check to make sure the PIC flag actually works.
  #
  if test -n "$lt_prog_compiler_pic_CXX"; then
@@ -17455,7 +17455,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_pic_works_CXX=no
-@@ -15047,11 +13958,11 @@
+@@ -15047,11 +13958,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -17469,7 +17469,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s "$ac_outfile"; then
       # The compiler can only warn and ignore the option if not recognized
       # So say no if there are warnings other than the usual output.
-@@ -15064,7 +13975,7 @@
+@@ -15064,7 +13975,7 @@ else
     $RM conftest*
  
  fi
@@ -17478,7 +17478,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_pic_works_CXX" >&6; }
  
  if test x"$lt_cv_prog_compiler_pic_works_CXX" = xyes; then
-@@ -15085,9 +13996,9 @@
+@@ -15085,9 +13996,9 @@ fi
  # Check to make sure the static flag actually works.
  #
  wl=$lt_prog_compiler_wl_CXX eval lt_tmp_static_flag=\"$lt_prog_compiler_static_CXX\"
@@ -17490,7 +17490,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_static_works_CXX=no
-@@ -15113,7 +14024,7 @@
+@@ -15113,7 +14024,7 @@ else
     LDFLAGS="$save_LDFLAGS"
  
  fi
@@ -17499,7 +17499,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_static_works_CXX" >&6; }
  
  if test x"$lt_cv_prog_compiler_static_works_CXX" = xyes; then
-@@ -15125,9 +14036,9 @@
+@@ -15125,9 +14036,9 @@ fi
  
  
  
@@ -17511,7 +17511,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_c_o_CXX=no
-@@ -15146,11 +14057,11 @@
+@@ -15146,11 +14057,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -17525,7 +17525,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s out/conftest2.$ac_objext
     then
       # The compiler can only warn and ignore the option if not recognized
-@@ -15172,14 +14083,14 @@
+@@ -15172,14 +14083,14 @@ else
     $RM conftest*
  
  fi
@@ -17543,7 +17543,7 @@ Index: gdm3-2.30.2/configure
    $as_echo_n "(cached) " >&6
  else
    lt_cv_prog_compiler_c_o_CXX=no
-@@ -15198,11 +14109,11 @@
+@@ -15198,11 +14109,11 @@ else
     -e 's:.*FLAGS}\{0,1\} :&$lt_compiler_flag :; t' \
     -e 's: [^ ]*conftest\.: $lt_compiler_flag&:; t' \
     -e 's:$: $lt_compiler_flag:'`
@@ -17557,7 +17557,7 @@ Index: gdm3-2.30.2/configure
     if (exit $ac_status) && test -s out/conftest2.$ac_objext
     then
       # The compiler can only warn and ignore the option if not recognized
-@@ -15224,7 +14135,7 @@
+@@ -15224,7 +14135,7 @@ else
     $RM conftest*
  
  fi
@@ -17566,7 +17566,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$lt_cv_prog_compiler_c_o_CXX" >&6; }
  
  
-@@ -15233,7 +14144,7 @@
+@@ -15233,7 +14144,7 @@ $as_echo "$lt_cv_prog_compiler_c_o_CXX"
  hard_links="nottested"
  if test "$lt_cv_prog_compiler_c_o_CXX" = no && test "$need_locks" != no; then
    # do not overwrite the value of need_locks provided by the user
@@ -17575,7 +17575,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking if we can lock with hard links... " >&6; }
    hard_links=yes
    $RM conftest*
-@@ -15241,10 +14152,10 @@
+@@ -15241,10 +14152,10 @@ $as_echo_n "checking if we can lock with
    touch conftest.a
    ln conftest.a conftest.b 2>&5 || hard_links=no
    ln conftest.a conftest.b 2>/dev/null && hard_links=no
@@ -17588,7 +17588,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: \`$CC' does not support \`-c -o', so \`make -j' may be unsafe" >&2;}
      need_locks=warn
    fi
-@@ -15254,7 +14165,7 @@
+@@ -15254,7 +14165,7 @@ fi
  
  
  
@@ -17597,7 +17597,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking whether the $compiler linker ($LD) supports shared libraries... " >&6; }
  
    export_symbols_cmds_CXX='$NM $libobjs $convenience | $global_symbol_pipe | $SED '\''s/.* //'\'' | sort | uniq > $export_symbols'
-@@ -15274,13 +14185,16 @@
+@@ -15274,13 +14185,16 @@ $as_echo_n "checking whether the $compil
    cygwin* | mingw* | cegcc*)
      export_symbols_cmds_CXX='$NM $libobjs $convenience | $global_symbol_pipe | $SED -e '\''/^[BCDGRS][ ]/s/.*[ ]\([^ ]*\)/\1 DATA/;/^.*[ ]__nm__/s/^.*[ ]__nm__\([^ ]*\)[ ][^ ]*/\1 DATA/;/^I[ ]/d;/^[AITW][ ]/s/.* //'\'' | sort | uniq > $export_symbols'
    ;;
@@ -17615,7 +17615,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ld_shlibs_CXX" >&6; }
  test "$ld_shlibs_CXX" = no && can_build_shared=no
  
-@@ -15308,16 +14222,16 @@
+@@ -15308,16 +14222,16 @@ x|xyes)
        # Test whether the compiler implicitly links with -lc since on some
        # systems, -lgcc has to come before -lc. If gcc already passes -lc
        # to ld, don't add -lc before -lgcc.
@@ -17636,7 +17636,7 @@ Index: gdm3-2.30.2/configure
          soname=conftest
          lib=conftest
          libobjs=conftest.$ac_objext
-@@ -15331,11 +14245,11 @@
+@@ -15331,11 +14245,11 @@ $as_echo_n "checking whether -lc should
          libname=conftest
          lt_save_allow_undefined_flag=$allow_undefined_flag_CXX
          allow_undefined_flag_CXX=
@@ -17651,7 +17651,7 @@ Index: gdm3-2.30.2/configure
          then
  	  archive_cmds_need_lc_CXX=no
          else
-@@ -15346,7 +14260,7 @@
+@@ -15346,7 +14260,7 @@ $as_echo_n "checking whether -lc should
          cat conftest.err 1>&5
        fi
        $RM conftest*
@@ -17660,7 +17660,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$archive_cmds_need_lc_CXX" >&6; }
        ;;
      esac
-@@ -15417,7 +14331,7 @@
+@@ -15417,7 +14331,7 @@ esac
  
  
  
@@ -17669,7 +17669,7 @@ Index: gdm3-2.30.2/configure
  $as_echo_n "checking dynamic linker characteristics... " >&6; }
  
  library_names_spec=
-@@ -15773,7 +14687,7 @@
+@@ -15773,7 +14687,7 @@ linux*oldld* | linux*aout* | linux*coff*
    ;;
  
  # This must be Linux ELF.
@@ -17678,7 +17678,7 @@ Index: gdm3-2.30.2/configure
    version_type=linux
    need_lib_prefix=no
    need_version=no
-@@ -15787,11 +14701,7 @@
+@@ -15787,11 +14701,7 @@ linux* | k*bsd*-gnu)
    save_libdir=$libdir
    eval "libdir=/foo; wl=\"$lt_prog_compiler_wl_CXX\"; \
         LDFLAGS=\"\$LDFLAGS $hardcode_libdir_flag_spec_CXX\""
@@ -17691,7 +17691,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -15802,41 +14712,13 @@
+@@ -15802,41 +14712,13 @@ main ()
    return 0;
  }
  _ACEOF
@@ -17737,7 +17737,7 @@ Index: gdm3-2.30.2/configure
    LDFLAGS=$save_LDFLAGS
    libdir=$save_libdir
  
-@@ -15845,13 +14727,10 @@
+@@ -15845,13 +14727,10 @@ rm -f core conftest.err conftest.$ac_obj
    # before this can be enabled.
    hardcode_into_libs=yes
  
@@ -17752,7 +17752,7 @@ Index: gdm3-2.30.2/configure
    fi
  
    # We used to test for /lib/ld.so.1 and disable shared libraries on
-@@ -15863,6 +14742,18 @@
+@@ -15863,6 +14742,18 @@ rm -f core conftest.err conftest.$ac_obj
    dynamic_linker='GNU/Linux ld.so'
    ;;
  
@@ -17771,7 +17771,7 @@ Index: gdm3-2.30.2/configure
  netbsd*)
    version_type=sunos
    need_lib_prefix=no
-@@ -16051,7 +14942,7 @@
+@@ -16051,7 +14942,7 @@ uts4*)
    dynamic_linker=no
    ;;
  esac
@@ -17780,7 +17780,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$dynamic_linker" >&6; }
  test "$dynamic_linker" = no && can_build_shared=no
  
-@@ -16102,5439 +14993,1136 @@
+@@ -16102,5439 +14993,1136 @@ fi
  
  
  
@@ -24054,7 +24054,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -21543,85 +16131,36 @@
+@@ -21543,85 +16131,36 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -24156,7 +24156,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -21629,71 +16168,35 @@
+@@ -21629,71 +16168,35 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -24244,7 +24244,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -21702,85 +16205,49 @@
+@@ -21702,85 +16205,49 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -24357,7 +24357,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -21788,71 +16255,35 @@
+@@ -21788,71 +16255,35 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -24445,7 +24445,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -21861,322 +16292,551 @@
+@@ -21861,322 +16292,551 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -25241,7 +25241,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  
-@@ -22189,68 +16849,41 @@
+@@ -22189,68 +16849,41 @@ else
          _pkg_short_errors_supported=no
  fi
          if test $_pkg_short_errors_supported = yes; then
@@ -25326,7 +25326,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "yes" >&6; }
  	:
  fi
-@@ -22259,46 +16892,68 @@
+@@ -22259,46 +16892,68 @@ fi
  
  
  pkg_failed=no
@@ -25421,7 +25421,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  
-@@ -22311,68 +16966,53 @@
+@@ -22311,68 +16966,53 @@ else
          _pkg_short_errors_supported=no
  fi
          if test $_pkg_short_errors_supported = yes; then
@@ -25517,7 +25517,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "yes" >&6; }
  	:
  fi
-@@ -22381,150 +17021,68 @@
+@@ -22381,150 +17021,68 @@ fi
  
  
  pkg_failed=no
@@ -25715,7 +25715,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  
-@@ -22537,127 +17095,292 @@
+@@ -22537,127 +17095,292 @@ else
          _pkg_short_errors_supported=no
  fi
          if test $_pkg_short_errors_supported = yes; then
@@ -26091,7 +26091,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  
-@@ -22670,357 +17393,516 @@
+@@ -22670,357 +17393,516 @@ else
          _pkg_short_errors_supported=no
  fi
          if test $_pkg_short_errors_supported = yes; then
@@ -26899,7 +26899,7 @@ Index: gdm3-2.30.2/configure
  
    X_CFLAGS= X_PRE_LIBS= X_LIBS= X_EXTRA_LIBS=
  else
-@@ -23033,16 +17915,12 @@
+@@ -23033,16 +17915,12 @@ else
      X_LIBS="$X_LIBS -L$x_libraries"
      # For Solaris; some versions of Sun CC require a space after -R and
      # others require no space.  Words are not sufficient . . . .
@@ -26918,7 +26918,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -23053,40 +17931,13 @@
+@@ -23053,40 +17931,13 @@ main ()
    return 0;
  }
  _ACEOF
@@ -26963,7 +26963,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -23097,46 +17948,19 @@
+@@ -23097,46 +17948,19 @@ main ()
    return 0;
  }
  _ACEOF
@@ -27017,7 +27017,7 @@ Index: gdm3-2.30.2/configure
      ac_c_werror_flag=$ac_xsave_c_werror_flag
      LIBS=$ac_xsave_LIBS
    fi
-@@ -23152,11 +17976,7 @@
+@@ -23152,11 +17976,7 @@ rm -f core conftest.err conftest.$ac_obj
      # libraries were built with DECnet support.  And Karl Berry says
      # the Alpha needs dnet_stub (dnet does not exist).
      ac_xsave_LIBS="$LIBS"; LIBS="$LIBS $X_LIBS -lX11"
@@ -27030,7 +27030,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -23174,44 +17994,17 @@
+@@ -23174,44 +17994,17 @@ return XOpenDisplay ();
    return 0;
  }
  _ACEOF
@@ -27080,7 +27080,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -23229,59 +18022,30 @@
+@@ -23229,59 +18022,30 @@ return dnet_ntoa ();
    return 0;
  }
  _ACEOF
@@ -27149,7 +27149,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -23299,52 +18063,25 @@
+@@ -23299,52 +18063,25 @@ return dnet_ntoa ();
    return 0;
  }
  _ACEOF
@@ -27210,7 +27210,7 @@ Index: gdm3-2.30.2/configure
      LIBS="$ac_xsave_LIBS"
  
      # msh@cis.ufl.edu says -lnsl (and -lsocket) are needed for his 386/AT,
-@@ -23355,33 +18092,167 @@
+@@ -23355,33 +18092,167 @@ rm -f core conftest.err conftest.$ac_obj
      # on Irix 5.2, according to T.E. Dickey.
      # The functions gethostbyname, getservbyname, and inet_addr are
      # in -lbsd on LynxOS 3.0.1/i386, according to Lars Hecking.
@@ -27397,7 +27397,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -23389,71 +18260,47 @@
+@@ -23389,71 +18260,47 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -27495,7 +27495,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -23462,68 +18309,50 @@
+@@ -23462,68 +18309,50 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -27592,7 +27592,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -23532,662 +18361,628 @@
+@@ -23532,662 +18361,628 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -28790,7 +28790,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  
-@@ -24200,887 +18995,624 @@
+@@ -24200,887 +18995,624 @@ else
          _pkg_short_errors_supported=no
  fi
          if test $_pkg_short_errors_supported = yes; then
@@ -30153,7 +30153,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -25088,252 +19620,145 @@
+@@ -25088,252 +19620,145 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -30511,7 +30511,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -25341,107 +19766,48 @@
+@@ -25341,107 +19766,48 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -30644,7 +30644,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -25449,73 +19815,50 @@
+@@ -25449,73 +19815,50 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -30748,7 +30748,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -25524,382 +19867,476 @@
+@@ -25524,382 +19867,476 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -31533,7 +31533,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -25907,78 +20344,53 @@
+@@ -25907,78 +20344,53 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -31640,7 +31640,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -25987,167 +20399,109 @@
+@@ -25987,167 +20399,109 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -31875,7 +31875,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -26156,88 +20510,53 @@
+@@ -26156,88 +20510,53 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -31990,7 +31990,7 @@ Index: gdm3-2.30.2/configure
  
  /* Override any GCC internal prototype to avoid an error.
     Use char because int might match the return type of a GCC
-@@ -26245,62 +20564,40 @@
+@@ -26245,62 +20564,40 @@ cat >>conftest.$ac_ext <<_ACEOF
  #ifdef __cplusplus
  extern "C"
  #endif
@@ -32074,7 +32074,7 @@ Index: gdm3-2.30.2/configure
  
  else
    mkdtemp_missing=true
-@@ -26316,10 +20613,10 @@
+@@ -26316,10 +20613,10 @@ fi
  
  
  
@@ -32087,7 +32087,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_ipv6;
  else
    enable_ipv6=no
-@@ -26327,11 +20624,7 @@
+@@ -26327,11 +20624,7 @@ fi
  
  
  if test x$enable_ipv6 = xyes; then
@@ -32100,7 +32100,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
      #include <sys/types.h>
-@@ -26347,141 +20640,32 @@
+@@ -26347,141 +20640,32 @@ main ()
    return 0;
  }
  _ACEOF
@@ -32249,7 +32249,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -26499,157 +20683,42 @@
+@@ -26499,157 +20683,42 @@ return getaddrinfo ();
    return 0;
  }
  _ACEOF
@@ -32420,7 +32420,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -26667,47 +20736,20 @@
+@@ -26667,47 +20736,20 @@ return inet_ntop ();
    return 0;
  }
  _ACEOF
@@ -32476,7 +32476,7 @@ Index: gdm3-2.30.2/configure
    "LIBS=$LIBS -l$lib";have_inet_ntop=yes;break
  fi
  
-@@ -26718,21 +20760,20 @@
+@@ -26718,21 +20760,19 @@ fi
        if test x$have_inet_ntop = xyes; then
          have_ipv6=yes
  
@@ -32484,7 +32484,6 @@ Index: gdm3-2.30.2/configure
 -#define ENABLE_IPV6 1
 -_ACEOF
 +$as_echo "#define ENABLE_IPV6 1" >>confdefs.h
-+$as_echo "#define IPV6_V6ONLY 1" >>confdefs.h
  
 -        { $as_echo "$as_me:$LINENO: result: $have_ipv6" >&5
 +        { $as_echo "$as_me:${as_lineno-$LINENO}: result: $have_ipv6" >&5
@@ -32503,7 +32502,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -26740,7 +20781,7 @@
+@@ -26740,7 +20780,7 @@ fi
  withval=""
  
  # Check whether --with-user was given.
@@ -32512,7 +32511,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_user;
  fi
  
-@@ -26761,7 +20802,7 @@
+@@ -26761,7 +20801,7 @@ _ACEOF
  withval=""
  
  # Check whether --with-group was given.
@@ -32521,7 +32520,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_group;
  fi
  
-@@ -26783,9 +20824,9 @@
+@@ -26783,9 +20823,9 @@ _ACEOF
  withval=""
  
  # Check whether --with-pam-prefix was given.
@@ -32533,7 +32532,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "\"PAM files will be installed in prefix ${withval}.\"" >&6; }
               fi
  fi
-@@ -26798,19 +20839,37 @@
+@@ -26798,19 +20838,37 @@ else
  fi
  
  
@@ -32578,7 +32577,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -26823,206 +20882,41 @@
+@@ -26823,206 +20881,41 @@ char pam_start ();
  int
  main ()
  {
@@ -32811,7 +32810,7 @@ Index: gdm3-2.30.2/configure
    cat >>confdefs.h <<_ACEOF
  #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
  _ACEOF
-@@ -27031,18 +20925,14 @@
+@@ -27031,18 +20924,14 @@ fi
  
  done
  
@@ -32833,7 +32832,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -27060,93 +20950,56 @@
+@@ -27060,93 +20949,56 @@ return pam_syslog ();
    return 0;
  }
  _ACEOF
@@ -32943,7 +32942,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "\"not found - assume const, Linux-type PAM\"" >&6; }
  
  fi
-@@ -27154,14 +21007,10 @@
+@@ -27154,14 +21006,10 @@ rm -f conftest*
  
  fi
  
@@ -32960,7 +32959,7 @@ Index: gdm3-2.30.2/configure
  		#ifdef HAVE_USERSEC_H
  		#include <usersec.h>
  		#endif
-@@ -27176,509 +21025,67 @@
+@@ -27176,509 +21024,67 @@ main ()
    return 0;
  }
  _ACEOF
@@ -33507,7 +33506,7 @@ Index: gdm3-2.30.2/configure
  fi
  
  done
-@@ -27698,20 +21105,16 @@
+@@ -27698,20 +21104,16 @@ ac_compile='$CC -c $CFLAGS $CPPFLAGS con
  ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
  ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
@@ -33532,7 +33531,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  #define _POSIX_PTHREAD_SEMANTICS
-@@ -27735,44 +21138,17 @@
+@@ -27735,44 +21137,17 @@ main ()
    return 0;
  }
  _ACEOF
@@ -33582,7 +33581,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$ac_cv_func_posix_getpwnam_r" >&6; }
  ac_ext=c
  ac_cpp='$CPP $CPPFLAGS'
-@@ -27783,21 +21159,15 @@
+@@ -27783,21 +21158,15 @@ ac_compiler_gnu=$ac_cv_c_compiler_gnu
  
  if test "$ac_cv_func_posix_getpwnam_r" = yes; then
  
@@ -33608,7 +33607,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #include <pwd.h>
  int
-@@ -27811,302 +21181,45 @@
+@@ -27811,302 +21180,45 @@ char buffer[10000];
    return 0;
  }
  _ACEOF
@@ -33936,7 +33935,7 @@ Index: gdm3-2.30.2/configure
    cat >>confdefs.h <<_ACEOF
  #define `$as_echo "HAVE_$ac_func" | $as_tr_cpp` 1
  _ACEOF
-@@ -28114,18 +21227,14 @@
+@@ -28114,18 +21226,14 @@ _ACEOF
  fi
  done
  
@@ -33958,7 +33957,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -28143,64 +21252,33 @@
+@@ -28143,64 +21251,33 @@ return login ();
    return 0;
  }
  _ACEOF
@@ -34033,7 +34032,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -28218,64 +21296,33 @@
+@@ -28218,64 +21295,33 @@ return logout ();
    return 0;
  }
  _ACEOF
@@ -34108,7 +34107,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -28293,199 +21340,33 @@
+@@ -28293,199 +21339,33 @@ return logwtmp ();
    return 0;
  }
  _ACEOF
@@ -34320,7 +34319,7 @@ Index: gdm3-2.30.2/configure
    cat >>confdefs.h <<_ACEOF
  #define `$as_echo "HAVE_$ac_header" | $as_tr_cpp` 1
  _ACEOF
-@@ -28494,16 +21375,12 @@
+@@ -28494,16 +21374,12 @@ fi
  
  done
  
@@ -34340,7 +34339,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #include <sys/types.h>
  #include <sys/time.h>
-@@ -28518,66 +21395,35 @@
+@@ -28518,66 +21394,35 @@ return 0;
    return 0;
  }
  _ACEOF
@@ -34415,7 +34414,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -28603,50 +21449,23 @@
+@@ -28603,50 +21448,23 @@ UTMP ut; char *p; p=ut.ut_host;
    return 0;
  }
  _ACEOF
@@ -34472,7 +34471,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -28672,50 +21491,23 @@
+@@ -28672,50 +21490,23 @@ UTMP ut; int i; i=ut.ut_pid;
    return 0;
  }
  _ACEOF
@@ -34529,7 +34528,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -28741,50 +21533,23 @@
+@@ -28741,50 +21532,23 @@ UTMP ut; char *p; p=ut.ut_id;
    return 0;
  }
  _ACEOF
@@ -34586,7 +34585,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -28810,50 +21575,23 @@
+@@ -28810,50 +21574,23 @@ UTMP ut; char *p; p=ut.ut_name;
    return 0;
  }
  _ACEOF
@@ -34643,7 +34642,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -28879,50 +21617,23 @@
+@@ -28879,50 +21616,23 @@ UTMP ut; int i; i=(int) ut.ut_type;
    return 0;
  }
  _ACEOF
@@ -34700,7 +34699,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -28948,50 +21659,23 @@
+@@ -28948,50 +21658,23 @@ UTMP ut; ut.ut_exit.e_termination=0;
    return 0;
  }
  _ACEOF
@@ -34757,7 +34756,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -29017,50 +21701,23 @@
+@@ -29017,50 +21700,23 @@ UTMP ut; char *p; p=ut.ut_user;
    return 0;
  }
  _ACEOF
@@ -34814,7 +34813,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -29085,51 +21742,24 @@
+@@ -29085,51 +21741,24 @@ UTMP ut; ut.ut_time=0;
    ;
    return 0;
  }
@@ -34873,7 +34872,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -29155,50 +21785,23 @@
+@@ -29155,50 +21784,23 @@ UTMP ut; ut.ut_tv.tv_sec=0; ut.ut_tv.tv_
    return 0;
  }
  _ACEOF
@@ -34930,7 +34929,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  #ifdef TIME_WITH_SYS_TIME
  #include <sys/time.h>
-@@ -29224,52 +21827,25 @@
+@@ -29224,52 +21826,25 @@ UTMP ut; ut.ut_syslen=0;
    return 0;
  }
  _ACEOF
@@ -34989,7 +34988,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
    #include <utmpx.h>
-@@ -29284,42 +21860,19 @@
+@@ -29284,42 +21859,19 @@ main ()
    return 0;
  }
  _ACEOF
@@ -35036,7 +35035,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$have_ut_syslen" >&6; }
  
  
-@@ -29328,65 +21881,18 @@
+@@ -29328,65 +21880,18 @@ XDMCP_LIBS=""
  if test x$with_xdmcp != xno ; then
  	xdmcp_save_CPPFLAGS="$CPPFLAGS"
  	CPPFLAGS="$CPPFLAGS $X_CFLAGS"
@@ -35108,7 +35107,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -29404,48 +21910,21 @@
+@@ -29404,48 +21909,21 @@ return XdmcpFlush ();
    return 0;
  }
  _ACEOF
@@ -35164,7 +35163,7 @@ Index: gdm3-2.30.2/configure
  
  		     	XDMCP_LIBS="-lXdmcp"
  		     	XDMCP_SUPPORT=yes
-@@ -29457,9 +21936,7 @@
+@@ -29457,9 +21935,7 @@ fi
  
  
  	if test x$with_xdmcp = xyes -a "x$XDMCP_SUPPORT" = "x" ; then
@@ -35175,7 +35174,7 @@ Index: gdm3-2.30.2/configure
  	fi
  	CPPFLAGS="$xdmcp_save_CPPFLAGS"
  fi
-@@ -29540,24 +22017,18 @@
+@@ -29540,24 +22016,18 @@ else
  	else
  		LIBWRAP_LIBS="-L/usr/sfw/lib -R/usr/sfw/lib -lwrap"
  
@@ -35204,7 +35203,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -29575,76 +22046,45 @@
+@@ -29575,76 +22045,45 @@ return hosts_ctl ();
    return 0;
  }
  _ACEOF
@@ -35293,7 +35292,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  #include <tcpd.h>
-@@ -29658,40 +22098,13 @@
+@@ -29658,40 +22097,13 @@ return hosts_access;
    return 0;
  }
  _ACEOF
@@ -35337,7 +35336,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  #include <tcpd.h>
-@@ -29705,52 +22118,25 @@
+@@ -29705,52 +22117,25 @@ return hosts_access;
    return 0;
  }
  _ACEOF
@@ -35398,7 +35397,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  		fi
    fi
-@@ -29762,27 +22148,21 @@
+@@ -29762,27 +22147,21 @@ fi
  
  if $PKG_CONFIG --exists xft ; then
  
@@ -35430,7 +35429,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -29795,262 +22175,73 @@
+@@ -29795,262 +22174,73 @@ char XOpenDevice ();
  int
  main ()
  {
@@ -35747,7 +35746,7 @@ Index: gdm3-2.30.2/configure
  
     X_EXTRA_LIBS="$X_EXTRA_LIBS $XINPUT_LIBS"
  fi
-@@ -30067,18 +22258,14 @@
+@@ -30067,18 +22257,14 @@ ALL_X_LIBS="$X_LIBS $X_PRE_LIBS -lX11 $X
  if test ! x$with_xinerama = xno ; then
    # Check for XFree
    use_xfree_xinerama=yes
@@ -35769,7 +35768,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30096,101 +22283,29 @@
+@@ -30096,101 +22282,29 @@ return XineramaQueryExtension ();
    return 0;
  }
  _ACEOF
@@ -35882,7 +35881,7 @@ Index: gdm3-2.30.2/configure
  
                         XINERAMA_LIBS="-lXinerama"
                         XINERAMA_SUPPORT=yes
-@@ -30203,27 +22318,23 @@
+@@ -30203,27 +22317,23 @@ else
    use_xfree_xinerama=no
  fi
  
@@ -35915,7 +35914,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30241,415 +22352,83 @@
+@@ -30241,415 +22351,83 @@ return XineramaGetInfo ();
    return 0;
  }
  _ACEOF
@@ -36376,7 +36375,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30667,60 +22446,31 @@
+@@ -30667,60 +22445,31 @@ return attr_get ();
    return 0;
  }
  _ACEOF
@@ -36446,7 +36445,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30738,58 +22488,29 @@
+@@ -30738,58 +22487,29 @@ return get_ordered_context_list ();
    return 0;
  }
  _ACEOF
@@ -36514,7 +36513,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30807,58 +22528,29 @@
+@@ -30807,58 +22527,29 @@ return freecon ();
    return 0;
  }
  _ACEOF
@@ -36582,7 +36581,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30876,58 +22568,29 @@
+@@ -30876,58 +22567,29 @@ return freeconary ();
    return 0;
  }
  _ACEOF
@@ -36650,7 +36649,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -30945,58 +22608,29 @@
+@@ -30945,58 +22607,29 @@ return setexeccon ();
    return 0;
  }
  _ACEOF
@@ -36718,7 +36717,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -31014,50 +22648,23 @@
+@@ -31014,50 +22647,23 @@ return is_selinux_enabled ();
    return 0;
  }
  _ACEOF
@@ -36776,7 +36775,7 @@ Index: gdm3-2.30.2/configure
  
  	EXTRA_DAEMON_LIBS="$EXTRA_DAEMON_LIBS -lselinux -lattr"
  fi
-@@ -31067,9 +22674,7 @@
+@@ -31067,9 +22673,7 @@ use_console_kit=no
  if test "x$with_console_kit" != "xno" ; then
  	use_console_kit=yes
  
@@ -36787,7 +36786,7 @@ Index: gdm3-2.30.2/configure
  
  fi
   if test x$use_console_kit = xyes; then
-@@ -31085,13 +22690,13 @@
+@@ -31085,13 +22689,13 @@ fi
  
  
  # Check whether --with-dbus-sys was given.
@@ -36803,7 +36802,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_dbus_services;
  fi
  
-@@ -31104,13 +22709,13 @@
+@@ -31104,13 +22708,13 @@ fi
  
  
  
@@ -36820,7 +36819,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -31124,7 +22729,7 @@
+@@ -31124,7 +22728,7 @@ ISO_CODES=iso-codes
  
  msg_rbac_shutdown=no
  # Check whether --enable-rbac-shutdown was given.
@@ -36829,7 +36828,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_rbac_shutdown; enable_rbac_shutdown=$enableval
  else
    enable_rbac_shutdown=no
-@@ -31134,9 +22739,7 @@
+@@ -31134,9 +22738,7 @@ fi
  if test "x$enable_rbac_shutdown" != "xno"; then
          RBAC_LIBS="-lsecdb -lsocket -lnsl"
  
@@ -36840,7 +36839,7 @@ Index: gdm3-2.30.2/configure
  
  
  cat >>confdefs.h <<_ACEOF
-@@ -31149,151 +22752,12 @@
+@@ -31149,151 +22751,12 @@ fi
  
  
  
@@ -36996,7 +36995,7 @@ Index: gdm3-2.30.2/configure
  _ACEOF
  
  fi
-@@ -31302,7 +22766,7 @@
+@@ -31302,7 +22765,7 @@ done
  
  
  
@@ -37005,7 +37004,7 @@ Index: gdm3-2.30.2/configure
  
  gdmlocaledir=${gdmconfdir}
  
-@@ -31311,7 +22775,7 @@
+@@ -31311,7 +22774,7 @@ pixmapdir=${datadir}/pixmaps
  
  
  # Check whether --with-log-dir was given.
@@ -37014,7 +37013,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_log_dir;
  fi
  
-@@ -31327,7 +22791,7 @@
+@@ -31327,7 +22790,7 @@ logdir=$GDM_LOG_DIR
  withval=""
  
  # Check whether --with-at-bindir was given.
@@ -37023,7 +37022,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_at_bindir;
  fi
  
-@@ -31343,7 +22807,7 @@
+@@ -31343,7 +22806,7 @@ fi
  withval=""
  
  # Check whether --with-defaults_conf was given.
@@ -37032,7 +37031,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_defaults_conf;
  fi
  
-@@ -31359,7 +22823,7 @@
+@@ -31359,7 +22822,7 @@ fi
  withval=""
  
  # Check whether --with-custom_conf was given.
@@ -37041,7 +37040,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_custom_conf;
  fi
  
-@@ -31377,7 +22841,7 @@
+@@ -31377,7 +22840,7 @@ GDM_OLD_CONF='${gdmconfdir}/gdm.conf'
  
  
  # Check whether --with-xevie was given.
@@ -37050,7 +37049,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_xevie;
  else
    with_xevie=no
-@@ -31404,13 +22868,9 @@
+@@ -31404,13 +22867,9 @@ _ACEOF
  # required.  Solaris auditing is only supported on systems that
  # support the ADT_USER enumeration value.
  #
@@ -37066,7 +37065,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  #include <bsm/adt.h>
-@@ -31424,46 +22884,23 @@
+@@ -31424,46 +22883,23 @@ main ()
    return 0;
  }
  _ACEOF
@@ -37118,7 +37117,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
   if test x$check_sun_audit = xyes; then
-@@ -31479,7 +22916,7 @@
+@@ -31479,7 +22915,7 @@ fi
  #
  
  # Check whether --with-libaudit was given.
@@ -37127,7 +37126,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_libaudit;
  else
    with_libaudit=auto
-@@ -31491,18 +22928,14 @@
+@@ -31491,18 +22927,14 @@ if test x$with_libaudit = xno ; then
      have_libaudit=no;
  else
      # See if we have audit daemon library
@@ -37149,7 +37148,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -31517,46 +22950,21 @@
+@@ -31517,46 +22949,21 @@ main ()
  {
  return audit_log_user_message ();
    ;
@@ -37205,7 +37204,7 @@ Index: gdm3-2.30.2/configure
    have_libaudit=yes
  else
    have_libaudit=no
-@@ -31576,9 +22984,7 @@
+@@ -31576,9 +22983,7 @@ fi
  if test x$have_libaudit = xyes ; then
      PAM_LIBS="$PAM_LIBS -laudit"
  
@@ -37216,7 +37215,7 @@ Index: gdm3-2.30.2/configure
  
  fi
  
-@@ -31597,18 +23003,14 @@
+@@ -31597,18 +23002,14 @@ fi
  
  # Check for Solaris logindevperm support
  #
@@ -37238,7 +37237,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  /* Override any GCC internal prototype to avoid an error.
-@@ -31626,47 +23028,20 @@
+@@ -31626,47 +23027,20 @@ return di_devperm_login ();
    return 0;
  }
  _ACEOF
@@ -37293,7 +37292,7 @@ Index: gdm3-2.30.2/configure
  
                              PAM_LIBS="$PAM_LIBS -ldevinfo"
  fi
-@@ -31684,7 +23059,10 @@
+@@ -31684,7 +23058,10 @@ fi
  # and /usr/X11 since they often symlink to each other, and configure
  # should use the more stable location (the real directory) if possible.
  #
@@ -37305,7 +37304,7 @@ Index: gdm3-2.30.2/configure
     X_PATH="/usr/X11/bin"
     X_SERVER_PATH="/usr/X11/bin"
     X_SERVER="/usr/X11/bin/Xserver"
-@@ -31742,28 +23120,10 @@
+@@ -31742,28 +23119,10 @@ else
  fi
  
  
@@ -37337,7 +37336,7 @@ Index: gdm3-2.30.2/configure
  
  
  
-@@ -31966,7 +23326,7 @@
+@@ -31966,7 +23325,7 @@ fi
  
  
  # Check whether --with-pid-file was given.
@@ -37346,7 +37345,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_pid_file;
  fi
  
-@@ -31987,7 +23347,7 @@
+@@ -31987,7 +23346,7 @@ _ACEOF
  
  
  # Check whether --with-working-directory was given.
@@ -37355,7 +37354,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_working_directory;
  fi
  
-@@ -32003,7 +23363,7 @@
+@@ -32003,7 +23362,7 @@ fi
  
  
  # Check whether --with-xauth-dir was given.
@@ -37364,7 +37363,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_xauth_dir;
  fi
  
-@@ -32019,7 +23379,7 @@
+@@ -32019,7 +23378,7 @@ fi
  
  
  # Check whether --with-screenshot-dir was given.
@@ -37373,7 +37372,7 @@ Index: gdm3-2.30.2/configure
    withval=$with_screenshot_dir;
  fi
  
-@@ -32038,7 +23398,7 @@
+@@ -32038,7 +23397,7 @@ fi
  # Turn on the additional warnings last, so -Werror doesn't affect other tests.
  
  # Check whether --enable-more-warnings was given.
@@ -37382,7 +37381,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_more_warnings; set_more_warnings="$enableval"
  else
  
-@@ -32050,10 +23410,10 @@
+@@ -32050,10 +23409,10 @@ else
  fi
  
  
@@ -37395,7 +37394,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "yes" >&6; }
          CFLAGS="\
          -Wall \
-@@ -32065,13 +23425,9 @@
+@@ -32065,13 +23424,9 @@ $as_echo "yes" >&6; }
          for option in -Wno-strict-aliasing -Wno-sign-compare; do
                  SAVE_CFLAGS="$CFLAGS"
                  CFLAGS="$CFLAGS $option"
@@ -37411,7 +37410,7 @@ Index: gdm3-2.30.2/configure
  /* end confdefs.h.  */
  
  int
-@@ -32082,44 +23438,23 @@
+@@ -32082,44 +23437,23 @@ main ()
    return 0;
  }
  _ACEOF
@@ -37460,7 +37459,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "no" >&6; }
  fi
  
-@@ -32127,7 +23462,7 @@
+@@ -32127,7 +23461,7 @@ fi
  # Enable Debug
  #
  # Check whether --enable-debug was given.
@@ -37469,7 +37468,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_debug;
  else
    enable_debug=yes
-@@ -32149,7 +23484,7 @@
+@@ -32149,7 +23483,7 @@ fi
  # Enable Profiling
  #
  # Check whether --enable-profiling was given.
@@ -37478,7 +37477,7 @@ Index: gdm3-2.30.2/configure
    enableval=$enable_profiling;
  else
    enable_profiling=yes
-@@ -32158,9 +23493,7 @@
+@@ -32158,9 +23492,7 @@ fi
  
  if test "$enable_profiling" = "yes"; then
  
@@ -37489,7 +37488,7 @@ Index: gdm3-2.30.2/configure
  
  fi
  
-@@ -32233,7 +23566,7 @@
+@@ -32233,7 +23565,7 @@ _ACEOF
  #AC_SUBST(DEBIAN_DATESTAMP)
  #AC_SUBST(DEBIAN_DATE)
  
@@ -37498,7 +37497,7 @@ Index: gdm3-2.30.2/configure
  
  
  cat >confcache <<\_ACEOF
-@@ -32263,13 +23596,13 @@
+@@ -32263,13 +23595,13 @@ _ACEOF
      case $ac_val in #(
      *${as_nl}*)
        case $ac_var in #(
@@ -37514,7 +37513,7 @@ Index: gdm3-2.30.2/configure
        esac ;;
      esac
    done
-@@ -32277,8 +23610,8 @@
+@@ -32277,8 +23609,8 @@ $as_echo "$as_me: WARNING: cache variabl
    (set) 2>&1 |
      case $as_nl`(ac_space=' '; set) 2>&1` in #(
      *${as_nl}ac_space=\ *)
@@ -37525,7 +37524,7 @@ Index: gdm3-2.30.2/configure
        sed -n \
  	"s/'/'\\\\''/g;
  	  s/^\\([_$as_cr_alnum]*_cv_[_$as_cr_alnum]*\\)=\\(.*\\)/\\1='\\2'/p"
-@@ -32301,11 +23634,11 @@
+@@ -32301,11 +23633,11 @@ $as_echo "$as_me: WARNING: cache variabl
  if diff "$cache_file" confcache >/dev/null 2>&1; then :; else
    if test -w "$cache_file"; then
      test "x$cache_file" != "x/dev/null" &&
@@ -37539,7 +37538,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: not updating unwritable cache $cache_file" >&6;}
    fi
  fi
-@@ -32325,8 +23658,8 @@
+@@ -32325,8 +23657,8 @@ for ac_i in : $LIBOBJS; do test "x$ac_i"
    ac_i=`$as_echo "$ac_i" | sed "$ac_script"`
    # 2. Prepend LIBOBJDIR.  When used with automake>=1.10 LIBOBJDIR
    #    will be set to the directory where LIBOBJS objects are built.
@@ -37550,7 +37549,7 @@ Index: gdm3-2.30.2/configure
  done
  LIBOBJS=$ac_libobjs
  
-@@ -32342,136 +23675,86 @@
+@@ -32342,136 +23674,86 @@ else
  fi
  
  if test -z "${MAINTAINER_MODE_TRUE}" && test -z "${MAINTAINER_MODE_FALSE}"; then
@@ -37724,7 +37723,7 @@ Index: gdm3-2.30.2/configure
  #! $SHELL
  # Generated by $as_me.
  # Run this file to recreate the current configuration.
-@@ -32481,17 +23764,18 @@
+@@ -32481,17 +23763,18 @@ cat >$CONFIG_STATUS <<_ACEOF || ac_write
  debug=false
  ac_cs_recheck=false
  ac_cs_silent=false
@@ -37750,7 +37749,7 @@ Index: gdm3-2.30.2/configure
    emulate sh
    NULLCMD=:
    # Pre-4.2 versions of Zsh do word splitting on ${1+"$@"}, which
-@@ -32499,23 +23783,15 @@
+@@ -32499,23 +23782,15 @@ if test -n "${ZSH_VERSION+set}" && (emul
    alias -g '${1+"$@"}'='"$@"'
    setopt NO_GLOB_SUBST
  else
@@ -37779,7 +37778,7 @@ Index: gdm3-2.30.2/configure
  as_nl='
  '
  export as_nl
-@@ -32523,7 +23799,13 @@
+@@ -32523,7 +23798,13 @@ export as_nl
  as_echo='\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\'
  as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo
  as_echo=$as_echo$as_echo$as_echo$as_echo$as_echo$as_echo
@@ -37794,7 +37793,7 @@ Index: gdm3-2.30.2/configure
    as_echo='printf %s\n'
    as_echo_n='printf %s'
  else
-@@ -32534,7 +23816,7 @@
+@@ -32534,7 +23815,7 @@ else
      as_echo_body='eval expr "X$1" : "X\\(.*\\)"'
      as_echo_n_body='eval
        arg=$1;
@@ -37803,7 +37802,7 @@ Index: gdm3-2.30.2/configure
        *"$as_nl"*)
  	expr "X$arg" : "X\\(.*\\)$as_nl";
  	arg=`expr "X$arg" : ".*$as_nl\\(.*\\)"`;;
-@@ -32557,13 +23839,6 @@
+@@ -32557,13 +23838,6 @@ if test "${PATH_SEPARATOR+set}" != set;
    }
  fi
  
@@ -37817,7 +37816,7 @@ Index: gdm3-2.30.2/configure
  
  # IFS
  # We need space, tab and new line, in precisely that order.  Quoting is
-@@ -32573,15 +23848,15 @@
+@@ -32573,15 +23847,15 @@ fi
  IFS=" ""	$as_nl"
  
  # Find who we are.  Look in the path if we contain no directory separator.
@@ -37836,7 +37835,7 @@ Index: gdm3-2.30.2/configure
  IFS=$as_save_IFS
  
       ;;
-@@ -32593,12 +23868,16 @@
+@@ -32593,12 +23867,16 @@ if test "x$as_myself" = x; then
  fi
  if test ! -f "$as_myself"; then
    $as_echo "$as_myself: error: cannot find myself; rerun with an absolute file name" >&2
@@ -37857,7 +37856,7 @@ Index: gdm3-2.30.2/configure
  done
  PS1='$ '
  PS2='> '
-@@ -32610,7 +23889,89 @@
+@@ -32610,7 +23888,89 @@ export LC_ALL
  LANGUAGE=C
  export LANGUAGE
  
@@ -37948,7 +37947,7 @@ Index: gdm3-2.30.2/configure
  if expr a : '\(a\)' >/dev/null 2>&1 &&
     test "X`expr 00001 : '.*\(...\)'`" = X001; then
    as_expr=expr
-@@ -32624,8 +23985,12 @@
+@@ -32624,8 +23984,12 @@ else
    as_basename=false
  fi
  
@@ -37962,7 +37961,7 @@ Index: gdm3-2.30.2/configure
  as_me=`$as_basename -- "$0" ||
  $as_expr X/"$0" : '.*/\([^/][^/]*\)/*$' \| \
  	 X"$0" : 'X\(//\)$' \| \
-@@ -32645,76 +24010,25 @@
+@@ -32645,76 +24009,25 @@ $as_echo X/"$0" |
  	  }
  	  s/.*/./; q'`
  
@@ -38050,7 +38049,7 @@ Index: gdm3-2.30.2/configure
  
  rm -f conf$$ conf$$.exe conf$$.file
  if test -d conf$$.dir; then
-@@ -32743,8 +24057,56 @@
+@@ -32743,8 +24056,56 @@ fi
  rm -f conf$$ conf$$.exe conf$$.dir/conf$$.file conf$$.file
  rmdir conf$$.dir 2>/dev/null
  
@@ -38108,7 +38107,7 @@ Index: gdm3-2.30.2/configure
  else
    test -d ./-p && rmdir ./-p
    as_mkdir_p=false
-@@ -32763,10 +24125,10 @@
+@@ -32763,10 +24124,10 @@ else
        if test -d "$1"; then
  	test -d "$1/.";
        else
@@ -38121,7 +38120,7 @@ Index: gdm3-2.30.2/configure
  	???[sx]*):;;*)false;;esac;fi
      '\'' sh
    '
-@@ -32781,13 +24143,19 @@
+@@ -32781,13 +24142,19 @@ as_tr_sh="eval sed 'y%*+%pp%;s%[^_$as_cr
  
  
  exec 6>&1
@@ -38143,7 +38142,7 @@ Index: gdm3-2.30.2/configure
  
    CONFIG_FILES    = $CONFIG_FILES
    CONFIG_HEADERS  = $CONFIG_HEADERS
-@@ -32819,13 +24187,15 @@
+@@ -32819,13 +24186,15 @@ _ACEOF
  
  cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
  ac_cs_usage="\
@@ -38162,7 +38161,7 @@ Index: gdm3-2.30.2/configure
    -q, --quiet, --silent
                     do not print progress messages
    -d, --debug      don't remove temporary files
-@@ -32844,16 +24214,17 @@
+@@ -32844,16 +24213,17 @@ $config_headers
  Configuration commands:
  $config_commands
  
@@ -38184,7 +38183,7 @@ Index: gdm3-2.30.2/configure
  This config.status script is free software; the Free Software Foundation
  gives unlimited permission to copy, distribute and modify it."
  
-@@ -32889,6 +24260,8 @@
+@@ -32889,6 +24259,8 @@ do
      ac_cs_recheck=: ;;
    --version | --versio | --versi | --vers | --ver | --ve | --v | -V )
      $as_echo "$ac_cs_version"; exit ;;
@@ -38193,7 +38192,7 @@ Index: gdm3-2.30.2/configure
    --debug | --debu | --deb | --de | --d | -d )
      debug=: ;;
    --file | --fil | --fi | --f )
-@@ -32896,20 +24269,19 @@
+@@ -32896,20 +24268,19 @@ do
      case $ac_optarg in
      *\'*) ac_optarg=`$as_echo "$ac_optarg" | sed "s/'/'\\\\\\\\''/g"` ;;
      esac
@@ -38218,7 +38217,7 @@ Index: gdm3-2.30.2/configure
    --help | --hel | -h )
      $as_echo "$ac_cs_usage"; exit ;;
    -q | -quiet | --quiet | --quie | --qui | --qu | --q \
-@@ -32917,11 +24289,10 @@
+@@ -32917,11 +24288,10 @@ Try \`$0 --help' for more information."
      ac_cs_silent=: ;;
  
    # This is an error.
@@ -38233,7 +38232,7 @@ Index: gdm3-2.30.2/configure
       ac_need_defaults=false ;;
  
    esac
-@@ -33332,12 +24703,14 @@
+@@ -33332,12 +24702,14 @@ do
      "daemon/Makefile") CONFIG_FILES="$CONFIG_FILES daemon/Makefile" ;;
      "docs/Makefile") CONFIG_FILES="$CONFIG_FILES docs/Makefile" ;;
      "gui/Makefile") CONFIG_FILES="$CONFIG_FILES gui/Makefile" ;;
@@ -38248,7 +38247,7 @@ Index: gdm3-2.30.2/configure
      "data/Makefile") CONFIG_FILES="$CONFIG_FILES data/Makefile" ;;
      "data/faces/Makefile") CONFIG_FILES="$CONFIG_FILES data/faces/Makefile" ;;
      "data/greeter-autostart/Makefile") CONFIG_FILES="$CONFIG_FILES data/greeter-autostart/Makefile" ;;
-@@ -33351,9 +24724,7 @@
+@@ -33351,9 +24723,7 @@ do
      "tests/Makefile") CONFIG_FILES="$CONFIG_FILES tests/Makefile" ;;
      "po/stamp-it") CONFIG_COMMANDS="$CONFIG_COMMANDS po/stamp-it" ;;
  
@@ -38259,7 +38258,7 @@ Index: gdm3-2.30.2/configure
    esac
  done
  
-@@ -33380,7 +24751,7 @@
+@@ -33380,7 +24750,7 @@ $debug ||
    trap 'exit_status=$?
    { test -z "$tmp" || test ! -d "$tmp" || rm -fr "$tmp"; } && exit $exit_status
  ' 0
@@ -38268,7 +38267,7 @@ Index: gdm3-2.30.2/configure
  }
  # Create a (secure) tmp directory for tmp files.
  
-@@ -33391,11 +24762,7 @@
+@@ -33391,11 +24761,7 @@ $debug ||
  {
    tmp=./conf$$-$RANDOM
    (umask 077 && mkdir "$tmp")
@@ -38281,7 +38280,7 @@ Index: gdm3-2.30.2/configure
  
  # Set up the scripts for CONFIG_FILES section.
  # No need to generate them if there are no CONFIG_FILES.
-@@ -33403,10 +24770,16 @@
+@@ -33403,10 +24769,16 @@ $debug ||
  if test -n "$CONFIG_FILES"; then
  
  
@@ -38300,7 +38299,7 @@ Index: gdm3-2.30.2/configure
  else
    ac_cs_awk_cr=$ac_cr
  fi
-@@ -33420,24 +24793,18 @@
+@@ -33420,24 +24792,18 @@ _ACEOF
    echo "$ac_subst_vars" | sed 's/.*/&!$&$ac_delim/' &&
    echo "_ACEOF"
  } >conf$$subs.sh ||
@@ -38328,7 +38327,7 @@ Index: gdm3-2.30.2/configure
    else
      ac_delim="$ac_delim!$ac_delim _$ac_delim!! "
    fi
-@@ -33459,7 +24826,7 @@
+@@ -33459,7 +24825,7 @@ s/'"$ac_delim"'$//
  t delim
  :nl
  h
@@ -38337,7 +38336,7 @@ Index: gdm3-2.30.2/configure
  t more1
  s/["\\]/\\&/g; s/^/"/; s/$/\\n"\\/
  p
-@@ -33473,7 +24840,7 @@
+@@ -33473,7 +24839,7 @@ s/.\{148\}//
  t nl
  :delim
  h
@@ -38346,7 +38345,7 @@ Index: gdm3-2.30.2/configure
  t more2
  s/["\\]/\\&/g; s/^/"/; s/$/"/
  p
-@@ -33526,9 +24893,7 @@
+@@ -33526,9 +24892,7 @@ if sed "s/$ac_cr//" < /dev/null > /dev/n
  else
    cat
  fi < "$tmp/subs1.awk" > "$tmp/subs.awk" \
@@ -38357,7 +38356,7 @@ Index: gdm3-2.30.2/configure
  _ACEOF
  
  # VPATH may cause trouble with some makes, so we remove $(srcdir),
-@@ -33569,9 +24934,7 @@
+@@ -33569,9 +24933,7 @@ for ac_last_try in false false :; do
    if test -z "$ac_t"; then
      break
    elif $ac_last_try; then
@@ -38368,7 +38367,7 @@ Index: gdm3-2.30.2/configure
    else
      ac_delim="$ac_delim!$ac_delim _$ac_delim!! "
    fi
-@@ -33656,9 +25019,7 @@
+@@ -33656,9 +25018,7 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_writ
  _ACAWK
  _ACEOF
  cat >>$CONFIG_STATUS <<\_ACEOF || ac_write_fail=1
@@ -38379,7 +38378,7 @@ Index: gdm3-2.30.2/configure
  fi # test -n "$CONFIG_HEADERS"
  
  
-@@ -33671,9 +25032,7 @@
+@@ -33671,9 +25031,7 @@ do
    esac
    case $ac_mode$ac_tag in
    :[FHL]*:*);;
@@ -38390,7 +38389,7 @@ Index: gdm3-2.30.2/configure
    :[FH]-) ac_tag=-:-;;
    :[FH]*) ac_tag=$ac_tag:$ac_tag.in;;
    esac
-@@ -33701,12 +25060,10 @@
+@@ -33701,12 +25059,10 @@ $as_echo "$as_me: error: invalid tag $ac
  	   [\\/$]*) false;;
  	   *) test -f "$srcdir/$ac_f" && ac_f="$srcdir/$ac_f";;
  	   esac ||
@@ -38405,7 +38404,7 @@ Index: gdm3-2.30.2/configure
      done
  
      # Let's still pretend it is `configure' which instantiates (i.e., don't
-@@ -33717,7 +25074,7 @@
+@@ -33717,7 +25073,7 @@ $as_echo "$as_me: error: cannot find inp
  	`' by configure.'
      if test x"$ac_file" != x-; then
        configure_input="$ac_file.  $configure_input"
@@ -38414,7 +38413,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: creating $ac_file" >&6;}
      fi
      # Neutralize special characters interpreted by sed in replacement strings.
-@@ -33730,9 +25087,7 @@
+@@ -33730,9 +25086,7 @@ $as_echo "$as_me: creating $ac_file" >&6
  
      case $ac_tag in
      *:-:* | *:-) cat >"$tmp/stdin" \
@@ -38425,7 +38424,7 @@ Index: gdm3-2.30.2/configure
      esac
      ;;
    esac
-@@ -33760,47 +25115,7 @@
+@@ -33760,47 +25114,7 @@ $as_echo X"$ac_file" |
  	    q
  	  }
  	  s/.*/./; q'`
@@ -38474,7 +38473,7 @@ Index: gdm3-2.30.2/configure
    ac_builddir=.
  
  case "$ac_dir" in
-@@ -33857,7 +25172,6 @@
+@@ -33857,7 +25171,6 @@ cat >>$CONFIG_STATUS <<\_ACEOF || ac_wri
  # If the template does not know about datarootdir, expand it.
  # FIXME: This hack should be removed a few years after 2.60.
  ac_datarootdir_hack=; ac_datarootdir_seen=
@@ -38482,7 +38481,7 @@ Index: gdm3-2.30.2/configure
  ac_sed_dataroot='
  /datarootdir/ {
    p
-@@ -33867,12 +25181,11 @@
+@@ -33867,12 +25180,11 @@ ac_sed_dataroot='
  /@docdir@/p
  /@infodir@/p
  /@localedir@/p
@@ -38497,7 +38496,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: $ac_file_inputs seems to ignore the --datarootdir setting" >&2;}
  _ACEOF
  cat >>$CONFIG_STATUS <<_ACEOF || ac_write_fail=1
-@@ -33882,7 +25195,7 @@
+@@ -33882,7 +25194,7 @@ cat >>$CONFIG_STATUS <<_ACEOF || ac_writ
    s&@infodir@&$infodir&g
    s&@localedir@&$localedir&g
    s&@mandir@&$mandir&g
@@ -38506,7 +38505,7 @@ Index: gdm3-2.30.2/configure
  esac
  _ACEOF
  
-@@ -33911,14 +25224,12 @@
+@@ -33911,14 +25223,12 @@ s&@MKDIR_P@&$ac_MKDIR_P&;t t
  $ac_datarootdir_hack
  "
  eval sed \"\$ac_sed_extra\" "$ac_file_inputs" | $AWK -f "$tmp/subs.awk" >$tmp/out \
@@ -38523,7 +38522,7 @@ Index: gdm3-2.30.2/configure
  which seems to be undefined.  Please make sure it is defined." >&5
  $as_echo "$as_me: WARNING: $ac_file contains a reference to the variable \`datarootdir'
  which seems to be undefined.  Please make sure it is defined." >&2;}
-@@ -33928,9 +25239,7 @@
+@@ -33928,9 +25238,7 @@ which seems to be undefined.  Please mak
    -) cat "$tmp/out" && rm -f "$tmp/out";;
    *) rm -f "$ac_file" && mv "$tmp/out" "$ac_file";;
    esac \
@@ -38534,7 +38533,7 @@ Index: gdm3-2.30.2/configure
   ;;
    :H)
    #
-@@ -33941,25 +25250,19 @@
+@@ -33941,25 +25249,19 @@ $as_echo "$as_me: error: could not creat
        $as_echo "/* $configure_input  */" \
        && eval '$AWK -f "$tmp/defines.awk"' "$ac_file_inputs"
      } >"$tmp/config.h" \
@@ -38564,7 +38563,7 @@ Index: gdm3-2.30.2/configure
    fi
  # Compute "$ac_file"'s index in $config_headers.
  _am_arg="$ac_file"
-@@ -33997,7 +25300,7 @@
+@@ -33997,7 +25299,7 @@ $as_echo X"$_am_arg" |
  	  s/.*/./; q'`/stamp-h$_am_stamp_count
   ;;
  
@@ -38573,7 +38572,7 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: executing $ac_file commands" >&6;}
   ;;
    esac
-@@ -34092,47 +25395,7 @@
+@@ -34092,47 +25394,7 @@ $as_echo X"$file" |
  	    q
  	  }
  	  s/.*/./; q'`
@@ -38622,7 +38621,7 @@ Index: gdm3-2.30.2/configure
        # echo "creating $dirpart/$file"
        echo '# dummy' > "$dirpart/$file"
      done
-@@ -34946,9 +26209,7 @@
+@@ -34946,9 +26208,7 @@ _LT_EOF
        esac ;;
      "po/stamp-it":C)
      if  ! grep "^# INTLTOOL_MAKEFILE$" "po/Makefile.in" > /dev/null ; then
@@ -38633,7 +38632,7 @@ Index: gdm3-2.30.2/configure
      fi
      rm -f "po/stamp-it" "po/stamp-it.tmp" "po/POTFILES" "po/Makefile.tmp"
      >"po/stamp-it.tmp"
-@@ -34971,15 +26232,12 @@
+@@ -34971,15 +26231,12 @@ $as_echo "$as_me: error: po/Makefile.in.
  done # for ac_tag
  
  
@@ -38651,7 +38650,7 @@ Index: gdm3-2.30.2/configure
  
  
  # configure is writing to config.log, and then calls config.status.
-@@ -35000,10 +26258,10 @@
+@@ -35000,10 +26257,10 @@ if test "$no_create" != yes; then
    exec 5>>config.log
    # Use ||, not &&, to avoid exiting from the if with $? = 1, which
    # would make configure fail if this is the last instruction.
@@ -38664,11 +38663,11 @@ Index: gdm3-2.30.2/configure
  $as_echo "$as_me: WARNING: unrecognized options: $ac_unrecognized_opts" >&2;}
  fi
  
-Index: gdm3-2.30.2/daemon/Makefile.in
+Index: gdm-2.30.2/daemon/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/daemon/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/daemon/Makefile.in	2010-06-02 19:00:46.000000000 +0200
-@@ -52,8 +52,10 @@
+--- gdm-2.30.2.orig/daemon/Makefile.in	2010-05-08 14:15:24.425608276 +0200
++++ gdm-2.30.2/daemon/Makefile.in	2010-05-08 14:31:39.477613057 +0200
+@@ -52,8 +52,10 @@ sbin_PROGRAMS = gdm-binary$(EXEEXT) $(am
  subdir = daemon
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -38681,7 +38680,7 @@ Index: gdm3-2.30.2/daemon/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -320,10 +322,13 @@
+@@ -320,10 +322,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -38695,7 +38694,7 @@ Index: gdm3-2.30.2/daemon/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -388,6 +393,7 @@
+@@ -388,6 +393,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -38703,11 +38702,11 @@ Index: gdm3-2.30.2/daemon/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/data/faces/Makefile.in
+Index: gdm-2.30.2/data/faces/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/faces/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/faces/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -37,8 +37,10 @@
+--- gdm-2.30.2.orig/data/faces/Makefile.in	2010-05-08 14:15:24.413608497 +0200
++++ gdm-2.30.2/data/faces/Makefile.in	2010-05-08 14:31:39.477613057 +0200
+@@ -37,8 +37,10 @@ host_triplet = @host@
  subdir = data/faces
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -38720,7 +38719,7 @@ Index: gdm3-2.30.2/data/faces/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -144,10 +146,13 @@
+@@ -144,10 +146,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -38734,7 +38733,7 @@ Index: gdm3-2.30.2/data/faces/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -212,6 +217,7 @@
+@@ -212,6 +217,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -38742,11 +38741,11 @@ Index: gdm3-2.30.2/data/faces/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/data/greeter-autostart/Makefile.in
+Index: gdm-2.30.2/data/greeter-autostart/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/greeter-autostart/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/greeter-autostart/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -38,8 +38,10 @@
+--- gdm-2.30.2.orig/data/greeter-autostart/Makefile.in	2010-05-08 14:15:24.397610583 +0200
++++ gdm-2.30.2/data/greeter-autostart/Makefile.in	2010-05-08 14:31:39.477613057 +0200
+@@ -38,8 +38,10 @@ subdir = data/greeter-autostart
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
  	$(srcdir)/at-spi-registryd-wrapper.desktop.in.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -38759,7 +38758,7 @@ Index: gdm3-2.30.2/data/greeter-autostart/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -145,10 +147,13 @@
+@@ -145,10 +147,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -38773,7 +38772,7 @@ Index: gdm3-2.30.2/data/greeter-autostart/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -213,6 +218,7 @@
+@@ -213,6 +218,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -38781,11 +38780,11 @@ Index: gdm3-2.30.2/data/greeter-autostart/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/data/Makefile.in
+Index: gdm-2.30.2/data/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -36,15 +36,17 @@
+--- gdm-2.30.2.orig/data/Makefile.in	2010-05-08 14:15:24.381611202 +0200
++++ gdm-2.30.2/data/Makefile.in	2010-05-08 14:32:29.553106672 +0200
+@@ -36,15 +36,17 @@ build_triplet = @build@
  host_triplet = @host@
  subdir = data
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in \
@@ -38807,7 +38806,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  CONFIG_CLEAN_VPATH_FILES =
  AM_V_GEN = $(am__v_GEN_$(V))
  am__v_GEN_ = $(am__v_GEN_$(AM_DEFAULT_VERBOSITY))
-@@ -83,8 +85,10 @@
+@@ -83,8 +85,10 @@ am__base_list = \
    sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
    sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
  am__installdirs = "$(DESTDIR)$(dbusconfdir)" \
@@ -38820,7 +38819,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
    distclean-recursive maintainer-clean-recursive
  AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
-@@ -186,10 +190,13 @@
+@@ -186,10 +190,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -38834,7 +38833,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -254,6 +261,7 @@
+@@ -254,6 +261,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -38842,7 +38841,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-@@ -312,7 +320,7 @@
+@@ -312,7 +320,7 @@ am__leading_dot = @am__leading_dot@
  am__quote = @am__quote@
  am__tar = @am__tar@
  am__untar = @am__untar@
@@ -38851,7 +38850,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  bindir = @bindir@
  build = @build@
  build_alias = @build_alias@
-@@ -378,16 +386,20 @@
+@@ -378,16 +386,20 @@ cachedir = $(localstatedir)/cache/gdm
  dbusconfdir = $(DBUS_SYS_DIR)
  dbusconf_in_files = gdm.conf.in
  dbusconf_DATA = $(dbusconf_in_files:.conf.in=.conf)
@@ -38873,7 +38872,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  	gdm.schemas.in.in	\
  	gdm.conf-custom.in 	\
  	Xsession.in 		\
-@@ -410,7 +422,8 @@
+@@ -410,7 +422,8 @@ CLEANFILES = \
  	$(NULL)
  
  DISTCLEANFILES = \
@@ -38883,7 +38882,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  	gdm.schemas			\
  	$(NULL)
  
-@@ -453,6 +466,8 @@
+@@ -453,6 +466,8 @@ $(ACLOCAL_M4): @MAINTAINER_MODE_TRUE@ $(
  $(am__aclocal_m4_deps):
  gdm.conf: $(top_builddir)/config.status $(srcdir)/gdm.conf.in
  	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@
@@ -38892,7 +38891,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  
  mostlyclean-libtool:
  	-rm -f *.lo
-@@ -499,6 +514,26 @@
+@@ -499,6 +514,26 @@ uninstall-localealiasDATA:
  	test -n "$$files" || exit 0; \
  	echo " ( cd '$(DESTDIR)$(localealiasdir)' && rm -f" $$files ")"; \
  	cd "$(DESTDIR)$(localealiasdir)" && rm -f $$files
@@ -38919,7 +38918,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  install-schemasDATA: $(schemas_DATA)
  	@$(NORMAL_INSTALL)
  	test -z "$(schemasdir)" || $(MKDIR_P) "$(DESTDIR)$(schemasdir)"
-@@ -718,7 +753,7 @@
+@@ -718,7 +753,7 @@ check: check-recursive
  all-am: Makefile $(DATA)
  installdirs: installdirs-recursive
  installdirs-am:
@@ -38928,7 +38927,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
  	done
  install: install-recursive
-@@ -770,7 +805,7 @@
+@@ -770,7 +805,7 @@ info: info-recursive
  info-am:
  
  install-data-am: install-dbusconfDATA install-localealiasDATA \
@@ -38937,7 +38936,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  	@$(NORMAL_INSTALL)
  	$(MAKE) $(AM_MAKEFLAGS) install-data-hook
  install-dvi: install-dvi-recursive
-@@ -816,7 +851,7 @@
+@@ -816,7 +851,7 @@ ps: ps-recursive
  ps-am:
  
  uninstall-am: uninstall-dbusconfDATA uninstall-localealiasDATA \
@@ -38946,7 +38945,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  	@$(NORMAL_INSTALL)
  	$(MAKE) $(AM_MAKEFLAGS) uninstall-hook
  .MAKE: $(RECURSIVE_CLEAN_TARGETS) $(RECURSIVE_TARGETS) ctags-recursive \
-@@ -832,13 +867,14 @@
+@@ -832,13 +867,14 @@ uninstall-am: uninstall-dbusconfDATA uni
  	install-dvi install-dvi-am install-exec install-exec-am \
  	install-html install-html-am install-info install-info-am \
  	install-localealiasDATA install-man install-pdf install-pdf-am \
@@ -38968,7 +38967,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  
  
  Xsession: $(srcdir)/Xsession.in
-@@ -863,6 +899,8 @@
+@@ -863,6 +899,8 @@ gdm.conf-custom: $(srcdir)/gdm.conf-cust
  
  @INTLTOOL_SCHEMAS_RULE@
  
@@ -38977,7 +38976,7 @@ Index: gdm3-2.30.2/data/Makefile.in
  gdm.schemas.in: $(srcdir)/gdm.schemas.in.in
  	sed	-e 's,[@]GDMPREFETCHCMD[@],$(GDMPREFETCHCMD),g' \
  		-e 's,[@]GDM_CUSTOM_CONF[@],$(GDM_CUSTOM_CONF),g' \
-@@ -891,6 +929,8 @@
+@@ -891,6 +929,8 @@ gdm.schemas.in: $(srcdir)/gdm.schemas.in
  		-e 's,[@]pixmapdir[@],$(pixmapdir),g' \
  		-e 's,[@]sbindir[@],$(sbindir),g' \
  		<$(srcdir)/gdm.schemas.in.in >gdm.schemas.in
@@ -38986,11 +38985,11 @@ Index: gdm3-2.30.2/data/Makefile.in
  
  uninstall-hook:
  	rm -f \
-Index: gdm3-2.30.2/data/pixmaps/16x16/Makefile.in
+Index: gdm-2.30.2/data/pixmaps/16x16/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/pixmaps/16x16/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/pixmaps/16x16/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/data/pixmaps/16x16/Makefile.in	2010-05-08 14:15:24.369609956 +0200
++++ gdm-2.30.2/data/pixmaps/16x16/Makefile.in	2010-05-08 14:31:39.477613057 +0200
+@@ -39,8 +39,10 @@ host_triplet = @host@
  subdir = data/pixmaps/16x16
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39003,7 +39002,7 @@ Index: gdm3-2.30.2/data/pixmaps/16x16/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -146,10 +148,13 @@
+@@ -146,10 +148,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39017,7 +39016,7 @@ Index: gdm3-2.30.2/data/pixmaps/16x16/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -214,6 +219,7 @@
+@@ -214,6 +219,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39025,11 +39024,11 @@ Index: gdm3-2.30.2/data/pixmaps/16x16/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/data/pixmaps/32x32/Makefile.in
+Index: gdm-2.30.2/data/pixmaps/32x32/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/pixmaps/32x32/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/pixmaps/32x32/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/data/pixmaps/32x32/Makefile.in	2010-05-08 14:15:24.353609108 +0200
++++ gdm-2.30.2/data/pixmaps/32x32/Makefile.in	2010-05-08 14:31:39.477613057 +0200
+@@ -39,8 +39,10 @@ host_triplet = @host@
  subdir = data/pixmaps/32x32
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39042,7 +39041,7 @@ Index: gdm3-2.30.2/data/pixmaps/32x32/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -146,10 +148,13 @@
+@@ -146,10 +148,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39056,7 +39055,7 @@ Index: gdm3-2.30.2/data/pixmaps/32x32/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -214,6 +219,7 @@
+@@ -214,6 +219,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39064,11 +39063,11 @@ Index: gdm3-2.30.2/data/pixmaps/32x32/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/data/pixmaps/48x48/Makefile.in
+Index: gdm-2.30.2/data/pixmaps/48x48/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/pixmaps/48x48/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/pixmaps/48x48/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/data/pixmaps/48x48/Makefile.in	2010-05-08 14:15:24.341610306 +0200
++++ gdm-2.30.2/data/pixmaps/48x48/Makefile.in	2010-05-08 14:31:39.477613057 +0200
+@@ -39,8 +39,10 @@ host_triplet = @host@
  subdir = data/pixmaps/48x48
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39081,7 +39080,7 @@ Index: gdm3-2.30.2/data/pixmaps/48x48/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -146,10 +148,13 @@
+@@ -146,10 +148,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39095,7 +39094,7 @@ Index: gdm3-2.30.2/data/pixmaps/48x48/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -214,6 +219,7 @@
+@@ -214,6 +219,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39103,11 +39102,11 @@ Index: gdm3-2.30.2/data/pixmaps/48x48/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/data/pixmaps/Makefile.in
+Index: gdm-2.30.2/data/pixmaps/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/data/pixmaps/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/data/pixmaps/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -37,8 +37,10 @@
+--- gdm-2.30.2.orig/data/pixmaps/Makefile.in	2010-05-08 14:15:24.325610924 +0200
++++ gdm-2.30.2/data/pixmaps/Makefile.in	2010-05-08 14:31:39.481613635 +0200
+@@ -37,8 +37,10 @@ host_triplet = @host@
  subdir = data/pixmaps
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39120,7 +39119,7 @@ Index: gdm3-2.30.2/data/pixmaps/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -184,10 +186,13 @@
+@@ -184,10 +186,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39134,7 +39133,7 @@ Index: gdm3-2.30.2/data/pixmaps/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -252,6 +257,7 @@
+@@ -252,6 +257,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39142,11 +39141,11 @@ Index: gdm3-2.30.2/data/pixmaps/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/docs/Makefile.in
+Index: gdm-2.30.2/docs/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/docs/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/docs/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -61,8 +61,10 @@
+--- gdm-2.30.2.orig/docs/Makefile.in	2010-05-08 14:15:24.317607322 +0200
++++ gdm-2.30.2/docs/Makefile.in	2010-05-08 14:31:39.481613635 +0200
+@@ -61,8 +61,10 @@ DIST_COMMON = $(srcdir)/Makefile.am $(sr
  	$(top_srcdir)/gnome-doc-utils.make
  subdir = docs
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39159,7 +39158,7 @@ Index: gdm3-2.30.2/docs/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -145,10 +147,13 @@
+@@ -145,10 +147,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39173,7 +39172,7 @@ Index: gdm3-2.30.2/docs/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -213,6 +218,7 @@
+@@ -213,6 +218,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39181,11 +39180,11 @@ Index: gdm3-2.30.2/docs/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/gui/Makefile.in
+Index: gdm-2.30.2/gui/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/gui/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/gui/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -36,8 +36,10 @@
+--- gdm-2.30.2.orig/gui/Makefile.in	2010-05-08 14:15:24.305609008 +0200
++++ gdm-2.30.2/gui/Makefile.in	2010-05-08 14:31:39.481613635 +0200
+@@ -36,8 +36,10 @@ host_triplet = @host@
  subdir = gui
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39198,7 +39197,7 @@ Index: gdm3-2.30.2/gui/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -160,10 +162,13 @@
+@@ -160,10 +162,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39212,7 +39211,7 @@ Index: gdm3-2.30.2/gui/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -228,6 +233,7 @@
+@@ -228,6 +233,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39220,7 +39219,7 @@ Index: gdm3-2.30.2/gui/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-@@ -339,6 +345,7 @@
+@@ -339,6 +345,7 @@ SUBDIRS = \
  	simple-chooser		\
  	simple-greeter		\
  	user-switch-applet	\
@@ -39228,11 +39227,11 @@ Index: gdm3-2.30.2/gui/Makefile.in
  	$(NULL)
  
  all: all-recursive
-Index: gdm3-2.30.2/gui/simple-chooser/Makefile.in
+Index: gdm-2.30.2/gui/simple-chooser/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/gui/simple-chooser/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/gui/simple-chooser/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/gui/simple-chooser/Makefile.in	2010-05-08 14:15:24.289608160 +0200
++++ gdm-2.30.2/gui/simple-chooser/Makefile.in	2010-05-08 14:31:39.481613635 +0200
+@@ -39,8 +39,10 @@ libexec_PROGRAMS = gdm-simple-chooser$(E
  subdir = gui/simple-chooser
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39245,7 +39244,7 @@ Index: gdm3-2.30.2/gui/simple-chooser/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -173,10 +175,13 @@
+@@ -173,10 +175,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39259,7 +39258,7 @@ Index: gdm3-2.30.2/gui/simple-chooser/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -241,6 +246,7 @@
+@@ -241,6 +246,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39267,11 +39266,11 @@ Index: gdm3-2.30.2/gui/simple-chooser/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in
+Index: gdm-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/gui/simple-greeter/libnotificationarea/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/gui/simple-greeter/libnotificationarea/Makefile.in	2010-05-08 14:15:24.277612290 +0200
++++ gdm-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in	2010-05-08 14:31:39.481613635 +0200
+@@ -39,8 +39,10 @@ noinst_PROGRAMS = testtray$(EXEEXT)
  subdir = gui/simple-greeter/libnotificationarea
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39284,7 +39283,7 @@ Index: gdm3-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -166,10 +168,13 @@
+@@ -166,10 +168,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39298,7 +39297,7 @@ Index: gdm3-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -234,6 +239,7 @@
+@@ -234,6 +239,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39306,11 +39305,11 @@ Index: gdm3-2.30.2/gui/simple-greeter/libnotificationarea/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/gui/simple-greeter/Makefile.in
+Index: gdm-2.30.2/gui/simple-greeter/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/gui/simple-greeter/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/gui/simple-greeter/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -46,8 +46,10 @@
+--- gdm-2.30.2.orig/gui/simple-greeter/Makefile.in	2010-05-08 14:15:24.261608019 +0200
++++ gdm-2.30.2/gui/simple-greeter/Makefile.in	2010-05-08 14:31:39.481613635 +0200
+@@ -46,8 +46,10 @@ libexec_PROGRAMS = gdm-simple-greeter$(E
  subdir = gui/simple-greeter
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39323,7 +39322,7 @@ Index: gdm3-2.30.2/gui/simple-greeter/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -353,10 +355,13 @@
+@@ -353,10 +355,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39337,7 +39336,7 @@ Index: gdm3-2.30.2/gui/simple-greeter/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -421,6 +426,7 @@
+@@ -421,6 +426,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39345,11 +39344,11 @@ Index: gdm3-2.30.2/gui/simple-greeter/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/gui/user-switch-applet/Makefile.in
+Index: gdm-2.30.2/gui/user-switch-applet/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/gui/user-switch-applet/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/gui/user-switch-applet/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/gui/user-switch-applet/Makefile.in	2010-05-08 14:15:24.253610284 +0200
++++ gdm-2.30.2/gui/user-switch-applet/Makefile.in	2010-05-08 14:31:39.485614214 +0200
+@@ -39,8 +39,10 @@ libexec_PROGRAMS = gdm-user-switch-apple
  subdir = gui/user-switch-applet
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -39362,7 +39361,7 @@ Index: gdm3-2.30.2/gui/user-switch-applet/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -183,10 +185,13 @@
+@@ -183,10 +185,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -39376,7 +39375,7 @@ Index: gdm3-2.30.2/gui/user-switch-applet/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -251,6 +256,7 @@
+@@ -251,6 +256,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -39384,10 +39383,10 @@ Index: gdm3-2.30.2/gui/user-switch-applet/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/ltmain.sh
+Index: gdm-2.30.2/ltmain.sh
 ===================================================================
---- gdm3-2.30.2.orig/ltmain.sh	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/ltmain.sh	2010-06-02 19:00:47.000000000 +0200
+--- gdm-2.30.2.orig/ltmain.sh	2010-05-08 14:15:24.225610635 +0200
++++ gdm-2.30.2/ltmain.sh	2010-05-08 14:31:39.489615280 +0200
 @@ -1,6 +1,6 @@
  # Generated from ltmain.m4sh.
  
@@ -39417,7 +39416,7 @@ Index: gdm3-2.30.2/ltmain.sh
  
  # Be Bourne compatible
  if test -n "${ZSH_VERSION+set}" && (emulate sh) >/dev/null 2>&1; then
-@@ -5033,7 +5033,10 @@
+@@ -5033,7 +5033,10 @@ func_mode_link ()
  	case $pass in
  	dlopen) libs="$dlfiles" ;;
  	dlpreopen) libs="$dlprefiles" ;;
@@ -39429,7 +39428,7 @@ Index: gdm3-2.30.2/ltmain.sh
  	esac
        fi
        if test "$linkmode,$pass" = "lib,dlpreopen"; then
-@@ -5344,19 +5347,19 @@
+@@ -5344,19 +5347,19 @@ func_mode_link ()
  	    # It is a libtool convenience library, so add in its objects.
  	    convenience="$convenience $ladir/$objdir/$old_library"
  	    old_convenience="$old_convenience $ladir/$objdir/$old_library"
@@ -39459,7 +39458,7 @@ Index: gdm3-2.30.2/ltmain.sh
  	  continue
  	fi # $pass = conv
  
-@@ -5893,6 +5896,7 @@
+@@ -5893,6 +5896,7 @@ func_mode_link ()
  	  if test "$link_all_deplibs" != no; then
  	    # Add the search paths of all dependency libraries
  	    for deplib in $dependency_libs; do
@@ -39467,7 +39466,7 @@ Index: gdm3-2.30.2/ltmain.sh
  	      case $deplib in
  	      -L*) path="$deplib" ;;
  	      *.la)
-@@ -6206,6 +6210,9 @@
+@@ -6206,6 +6210,9 @@ func_mode_link ()
  	    revision="$number_minor"
  	    lt_irix_increment=no
  	    ;;
@@ -39477,10 +39476,10 @@ Index: gdm3-2.30.2/ltmain.sh
  	  esac
  	  ;;
  	no)
-Index: gdm3-2.30.2/m4/libtool.m4
+Index: gdm-2.30.2/m4/libtool.m4
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gdm3-2.30.2/m4/libtool.m4	2010-06-02 19:00:47.000000000 +0200
++++ gdm-2.30.2/m4/libtool.m4	2010-05-08 14:31:39.501609193 +0200
 @@ -0,0 +1,7377 @@
 +# libtool.m4 - Configure libtool for the host system. -*-Autoconf-*-
 +#
@@ -46859,10 +46858,10 @@ Index: gdm3-2.30.2/m4/libtool.m4
 +    ;;
 +  esac
 +])
-Index: gdm3-2.30.2/m4/lt~obsolete.m4
+Index: gdm-2.30.2/m4/lt~obsolete.m4
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gdm3-2.30.2/m4/lt~obsolete.m4	2010-06-02 19:00:47.000000000 +0200
++++ gdm-2.30.2/m4/lt~obsolete.m4	2010-05-08 14:31:39.501609193 +0200
 @@ -0,0 +1,92 @@
 +# lt~obsolete.m4 -- aclocal satisfying obsolete definitions.    -*-Autoconf-*-
 +#
@@ -46956,10 +46955,10 @@ Index: gdm3-2.30.2/m4/lt~obsolete.m4
 +m4_ifndef([_LT_AC_LANG_RC_CONFIG],	[AC_DEFUN([_LT_AC_LANG_RC_CONFIG])])
 +m4_ifndef([AC_LIBTOOL_CONFIG],		[AC_DEFUN([AC_LIBTOOL_CONFIG])])
 +m4_ifndef([_LT_AC_FILE_LTDLL_C],	[AC_DEFUN([_LT_AC_FILE_LTDLL_C])])
-Index: gdm3-2.30.2/m4/ltoptions.m4
+Index: gdm-2.30.2/m4/ltoptions.m4
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gdm3-2.30.2/m4/ltoptions.m4	2010-06-02 19:00:47.000000000 +0200
++++ gdm-2.30.2/m4/ltoptions.m4	2010-05-08 14:31:39.501609193 +0200
 @@ -0,0 +1,368 @@
 +# Helper functions for option handling.                    -*- Autoconf -*-
 +#
@@ -47329,10 +47328,10 @@ Index: gdm3-2.30.2/m4/ltoptions.m4
 +		 [m4_define([_LTDL_TYPE], [installable])])
 +LT_OPTION_DEFINE([LTDL_INIT], [convenience],
 +		 [m4_define([_LTDL_TYPE], [convenience])])
-Index: gdm3-2.30.2/m4/ltsugar.m4
+Index: gdm-2.30.2/m4/ltsugar.m4
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gdm3-2.30.2/m4/ltsugar.m4	2010-06-02 19:00:47.000000000 +0200
++++ gdm-2.30.2/m4/ltsugar.m4	2010-05-08 14:31:39.501609193 +0200
 @@ -0,0 +1,123 @@
 +# ltsugar.m4 -- libtool m4 base layer.                         -*-Autoconf-*-
 +#
@@ -47457,10 +47456,10 @@ Index: gdm3-2.30.2/m4/ltsugar.m4
 +           lt_unquote(m4_split(m4_normalize(m4_foreach(_Lt_key, lt_car([m4_shiftn(4, $@)]),
 +		      [lt_if_dict_fetch([$1], _Lt_key, [$2], [$3], [_Lt_key ])])))))])[]dnl
 +])
-Index: gdm3-2.30.2/m4/ltversion.m4
+Index: gdm-2.30.2/m4/ltversion.m4
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gdm3-2.30.2/m4/ltversion.m4	2010-06-02 19:00:47.000000000 +0200
++++ gdm-2.30.2/m4/ltversion.m4	2010-05-08 14:31:39.501609193 +0200
 @@ -0,0 +1,23 @@
 +# ltversion.m4 -- version numbers			-*- Autoconf -*-
 +#
@@ -47485,11 +47484,11 @@ Index: gdm3-2.30.2/m4/ltversion.m4
 +_LT_DECL(, macro_version, 0, [Which release of libtool.m4 was used?])
 +_LT_DECL(, macro_revision, 0)
 +])
-Index: gdm3-2.30.2/Makefile.in
+Index: gdm-2.30.2/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -40,8 +40,10 @@
+--- gdm-2.30.2.orig/Makefile.in	2010-05-08 14:15:24.133611995 +0200
++++ gdm-2.30.2/Makefile.in	2010-05-08 14:31:39.505610749 +0200
+@@ -40,8 +40,10 @@ DIST_COMMON = README $(am__configure_dep
  	TODO acconfig.h compile config.guess config.sub depcomp \
  	install-sh ltmain.sh missing mkinstalldirs
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -47502,7 +47501,7 @@ Index: gdm3-2.30.2/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
-@@ -175,10 +177,13 @@
+@@ -175,10 +177,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -47516,7 +47515,7 @@ Index: gdm3-2.30.2/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -243,6 +248,7 @@
+@@ -243,6 +248,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -47524,11 +47523,11 @@ Index: gdm3-2.30.2/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/tests/Makefile.in
+Index: gdm-2.30.2/tests/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/tests/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/tests/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -39,8 +39,10 @@
+--- gdm-2.30.2.orig/tests/Makefile.in	2010-05-08 14:15:24.105614300 +0200
++++ gdm-2.30.2/tests/Makefile.in	2010-05-08 14:31:39.505610749 +0200
+@@ -39,8 +39,10 @@ TESTS = m-common$(EXEEXT) $(am__EXEEXT_1
  subdir = tests
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -47541,7 +47540,7 @@ Index: gdm3-2.30.2/tests/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -165,10 +167,13 @@
+@@ -165,10 +167,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -47555,7 +47554,7 @@ Index: gdm3-2.30.2/tests/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -233,6 +238,7 @@
+@@ -233,6 +238,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -47563,11 +47562,11 @@ Index: gdm3-2.30.2/tests/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/utils/Makefile.in
+Index: gdm-2.30.2/utils/Makefile.in
 ===================================================================
---- gdm3-2.30.2.orig/utils/Makefile.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/utils/Makefile.in	2010-06-02 19:00:47.000000000 +0200
-@@ -40,8 +40,10 @@
+--- gdm-2.30.2.orig/utils/Makefile.in	2010-05-08 14:15:24.077611718 +0200
++++ gdm-2.30.2/utils/Makefile.in	2010-05-08 14:31:39.505610749 +0200
+@@ -40,8 +40,10 @@ bin_PROGRAMS = gdmflexiserver$(EXEEXT) g
  subdir = utils
  DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -47580,7 +47579,7 @@ Index: gdm3-2.30.2/utils/Makefile.in
  am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
  	$(ACLOCAL_M4)
  mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
-@@ -185,10 +187,13 @@
+@@ -185,10 +187,13 @@ GCONF_LIBS = @GCONF_LIBS@
  GCONF_SCHEMA_CONFIG_SOURCE = @GCONF_SCHEMA_CONFIG_SOURCE@
  GCONF_SCHEMA_FILE_DIR = @GCONF_SCHEMA_FILE_DIR@
  GDMCHOOSER = @GDMCHOOSER@
@@ -47594,7 +47593,7 @@ Index: gdm3-2.30.2/utils/Makefile.in
  GDM_PID_FILE = @GDM_PID_FILE@
  GDM_SCREENSHOT_DIR = @GDM_SCREENSHOT_DIR@
  GDM_SESSION_DEFAULT_PATH = @GDM_SESSION_DEFAULT_PATH@
-@@ -253,6 +258,7 @@
+@@ -253,6 +258,7 @@ PACKAGE_BUGREPORT = @PACKAGE_BUGREPORT@
  PACKAGE_NAME = @PACKAGE_NAME@
  PACKAGE_STRING = @PACKAGE_STRING@
  PACKAGE_TARNAME = @PACKAGE_TARNAME@
@@ -47602,19 +47601,11 @@ Index: gdm3-2.30.2/utils/Makefile.in
  PACKAGE_VERSION = @PACKAGE_VERSION@
  PAM_LIBS = @PAM_LIBS@
  PAM_PREFIX = @PAM_PREFIX@
-Index: gdm3-2.30.2/config.h.in
+Index: gdm-2.30.2/config.h.in
 ===================================================================
---- gdm3-2.30.2.orig/config.h.in	2010-06-02 19:00:15.000000000 +0200
-+++ gdm3-2.30.2/config.h.in	2010-06-02 19:00:47.000000000 +0200
-@@ -58,6 +58,7 @@
- 
- /* Define if we have ipv6 */
- #undef ENABLE_IPV6
-+#undef IPV6_V6ONLY
- 
- /* always defined to indicate that i18n is enabled */
- #undef ENABLE_NLS
-@@ -71,6 +72,9 @@
+--- gdm-2.30.2.orig/config.h.in	2010-05-08 14:15:24.041611401 +0200
++++ gdm-2.30.2/config.h.in	2010-05-08 14:31:39.505610749 +0200
+@@ -71,6 +71,9 @@
  /* Group to use */
  #undef GDM_GROUPNAME
  
@@ -47624,7 +47615,7 @@ Index: gdm3-2.30.2/config.h.in
  /* pid file */
  #undef GDM_PID_FILE
  
-@@ -312,6 +316,9 @@
+@@ -312,6 +315,9 @@
  /* Define to the one symbol short name of this package. */
  #undef PACKAGE_TARNAME
  
@@ -47634,10 +47625,10 @@ Index: gdm3-2.30.2/config.h.in
  /* Define to the version of this package. */
  #undef PACKAGE_VERSION
  
-Index: gdm3-2.30.2/gui/gdmsetup/Makefile.in
+Index: gdm-2.30.2/gui/gdmsetup/Makefile.in
 ===================================================================
 --- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ gdm3-2.30.2/gui/gdmsetup/Makefile.in	2010-06-02 19:00:47.000000000 +0200
++++ gdm-2.30.2/gui/gdmsetup/Makefile.in	2010-05-08 14:31:39.509612305 +0200
 @@ -0,0 +1,765 @@
 +# Makefile.in generated by automake 1.11.1 from Makefile.am.
 +# @configure_input@

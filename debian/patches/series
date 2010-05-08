@@ -24,4 +24,3 @@
 22_noconsole.patch
 23_autologin_once.patch
 90_relibtoolize.patch
-95_xdmcp_fill_fix.patch
