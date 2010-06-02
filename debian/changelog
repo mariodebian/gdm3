@@ -1,3 +1,10 @@
+gdm3 (2.30.2-3.1) unstable; urgency=low
+
+  * 95_xdmcp_fill_fix.patch: fix XdmcpFill (set ss_len before using it) 
+  * Add IPV6_V6ONLY to configure and config.h in 90_relibtoolize.patch
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Wed, 02 Jun 2010 19:05:57 +0200
+
 gdm3 (2.30.2-3) unstable; urgency=low
 
   * Pass -novtswitch to the X server options, so that it doesn’t switch 
