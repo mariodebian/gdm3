@@ -1,0 +1,84 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/rules/debhelper.mk
+include /usr/share/cdbs/1/class/gnome.mk
+include /usr/share/gnome-pkg-tools/1/rules/uploaders.mk
+include /usr/share/gnome-pkg-tools/1/rules/gnome-version.mk
+include /usr/share/gnome-pkg-tools/1/rules/patch-translations.mk
+-include /usr/share/gnome-pkg-tools/1/rules/gnome-get-source.mk
+
+GNOME_MODULE := gdm
+
+DEB_CONFIGURE_SCRIPT_ENV += X_PATH="/usr/bin" \
+			    X_SERVER_PATH="/usr/bin" \
+			    X_SERVER="/usr/bin/Xorg"
+
+ifeq (linux,$(DEB_HOST_ARCH_OS))
+    DEB_CONFIGURE_SCRIPT_ENV += X_CONFIG_OPTIONS="-audit 0 -novtswitch"
+else
+    DEB_CONFIGURE_SCRIPT_ENV += X_CONFIG_OPTIONS="-audit 0"
+endif
+
+DEB_CONFIGURE_EXTRA_FLAGS += --disable-scrollkeeper \
+		--enable-ipv6=no \
+		--with-at-spi-registryd-directory=/usr/lib/at-spi \
+		--with-default-path=/usr/local/bin:/usr/bin:/bin:/usr/games \
+		--with-custom-conf=/etc/gdm3/daemon.conf \
+		--with-sysconfsubdir=gdm3 \
+		--with-working-directory=/var/lib/gdm3 \
+		--with-xauth-dir=/var/run/gdm3 \
+		--with-pid-file=/var/run/gdm3.pid \
+		--with-log-dir=/var/log/gdm3 \
+		--with-screenshot-dir=/var/run/gdm3/greeter \
+		--with-defaults-conf=/usr/share/gdm/defaults.conf \
+		--with-user=Debian-gdm --with-group=Debian-gdm \
+		--with-pam-domain=gdm3
+
+DEB_MAKE_EXTRA_ARGS += authdir=/var/lib/gdm3
+		
+ifeq (linux,$(DEB_HOST_ARCH_OS))
+	DEB_CONFIGURE_EXTRA_FLAGS += --with-selinux
+endif
+
+
+DEB_DH_INSTALLINIT_ARGS := --noscripts
+
+binary-install/gdm3::
+	chmod 755 debian/gdm3/usr/share/gdm/gdmXnestWrapper
+	mv debian/gdm3/usr/share/applications/gdmsetup.desktop \
+		debian/gdm3/usr/share/gdm/applications/
+	rmdir debian/gdm3/usr/share/applications
+	mv debian/gdm3/usr/sbin/gdm-binary debian/gdm3/usr/sbin/gdm3
+	cd debian/gdm3/usr/sbin && rm -f gdm-restart gdm-stop gdm-safe-restart
+	chmod 755 debian/gdm3/etc/gdm3/Xsession
+	dh_installpam -pgdm3 --name=gdm3-autologin
+	rm -rf debian/gdm3/var/lib/gdm3/.g*
+	rm -rf debian/gdm3/var/run
+	rm -f debian/gdm3/usr/sbin/gdm
+	rm -f debian/gdm3/etc/pam.d/gdm
+	rm -f debian/gdm3/etc/pam.d/gdm-autologin
+	cd debian/gdm3/usr/share/gdm/greeter-config && \
+		mv session-setup.entries 10_upstream.entries
+
+INFILES := $(wildcard debian/*.desktop.in)
+OUTFILES := $(INFILES:.desktop.in=.desktop)
+
+%.desktop: %.desktop.in
+	intltool-merge -d debian/po-up $< $@
+
+build/gdm3:: $(OUTFILES)
+
+MANPAGES := $(patsubst %.pod,%,$(wildcard debian/*.pod))
+
+common-build-arch:: $(MANPAGES)
+
+clean::
+	rm -f $(MANPAGES)
+	rm -f $(OUTFILES)
+
+%: %.pod
+	pod2man --section=$(shell echo $@ | sed 's/.*\.//') \
+		--release="GNOME $(DEB_GNOME_VERSION)" \
+		--center="Debian GNU/Linux" \
+		$< \
+		| sed -e 's/debian:://' >$@

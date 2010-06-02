@@ -1,0 +1,44 @@
+--- a/daemon/gdm-server.c
++++ b/daemon/gdm-server.c
+@@ -130,7 +130,7 @@
+         g_return_val_if_fail (GDM_IS_SERVER (server), NULL);
+ 
+         error = NULL;
+-        command = g_strdup_printf (LIBEXECDIR "/ck-get-x11-display-device --display %s",
++        command = g_strdup_printf ("/usr/lib/ConsoleKit/ck-get-x11-display-device --display %s",
+                                    server->priv->display_name);
+ 
+         g_debug ("GdmServer: Running helper %s", command);
+--- a/data/greeter-autostart/gnome-settings-daemon.desktop.in.in
++++ b/data/greeter-autostart/gnome-settings-daemon.desktop.in.in
+@@ -1,8 +1,8 @@
+ [Desktop Entry]
+ Type=Application
+ _Name=GNOME Settings Daemon
+-TryExec=@LIBEXECDIR@/gnome-settings-daemon
+-Exec=@LIBEXECDIR@/gnome-settings-daemon --gconf-prefix=/apps/gdm/simple-greeter/settings-manager-plugins
++TryExec=@LIBDIR@/gnome-settings-daemon/gnome-settings-daemon
++Exec=@LIBDIR@/gnome-settings-daemon/gnome-settings-daemon --gconf-prefix=/apps/gdm/simple-greeter/settings-manager-plugins
+ OnlyShowIn=GNOME;
+ X-GNOME-Autostart-Phase=Initialization
+ X-GNOME-Autostart-Notify=true
+--- a/gui/simple-chooser/gdm-chooser-session.c
++++ b/gui/simple-chooser/gdm-chooser-session.c
+@@ -131,7 +131,7 @@
+         ret = FALSE;
+ 
+         error = NULL;
+-        g_spawn_command_line_async (LIBEXECDIR "/gnome-settings-daemon --gconf-prefix=/apps/gdm/simple-chooser/settings-manager-plugins", &error);
++        g_spawn_command_line_async ("/usr/lib/gnome-settings-daemon/gnome-settings-daemon --gconf-prefix=/apps/gdm/simple-chooser/settings-manager-plugins", &error);
+         if (error != NULL) {
+                 g_warning ("Error starting settings daemon: %s", error->message);
+                 g_error_free (error);
+--- a/data/greeter-autostart/polkit-gnome-authentication-agent-1.desktop.in.in
++++ b/data/greeter-autostart/polkit-gnome-authentication-agent-1.desktop.in.in
+@@ -1,5 +1,5 @@
+ [Desktop Entry]
+ Type=Application
+ _Name=PolicyKit Authentication Agent
+-Exec=@LIBEXECDIR@/polkit-gnome-authentication-agent-1
++Exec=/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+ OnlyShowIn=GNOME;

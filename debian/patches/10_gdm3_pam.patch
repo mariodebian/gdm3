@@ -1,0 +1,62 @@
+--- a/daemon/gdm-simple-slave.c
++++ b/daemon/gdm-simple-slave.c
+@@ -544,7 +544,7 @@
+         } else {
+                 g_debug ("GdmSimpleSlave: begin auto login for user '%s'", username);
+                 gdm_session_setup_for_user (GDM_SESSION (slave->priv->session),
+-                                            "gdm-autologin",
++                                            GDM_PAM_DOMAIN "-autologin",
+                                             username);
+         }
+ 
+@@ -781,7 +781,7 @@
+ {
+         g_debug ("GdmSimpleSlave: begin verification");
+         gdm_session_setup (GDM_SESSION (slave->priv->session),
+-                           "gdm");
++                           GDM_PAM_DOMAIN);
+ }
+ 
+ static void
+@@ -791,7 +791,7 @@
+ {
+         g_debug ("GdmSimpleSlave: begin auto login for user '%s'", username);
+         gdm_session_setup_for_user (GDM_SESSION (slave->priv->session),
+-                                    "gdm-autologin",
++                                    GDM_PAM_DOMAIN "-autologin",
+                                     username);
+ }
+ 
+@@ -802,7 +802,7 @@
+ {
+         g_debug ("GdmSimpleSlave: begin verification");
+         gdm_session_setup_for_user (GDM_SESSION (slave->priv->session),
+-                                    "gdm",
++                                    GDM_PAM_DOMAIN,
+                                     username);
+ }
+ 
+--- a/configure.ac
++++ b/configure.ac
+@@ -465,6 +465,21 @@
+ fi
+ AC_SUBST(PAM_PREFIX)
+ 
++AC_ARG_WITH(pam-domain,
++            AS_HELP_STRING([--with-pam-domain=<domain>],
++                           [specify the naming scheme of pam files]),
++            [if test x$withval != x; then
++               AC_MSG_RESULT("PAM files will be named ${withval} and ${withval}-autologin.")
++             fi])
++
++if test x$withval != x; then
++	GDM_PAM_DOMAIN="$withval"
++else
++	GDM_PAM_DOMAIN=gdm
++fi
++AC_SUBST(GDM_PAM_DOMAIN)
++AC_DEFINE_UNQUOTED([GDM_PAM_DOMAIN], "$GDM_PAM_DOMAIN", [Naming scheme for PAM files])
++
+ have_pam=no
+ AC_CHECK_LIB(pam, pam_start, have_pam=yes)
+ 
