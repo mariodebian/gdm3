@@ -618,9 +618,12 @@ msgid "_Languages:"
 msgstr "_Lingvoj:"
 
 #: ../gui/simple-greeter/gdm-language-chooser-widget.c:273
-#: ../gui/simple-greeter/gdm-language-option-widget.c:262
 msgid "_Language:"
 msgstr "_Lingvo:"
+
+#: ../gui/simple-greeter/gdm-language-option-widget.c:262
+msgid "Language"
+msgstr "Lingvo"
 
 #. translators: This brings up a dialog
 #. * with a list of languages to choose from
@@ -644,9 +647,12 @@ msgstr "Klavarfasono"
 
 #: ../gui/simple-greeter/gdm-layout-chooser-widget.c:200
 #: ../gui/simple-greeter/gdm-layout-chooser-widget.c:201
-#: ../gui/simple-greeter/gdm-layout-option-widget.c:254
 msgid "_Keyboard:"
 msgstr "_Klavaro:"
+
+#: ../gui/simple-greeter/gdm-layout-option-widget.c:254
+msgid "Keyboard"
+msgstr "Klavaro"
 
 #. translators: This brings up a dialog of
 #. * available keyboard layouts
@@ -707,8 +713,8 @@ msgid "Remote Login"
 msgstr "Fora saluto"
 
 #: ../gui/simple-greeter/gdm-session-option-widget.c:162
-msgid "_Sessions:"
-msgstr "_Seancoj:"
+msgid "Session"
+msgstr "Seancoj"
 
 #: ../gui/simple-greeter/gdm-simple-greeter.schemas.in.h:1
 msgid "Banner message text"

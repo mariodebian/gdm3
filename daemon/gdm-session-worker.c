@@ -52,6 +52,7 @@
 
 #include "ck-connector.h"
 
+#include "gdm-common.h"
 #include "gdm-session-worker.h"
 #include "gdm-marshal.h"
 
@@ -210,7 +211,7 @@ open_ck_session (GdmSessionWorker  *worker)
                 is_local = FALSE;
         }
 
-        pwent = getpwnam (worker->priv->username);
+        gdm_get_pwent_for_name (worker->priv->username, &pwent);
         if (pwent == NULL) {
                 goto out;
         }
@@ -1003,7 +1004,7 @@ gdm_cache_copy_file (GdmSessionWorker *worker,
 {
         gboolean res;
 
-        g_debug ("Checking if %s should be copied to cache %s",
+        g_debug ("GdmSessionWorker: Checking if %s should be copied to cache %s",
                  userfilename, cachefilename);
 
         res = check_user_copy_file (userfilename,
@@ -1034,9 +1035,16 @@ gdm_cache_copy_file (GdmSessionWorker *worker,
                                    error->message);
                         g_error_free (error);
                  } else {
-                        chown (cachefilename,
-                               worker->priv->uid,
-                               worker->priv->gid);
+                         int res;
+
+                         res = chown (cachefilename,
+                                      worker->priv->uid,
+                                      worker->priv->gid);
+                         if (res == -1) {
+                                 g_warning ("GdmSessionWorker: Error setting owner of cache file: %s",
+                                            g_strerror (errno));
+                         }
+
                         g_chmod (cachefilename, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
                         g_debug ("Copy successful");
                 }
@@ -1070,7 +1078,11 @@ gdm_session_worker_create_cachedir (GdmSessionWorker *worker)
                 g_chmod (cachedir,
                          S_IRWXU | S_IXGRP | S_IRGRP | S_IXOTH | S_IROTH);
         }
-        chown (cachedir, worker->priv->uid, worker->priv->gid);
+        r = chown (cachedir, worker->priv->uid, worker->priv->gid);
+        if (r == -1) {
+                g_warning ("GdmSessionWorker: Error setting owner of cache directory: %s",
+                           g_strerror (errno));
+        }
 
         return cachedir;
 }
@@ -1084,7 +1096,7 @@ gdm_session_worker_cache_userfiles (GdmSessionWorker *worker)
         char          *userfile;
         gboolean       res;
 
-        passwd_entry = getpwnam (worker->priv->username);
+        gdm_get_pwent_for_name (worker->priv->username, &passwd_entry);
         if (passwd_entry == NULL)
                 return;
 
@@ -1191,7 +1203,7 @@ gdm_session_worker_uninitialize_pam (GdmSessionWorker *worker,
 #endif  /* HAVE_LOGINDEVPERM */
 
         } else {
-                void *p;
+                const void *p;
 
                 if ((pam_get_item (worker->priv->pam_handle, PAM_USER, &p)) == PAM_SUCCESS) {
                         gdm_session_auditor_set_username (worker->priv->auditor, (const char *)p);
@@ -1592,6 +1604,7 @@ _lookup_passwd_info (const char *username,
          * passwd_entry doesn't potentially get stomped on
          * by a PAM module
          */
+ again:
         passwd_entry = NULL;
 #ifdef HAVE_POSIX_GETPWNAM_R
         errno = getpwnam_r (username,
@@ -1606,8 +1619,10 @@ _lookup_passwd_info (const char *username,
                                    (size_t) aux_buffer_size);
         errno = 0;
 #endif /* !HAVE_POSIX_GETPWNAM_R */
-
-        if (errno != 0) {
+        if (errno == EINTR) {
+                g_debug ("%s", g_strerror (errno));
+                goto again;
+        } else if (errno != 0) {
                 g_warning ("%s", g_strerror (errno));
                 goto out;
         }
@@ -1652,6 +1667,9 @@ gdm_session_worker_accredit_user (GdmSessionWorker  *worker,
 
         ret = FALSE;
 
+        home = NULL;
+        shell = NULL;
+
         if (worker->priv->username == NULL) {
                 g_debug ("GdmSessionWorker: Username not set");
                 error_code = PAM_USER_UNKNOWN;
@@ -1662,8 +1680,6 @@ gdm_session_worker_accredit_user (GdmSessionWorker  *worker,
                 goto out;
         }
 
-        home = NULL;
-        shell = NULL;
         uid = 0;
         gid = 0;
         res = _lookup_passwd_info (worker->priv->username,
@@ -1722,6 +1738,8 @@ gdm_session_worker_accredit_user (GdmSessionWorker  *worker,
         ret = TRUE;
 
  out:
+        g_free (home);
+        g_free (shell);
         if (ret) {
                 g_debug ("GdmSessionWorker: state ACCREDITED");
                 ret = TRUE;
@@ -1968,7 +1986,7 @@ gdm_session_worker_start_user_session (GdmSessionWorker  *worker,
 
         register_ck_session (worker);
 
-        passwd_entry = getpwnam (worker->priv->username);
+        gdm_get_pwent_for_name (worker->priv->username, &passwd_entry);
 
 #ifdef  HAVE_LOGINDEVPERM
         /*
@@ -2970,19 +2988,16 @@ gdm_session_worker_finalize (GObject *object)
 
         gdm_session_worker_unwatch_child (worker);
 
-        if (worker->priv->username != NULL) {
-                g_free (worker->priv->username);
-                worker->priv->username = NULL;
-        }
-
-        if (worker->priv->arguments != NULL) {
-                g_strfreev (worker->priv->arguments);
-                worker->priv->arguments = NULL;
-        }
-
+        g_free (worker->priv->service);
+        g_free (worker->priv->x11_display_name);
+        g_free (worker->priv->x11_authority_file);
+        g_free (worker->priv->display_device);
+        g_free (worker->priv->hostname);
+        g_free (worker->priv->username);
+        g_free (worker->priv->server_address);
+        g_strfreev (worker->priv->arguments);
         if (worker->priv->environment != NULL) {
                 g_hash_table_destroy (worker->priv->environment);
-                worker->priv->environment = NULL;
         }
 
         G_OBJECT_CLASS (gdm_session_worker_parent_class)->finalize (object);

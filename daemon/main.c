@@ -344,6 +344,7 @@ gdm_daemon_check_permissions (uid_t uid,
 {
         struct stat statbuf;
         const char *auth_path;
+        int         res;
 
         auth_path = LOGDIR;
 
@@ -353,7 +354,12 @@ gdm_daemon_check_permissions (uid_t uid,
         set_effective_user_group (0, 0);
 
         /* Now set things up for us as  */
-        chown (auth_path, 0, gid);
+        res = chown (auth_path, 0, gid);
+        if (res == -1) {
+                g_warning ("Unable to change owner for auth file: %s",
+                           g_strerror (errno));
+        }
+
         g_chmod (auth_path, (S_IRWXU|S_IRWXG|S_ISVTX));
 
         set_effective_user_group (uid, gid);
@@ -402,7 +408,7 @@ gdm_daemon_change_user (uid_t *uidp,
         g_debug ("Changing user:group to %s:%s", username, groupname);
 
         /* Lookup user and groupid for the GDM user */
-        pwent = getpwnam (username);
+        gdm_get_pwent_for_name (username, &pwent);
 
         /* Set uid and gid */
         if G_UNLIKELY (pwent == NULL) {
@@ -558,6 +564,11 @@ main (int    argc,
                 g_warning ("%s", error->message);
                 g_error_free (error);
                 goto out;
+        }
+
+        if (print_version) {
+                g_print ("GDM %s\n", VERSION);
+                exit (1);
         }
 
         if (fatal_warnings) {

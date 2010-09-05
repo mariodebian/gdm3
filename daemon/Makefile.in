@@ -38,17 +38,20 @@ host_triplet = @host@
 noinst_PROGRAMS = test-session$(EXEEXT) $(am__EXEEXT_1)
 libexec_PROGRAMS = gdm-simple-slave$(EXEEXT) \
 	gdm-factory-slave$(EXEEXT) gdm-product-slave$(EXEEXT) \
-	gdm-xdmcp-chooser-slave$(EXEEXT) gdm-session-worker$(EXEEXT) \
-	$(am__EXEEXT_1)
-@HAVE_LIBAUDIT_TRUE@am__append_1 = gdm-session-linux-auditor.h       \
+	gdm-session-worker$(EXEEXT) $(am__EXEEXT_1) $(am__EXEEXT_2)
+@XDMCP_SUPPORT_TRUE@am__append_1 = \
+@XDMCP_SUPPORT_TRUE@	gdm-xdmcp-chooser-slave		\
+@XDMCP_SUPPORT_TRUE@	$(NULL)
+
+@HAVE_LIBAUDIT_TRUE@am__append_2 = gdm-session-linux-auditor.h       \
 @HAVE_LIBAUDIT_TRUE@	                      gdm-session-linux-auditor.c
 
-@HAVE_ADT_TRUE@am__append_2 = gdm-session-solaris-auditor.h     \
+@HAVE_ADT_TRUE@am__append_3 = gdm-session-solaris-auditor.h     \
 @HAVE_ADT_TRUE@	                      gdm-session-solaris-auditor.c
 
 sbin_PROGRAMS = gdm-binary$(EXEEXT) $(am__EXEEXT_1)
-@XDMCP_SUPPORT_TRUE@am__append_3 = $(XDMCP_SOURCES)
-@WITH_CONSOLE_KIT_TRUE@am__append_4 = $(CONSOLE_KIT_SOURCES)
+@XDMCP_SUPPORT_TRUE@am__append_4 = $(XDMCP_SOURCES)
+@WITH_CONSOLE_KIT_TRUE@am__append_5 = $(CONSOLE_KIT_SOURCES)
 subdir = daemon
 DIST_COMMON = $(srcdir)/Makefile.am $(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -61,6 +64,8 @@ CONFIG_HEADER = $(top_builddir)/config.h
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__EXEEXT_1 =
+@XDMCP_SUPPORT_TRUE@am__EXEEXT_2 = gdm-xdmcp-chooser-slave$(EXEEXT) \
+@XDMCP_SUPPORT_TRUE@	$(am__EXEEXT_1)
 am__installdirs = "$(DESTDIR)$(libexecdir)" "$(DESTDIR)$(sbindir)" \
 	"$(DESTDIR)$(sbindir)"
 PROGRAMS = $(libexec_PROGRAMS) $(noinst_PROGRAMS) $(sbin_PROGRAMS)
@@ -69,17 +74,20 @@ am__gdm_binary_SOURCES_DIST = main.c gdm-display-access-file.c \
 	gdm-display-store.h gdm-display-factory.c \
 	gdm-display-factory.h gdm-local-display-factory.c \
 	gdm-local-display-factory.h gdm-display.c gdm-display.h \
-	gdm-xdmcp-display.c gdm-xdmcp-display.h \
-	gdm-xdmcp-greeter-display.c gdm-xdmcp-greeter-display.h \
-	gdm-xdmcp-chooser-display.c gdm-xdmcp-chooser-display.h \
 	gdm-static-display.c gdm-static-display.h \
 	gdm-transient-display.c gdm-transient-display.h \
 	gdm-static-factory-display.c gdm-static-factory-display.h \
 	gdm-product-display.c gdm-product-display.h gdm-manager.c \
 	gdm-manager.h gdm-slave-proxy.c gdm-slave-proxy.h \
-	gdm-xdmcp-display-factory.c gdm-xdmcp-display-factory.h
+	gdm-xdmcp-display-factory.c gdm-xdmcp-display-factory.h \
+	gdm-xdmcp-display.c gdm-xdmcp-display.h \
+	gdm-xdmcp-greeter-display.c gdm-xdmcp-greeter-display.h \
+	gdm-xdmcp-chooser-display.c gdm-xdmcp-chooser-display.h
 am__objects_1 =
-am__objects_2 = gdm-xdmcp-display-factory.$(OBJEXT) $(am__objects_1)
+am__objects_2 = gdm-xdmcp-display-factory.$(OBJEXT) \
+	gdm-xdmcp-display.$(OBJEXT) \
+	gdm-xdmcp-greeter-display.$(OBJEXT) \
+	gdm-xdmcp-chooser-display.$(OBJEXT) $(am__objects_1)
 @XDMCP_SUPPORT_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = $(am__objects_1)
 @WITH_CONSOLE_KIT_TRUE@am__objects_5 = $(am__objects_4)
@@ -87,9 +95,6 @@ am_gdm_binary_OBJECTS = main.$(OBJEXT) \
 	gdm-display-access-file.$(OBJEXT) gdm-display-store.$(OBJEXT) \
 	gdm-display-factory.$(OBJEXT) \
 	gdm-local-display-factory.$(OBJEXT) gdm-display.$(OBJEXT) \
-	gdm-xdmcp-display.$(OBJEXT) \
-	gdm-xdmcp-greeter-display.$(OBJEXT) \
-	gdm-xdmcp-chooser-display.$(OBJEXT) \
 	gdm-static-display.$(OBJEXT) gdm-transient-display.$(OBJEXT) \
 	gdm-static-factory-display.$(OBJEXT) \
 	gdm-product-display.$(OBJEXT) gdm-manager.$(OBJEXT) \
@@ -111,8 +116,9 @@ am_gdm_factory_slave_OBJECTS = factory-slave-main.$(OBJEXT) \
 	gdm-greeter-server.$(OBJEXT) ck-connector.$(OBJEXT) \
 	gdm-welcome-session.$(OBJEXT) gdm-greeter-session.$(OBJEXT) \
 	gdm-server.$(OBJEXT) gdm-session.$(OBJEXT) \
-	gdm-session-relay.$(OBJEXT) gdm-slave.$(OBJEXT) \
-	gdm-factory-slave.$(OBJEXT) $(am__objects_1)
+	gdm-session-relay.$(OBJEXT) gdm-xerrors.$(OBJEXT) \
+	gdm-slave.$(OBJEXT) gdm-factory-slave.$(OBJEXT) \
+	$(am__objects_1)
 gdm_factory_slave_OBJECTS = $(am_gdm_factory_slave_OBJECTS)
 gdm_factory_slave_DEPENDENCIES =  \
 	$(top_builddir)/common/libgdmcommon.la $(am__DEPENDENCIES_1) \
@@ -124,8 +130,9 @@ gdm_factory_slave_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
 am_gdm_product_slave_OBJECTS = product-slave-main.$(OBJEXT) \
 	gdm-server.$(OBJEXT) gdm-session.$(OBJEXT) \
 	gdm-session-direct.$(OBJEXT) gdm-session-record.$(OBJEXT) \
-	gdm-session-worker-job.$(OBJEXT) gdm-slave.$(OBJEXT) \
-	gdm-product-slave.$(OBJEXT) $(am__objects_1)
+	gdm-session-worker-job.$(OBJEXT) gdm-xerrors.$(OBJEXT) \
+	gdm-slave.$(OBJEXT) gdm-product-slave.$(OBJEXT) \
+	$(am__objects_1)
 gdm_product_slave_OBJECTS = $(am_gdm_product_slave_OBJECTS)
 gdm_product_slave_DEPENDENCIES =  \
 	$(top_builddir)/common/libgdmcommon.la $(am__DEPENDENCIES_1) \
@@ -162,8 +169,9 @@ am_gdm_simple_slave_OBJECTS = simple-slave-main.$(OBJEXT) \
 	gdm-welcome-session.$(OBJEXT) gdm-greeter-session.$(OBJEXT) \
 	gdm-server.$(OBJEXT) gdm-session.$(OBJEXT) \
 	gdm-session-direct.$(OBJEXT) gdm-session-record.$(OBJEXT) \
-	gdm-session-worker-job.$(OBJEXT) gdm-slave.$(OBJEXT) \
-	gdm-simple-slave.$(OBJEXT) $(am__objects_1)
+	gdm-session-worker-job.$(OBJEXT) gdm-xerrors.$(OBJEXT) \
+	gdm-slave.$(OBJEXT) gdm-simple-slave.$(OBJEXT) \
+	$(am__objects_1)
 gdm_simple_slave_OBJECTS = $(am_gdm_simple_slave_OBJECTS)
 gdm_simple_slave_DEPENDENCIES =  \
 	$(top_builddir)/common/libgdmcommon.la $(am__DEPENDENCIES_1) \
@@ -177,8 +185,8 @@ am_gdm_xdmcp_chooser_slave_OBJECTS =  \
 	xdmcp-chooser-slave-main.$(OBJEXT) \
 	gdm-chooser-server.$(OBJEXT) ck-connector.$(OBJEXT) \
 	gdm-welcome-session.$(OBJEXT) gdm-chooser-session.$(OBJEXT) \
-	gdm-slave.$(OBJEXT) gdm-xdmcp-chooser-slave.$(OBJEXT) \
-	$(am__objects_1)
+	gdm-xerrors.$(OBJEXT) gdm-slave.$(OBJEXT) \
+	gdm-xdmcp-chooser-slave.$(OBJEXT) $(am__objects_1)
 gdm_xdmcp_chooser_slave_OBJECTS =  \
 	$(am_gdm_xdmcp_chooser_slave_OBJECTS)
 gdm_xdmcp_chooser_slave_DEPENDENCIES = $(am__DEPENDENCIES_1) \
@@ -581,6 +589,8 @@ gdm_simple_slave_SOURCES = \
 	gdm-session-record.h		\
 	gdm-session-worker-job.c	\
 	gdm-session-worker-job.h	\
+	gdm-xerrors.h			\
+	gdm-xerrors.c			\
 	gdm-slave.c			\
 	gdm-slave.h			\
 	gdm-simple-slave.c		\
@@ -616,6 +626,8 @@ gdm_factory_slave_SOURCES = \
 	gdm-session-private.h		\
 	gdm-session-relay.c		\
 	gdm-session-relay.h		\
+	gdm-xerrors.h			\
+	gdm-xerrors.c			\
 	gdm-slave.c			\
 	gdm-slave.h			\
 	gdm-factory-slave.c		\
@@ -645,6 +657,8 @@ gdm_product_slave_SOURCES = \
 	gdm-session-record.h		\
 	gdm-session-worker-job.c	\
 	gdm-session-worker-job.h	\
+	gdm-xerrors.h			\
+	gdm-xerrors.c			\
 	gdm-slave.c			\
 	gdm-slave.h			\
 	gdm-product-slave.c		\
@@ -673,6 +687,8 @@ gdm_xdmcp_chooser_slave_SOURCES = \
 	gdm-welcome-session.h			\
 	gdm-chooser-session.c			\
 	gdm-chooser-session.h			\
+	gdm-xerrors.h				\
+	gdm-xerrors.c				\
 	gdm-slave.c				\
 	gdm-slave.h				\
 	gdm-xdmcp-chooser-slave.c		\
@@ -690,7 +706,7 @@ gdm_session_worker_SOURCES = session-worker-main.c ck-connector.h \
 	ck-connector.c gdm-session-settings.h gdm-session-settings.c \
 	gdm-session-auditor.h gdm-session-auditor.c \
 	gdm-session-worker.h gdm-session-worker.c $(NULL) \
-	$(am__append_1) $(am__append_2)
+	$(am__append_2) $(am__append_3)
 gdm_session_worker_LDFLAGS = \
 	$(XLIB_LIBS)				\
 	$(PAM_LIBS)				\
@@ -706,18 +722,21 @@ gdm_binary_SOURCES = main.c gdm-display-access-file.c \
 	gdm-display-store.h gdm-display-factory.c \
 	gdm-display-factory.h gdm-local-display-factory.c \
 	gdm-local-display-factory.h gdm-display.c gdm-display.h \
-	gdm-xdmcp-display.c gdm-xdmcp-display.h \
-	gdm-xdmcp-greeter-display.c gdm-xdmcp-greeter-display.h \
-	gdm-xdmcp-chooser-display.c gdm-xdmcp-chooser-display.h \
 	gdm-static-display.c gdm-static-display.h \
 	gdm-transient-display.c gdm-transient-display.h \
 	gdm-static-factory-display.c gdm-static-factory-display.h \
 	gdm-product-display.c gdm-product-display.h gdm-manager.c \
 	gdm-manager.h gdm-slave-proxy.c gdm-slave-proxy.h $(NULL) \
-	$(am__append_3) $(am__append_4)
+	$(am__append_4) $(am__append_5)
 XDMCP_SOURCES = \
 	gdm-xdmcp-display-factory.c	\
 	gdm-xdmcp-display-factory.h	\
+	gdm-xdmcp-display.c		\
+	gdm-xdmcp-display.h		\
+	gdm-xdmcp-greeter-display.c	\
+	gdm-xdmcp-greeter-display.h	\
+	gdm-xdmcp-chooser-display.c	\
+	gdm-xdmcp-chooser-display.h	\
 	$(NULL)
 
 EXTRA_gdm_binary_SOURCES = $(XDMCP_SOURCES) $(NULL) \
@@ -998,6 +1017,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdm-xdmcp-display-factory.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdm-xdmcp-display.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdm-xdmcp-greeter-display.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gdm-xerrors.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/product-slave-main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/session-worker-main.Po@am__quote@

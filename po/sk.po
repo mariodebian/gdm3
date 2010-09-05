@@ -643,9 +643,12 @@ msgid "_Languages:"
 msgstr "_Jazyky:"
 
 #: ../gui/simple-greeter/gdm-language-chooser-widget.c:273
-#: ../gui/simple-greeter/gdm-language-option-widget.c:259
 msgid "_Language:"
 msgstr "_Jazyk:"
+
+#: ../gui/simple-greeter/gdm-language-option-widget.c:259
+msgid "Language"
+msgstr "Jazyk"
 
 #: ../gui/simple-greeter/gdm-language-option-widget.c:228
 #: ../gui/simple-greeter/gdm-layout-option-widget.c:220
@@ -667,9 +670,12 @@ msgstr "Rozloženia klávesnice"
 
 #: ../gui/simple-greeter/gdm-layout-chooser-widget.c:200
 #: ../gui/simple-greeter/gdm-layout-chooser-widget.c:201
-#: ../gui/simple-greeter/gdm-layout-option-widget.c:251
 msgid "_Keyboard:"
 msgstr "_Klávesnica:"
+
+#: ../gui/simple-greeter/gdm-layout-option-widget.c:251
+msgid "Keyboard"
+msgstr "Klávesnica"
 
 #: ../gui/simple-greeter/gdm-layout-option-widget.c:221
 msgid "Choose a keyboard layout from the full list of available layouts."
@@ -723,8 +729,8 @@ msgid "Remote Login"
 msgstr "Vzdialené prihlásenie"
 
 #: ../gui/simple-greeter/gdm-session-option-widget.c:162
-msgid "_Sessions:"
-msgstr "_Relácie:"
+msgid "Session"
+msgstr "Relácie"
 
 #: ../gui/simple-greeter/gdm-simple-greeter.schemas.in.h:1
 msgid "Banner message text"

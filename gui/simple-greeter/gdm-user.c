@@ -30,7 +30,6 @@
 #include <gio/gio.h>
 #include <gtk/gtk.h>
 
-#include "gdm-user-manager.h"
 #include "gdm-user-private.h"
 
 #define GDM_USER_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST ((klass), GDM_TYPE_USER, GdmUserClass))
@@ -38,23 +37,10 @@
 #define GDM_USER_GET_CLASS(object) (G_TYPE_INSTANCE_GET_CLASS ((object), GDM_TYPE_USER, GdmUserClass))
 
 #define GLOBAL_FACEDIR    DATADIR "/faces"
-#define MAX_ICON_SIZE     128
 #define MAX_FILE_SIZE     65536
-#define MINIMAL_UID       100
 
 enum {
-        PROP_0,
-        PROP_MANAGER,
-        PROP_REAL_NAME,
-        PROP_DISPLAY_NAME,
-        PROP_USER_NAME,
-        PROP_UID,
-        PROP_HOME_DIR,
-        PROP_SHELL,
-        PROP_LOGIN_FREQUENCY,
-};
-
-enum {
+        CHANGED,
         SESSIONS_CHANGED,
         LAST_SIGNAL
 };
@@ -62,12 +48,9 @@ enum {
 struct _GdmUser {
         GObject         parent;
 
-        GdmUserManager *manager;
-
         uid_t           uid;
         char           *user_name;
         char           *real_name;
-        char           *display_name;
         char           *home_dir;
         char           *shell;
         GList          *sessions;
@@ -77,8 +60,6 @@ struct _GdmUser {
 typedef struct _GdmUserClass
 {
         GObjectClass parent_class;
-
-        void (* sessions_changed) (GdmUser *user);
 } GdmUserClass;
 
 static void gdm_user_finalize     (GObject      *object);
@@ -145,85 +126,6 @@ gdm_user_get_num_sessions (GdmUser    *user)
         return g_list_length (user->sessions);
 }
 
-GList *
-gdm_user_get_sessions (GdmUser *user)
-{
-        return user->sessions;
-}
-
-static void
-_gdm_user_set_login_frequency (GdmUser *user,
-                               gulong   login_frequency)
-{
-        user->login_frequency = login_frequency;
-        g_object_notify (G_OBJECT (user), "login-frequency");
-}
-
-static void
-gdm_user_set_property (GObject      *object,
-                       guint         param_id,
-                       const GValue *value,
-                       GParamSpec   *pspec)
-{
-        GdmUser *user;
-
-        user = GDM_USER (object);
-
-        switch (param_id) {
-        case PROP_MANAGER:
-                user->manager = g_value_get_object (value);
-                g_assert (user->manager);
-                break;
-        case PROP_LOGIN_FREQUENCY:
-                _gdm_user_set_login_frequency (user, g_value_get_ulong (value));
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-                break;
-        }
-}
-
-static void
-gdm_user_get_property (GObject    *object,
-                       guint       param_id,
-                       GValue     *value,
-                       GParamSpec *pspec)
-{
-        GdmUser *user;
-
-        user = GDM_USER (object);
-
-        switch (param_id) {
-        case PROP_MANAGER:
-                g_value_set_object (value, user->manager);
-                break;
-        case PROP_USER_NAME:
-                g_value_set_string (value, user->user_name);
-                break;
-        case PROP_REAL_NAME:
-                g_value_set_string (value, user->real_name);
-                break;
-        case PROP_DISPLAY_NAME:
-                g_value_set_string (value, user->display_name);
-                break;
-        case PROP_HOME_DIR:
-                g_value_set_string (value, user->home_dir);
-                break;
-        case PROP_UID:
-                g_value_set_ulong (value, user->uid);
-                break;
-        case PROP_SHELL:
-                g_value_set_string (value, user->shell);
-                break;
-        case PROP_LOGIN_FREQUENCY:
-                g_value_set_ulong (value, user->login_frequency);
-                break;
-        default:
-                G_OBJECT_WARN_INVALID_PROPERTY_ID (object, param_id, pspec);
-                break;
-        }
-}
-
 static void
 gdm_user_class_init (GdmUserClass *class)
 {
@@ -231,78 +133,21 @@ gdm_user_class_init (GdmUserClass *class)
 
         gobject_class = G_OBJECT_CLASS (class);
 
-        gobject_class->set_property = gdm_user_set_property;
-        gobject_class->get_property = gdm_user_get_property;
         gobject_class->finalize = gdm_user_finalize;
 
-        g_object_class_install_property (gobject_class,
-                                         PROP_MANAGER,
-                                         g_param_spec_object ("manager",
-                                                              _("Manager"),
-                                                              _("The user manager object this user is controlled by."),
-                                                              GDM_TYPE_USER_MANAGER,
-                                                              (G_PARAM_READWRITE |
-                                                               G_PARAM_CONSTRUCT_ONLY)));
-
-        g_object_class_install_property (gobject_class,
-                                         PROP_REAL_NAME,
-                                         g_param_spec_string ("real-name",
-                                                              "Real Name",
-                                                              "The real name to display for this user.",
-                                                              NULL,
-                                                              G_PARAM_READABLE));
-
-        g_object_class_install_property (gobject_class,
-                                         PROP_DISPLAY_NAME,
-                                         g_param_spec_string ("display-name",
-                                                              "Display Name",
-                                                              "The unique name to display for this user.",
-                                                              NULL,
-                                                              G_PARAM_READABLE));
-
-        g_object_class_install_property (gobject_class,
-                                         PROP_UID,
-                                         g_param_spec_ulong ("uid",
-                                                             "User ID",
-                                                             "The UID for this user.",
-                                                             0, G_MAXULONG, 0,
-                                                             G_PARAM_READABLE));
-        g_object_class_install_property (gobject_class,
-                                         PROP_USER_NAME,
-                                         g_param_spec_string ("user-name",
-                                                              "User Name",
-                                                              "The login name for this user.",
-                                                              NULL,
-                                                              G_PARAM_READABLE));
-        g_object_class_install_property (gobject_class,
-                                         PROP_HOME_DIR,
-                                         g_param_spec_string ("home-directory",
-                                                              "Home Directory",
-                                                              "The home directory for this user.",
-                                                              NULL,
-                                                              G_PARAM_READABLE));
-        g_object_class_install_property (gobject_class,
-                                         PROP_SHELL,
-                                         g_param_spec_string ("shell",
-                                                              "Shell",
-                                                              "The shell for this user.",
-                                                              NULL,
-                                                              G_PARAM_READABLE));
-        g_object_class_install_property (gobject_class,
-                                         PROP_LOGIN_FREQUENCY,
-                                         g_param_spec_ulong ("login-frequency",
-                                                             "login frequency",
-                                                             "login frequency",
-                                                             0,
-                                                             G_MAXULONG,
-                                                             0,
-                                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-
+        signals [CHANGED] =
+                g_signal_new ("changed",
+                              G_TYPE_FROM_CLASS (class),
+                              G_SIGNAL_RUN_LAST,
+                              0,
+                              NULL, NULL,
+                              g_cclosure_marshal_VOID__VOID,
+                              G_TYPE_NONE, 0);
         signals [SESSIONS_CHANGED] =
                 g_signal_new ("sessions-changed",
                               G_TYPE_FROM_CLASS (class),
                               G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (GdmUserClass, sessions_changed),
+                              0,
                               NULL, NULL,
                               g_cclosure_marshal_VOID__VOID,
                               G_TYPE_NONE, 0);
@@ -311,10 +156,8 @@ gdm_user_class_init (GdmUserClass *class)
 static void
 gdm_user_init (GdmUser *user)
 {
-        user->manager = NULL;
         user->user_name = NULL;
         user->real_name = NULL;
-        user->display_name = NULL;
         user->sessions = NULL;
 }
 
@@ -327,14 +170,13 @@ gdm_user_finalize (GObject *object)
 
         g_free (user->user_name);
         g_free (user->real_name);
-        g_free (user->display_name);
 
         if (G_OBJECT_CLASS (gdm_user_parent_class)->finalize)
                 (*G_OBJECT_CLASS (gdm_user_parent_class)->finalize) (object);
 }
 
 /**
- * _gdm_user_update:
+ * _gdm_user_update_from_pwent:
  * @user: the user object to update.
  * @pwent: the user data to use.
  *
@@ -343,15 +185,16 @@ gdm_user_finalize (GObject *object)
  * Since: 1.0
  **/
 void
-_gdm_user_update (GdmUser             *user,
-                  const struct passwd *pwent)
+_gdm_user_update_from_pwent (GdmUser             *user,
+                             const struct passwd *pwent)
 {
         gchar *real_name = NULL;
+        gboolean changed;
 
         g_return_if_fail (GDM_IS_USER (user));
         g_return_if_fail (pwent != NULL);
 
-        g_object_freeze_notify (G_OBJECT (user));
+        changed = FALSE;
 
         /* Display Name */
         if (pwent->pw_gecos && pwent->pw_gecos[0] != '\0') {
@@ -360,7 +203,7 @@ _gdm_user_update (GdmUser             *user,
 
                 if (g_utf8_validate (pwent->pw_gecos, -1, NULL)) {
                         valid_utf8_name = pwent->pw_gecos;
-                        first_comma = g_utf8_strchr (valid_utf8_name, -1, ',');
+                        first_comma = strchr (valid_utf8_name, ',');
                 } else {
                         g_warning ("User %s has invalid UTF-8 in GECOS field. "
                                    "It would be a good thing to check /etc/passwd.",
@@ -369,7 +212,7 @@ _gdm_user_update (GdmUser             *user,
 
                 if (first_comma) {
                         real_name = g_strndup (valid_utf8_name,
-                                                  (first_comma - valid_utf8_name));
+                                               (first_comma - valid_utf8_name));
                 } else if (valid_utf8_name) {
                         real_name = g_strdup (valid_utf8_name);
                 } else {
@@ -384,66 +227,52 @@ _gdm_user_update (GdmUser             *user,
                 real_name = NULL;
         }
 
-        if ((real_name && !user->real_name) ||
-            (!real_name && user->real_name) ||
-            (real_name &&
-             user->real_name &&
-             strcmp (real_name, user->real_name) != 0)) {
+        if (g_strcmp0 (real_name, user->real_name) != 0) {
                 g_free (user->real_name);
                 user->real_name = real_name;
-                g_object_notify (G_OBJECT (user), "real-name");
+                changed = TRUE;
         } else {
                 g_free (real_name);
-        }
-
-        /* Unique Display Name */
-        if ((!user->real_name && user->display_name) ||
-            (user->real_name &&
-             user->display_name &&
-             strncmp (user->real_name, user->display_name, strlen (user->real_name)) != 0)) {
-                g_free (user->display_name);
-                user->display_name = NULL;
-                g_object_notify (G_OBJECT (user), "display-name");
         }
 
         /* UID */
         if (pwent->pw_uid != user->uid) {
                 user->uid = pwent->pw_uid;
-                g_object_notify (G_OBJECT (user), "uid");
+                changed = TRUE;
         }
 
         /* Username */
-        if ((pwent->pw_name && !user->user_name) ||
-            (!pwent->pw_name && user->user_name) ||
-            (pwent->pw_name &&
-             user->user_name &&
-             strcmp (user->user_name, pwent->pw_name) != 0)) {
+        if (g_strcmp0 (pwent->pw_name, user->user_name) != 0) {
                 g_free (user->user_name);
                 user->user_name = g_strdup (pwent->pw_name);
-                g_object_notify (G_OBJECT (user), "user-name");
+                changed = TRUE;
         }
 
-        /* Home Directory */
-        if ((pwent->pw_dir && !user->home_dir) ||
-            (!pwent->pw_dir && user->home_dir) ||
-            strcmp (user->home_dir, pwent->pw_dir) != 0) {
-                g_free (user->home_dir);
-                user->home_dir = g_strdup (pwent->pw_dir);
-                g_object_notify (G_OBJECT (user), "home-directory");
+        if (changed) {
+                g_signal_emit (user, signals[CHANGED], 0);
+        }
+}
+
+/**
+ * _gdm_user_update_login_frequency:
+ * @user: the user object to update
+ *
+ * Updates the login frequency of @user
+ *
+ * Since: 1.0
+ **/
+void
+_gdm_user_update_login_frequency (GdmUser *user,
+                                  guint64  login_frequency)
+{
+        g_return_if_fail (GDM_IS_USER (user));
+
+        if (login_frequency == user->login_frequency) {
+                return;
         }
 
-        /* Shell */
-        if ((pwent->pw_shell && !user->shell) ||
-            (!pwent->pw_shell && user->shell) ||
-            (pwent->pw_shell &&
-             user->shell &&
-             strcmp (user->shell, pwent->pw_shell) != 0)) {
-                g_free (user->shell);
-                user->shell = g_strdup (pwent->pw_shell);
-                g_object_notify (G_OBJECT (user), "shell");
-        }
-
-        g_object_thaw_notify (G_OBJECT (user));
+        user->login_frequency = login_frequency;
+        g_signal_emit (user, signals[CHANGED], 0);
 }
 
 /**
@@ -458,7 +287,7 @@ _gdm_user_update (GdmUser             *user,
  * Since: 1.0
  **/
 
-uid_t
+gulong
 gdm_user_get_uid (GdmUser *user)
 {
         g_return_val_if_fail (GDM_IS_USER (user), -1);
@@ -477,32 +306,12 @@ gdm_user_get_uid (GdmUser *user)
  *
  * Since: 1.0
  **/
-G_CONST_RETURN gchar *
+const char *
 gdm_user_get_real_name (GdmUser *user)
 {
         g_return_val_if_fail (GDM_IS_USER (user), NULL);
 
         return (user->real_name ? user->real_name : user->user_name);
-}
-
-/**
- * gdm_user_get_display_name:
- * @user: the user object to examine.
- *
- * Retrieves the unique display name of @user.
- *
- * Returns: a pointer to an array of characters which must not be modified or
- *  freed, or %NULL.
- *
- * Since: 1.0
- **/
-G_CONST_RETURN gchar *
-gdm_user_get_display_name (GdmUser *user)
-{
-        g_return_val_if_fail (GDM_IS_USER (user), NULL);
-
-        return (user->display_name ? user->display_name
-                : gdm_user_get_real_name (user));
 }
 
 /**
@@ -517,52 +326,12 @@ gdm_user_get_display_name (GdmUser *user)
  * Since: 1.0
  **/
 
-G_CONST_RETURN gchar *
+const char *
 gdm_user_get_user_name (GdmUser *user)
 {
         g_return_val_if_fail (GDM_IS_USER (user), NULL);
 
         return user->user_name;
-}
-
-/**
- * gdm_user_get_home_directory:
- * @user: the user object to examine.
- *
- * Retrieves the home directory of @user.
- *
- * Returns: a pointer to an array of characters which must not be modified or
- *  freed, or %NULL.
- *
- * Since: 1.0
- **/
-
-G_CONST_RETURN gchar *
-gdm_user_get_home_directory (GdmUser *user)
-{
-        g_return_val_if_fail (GDM_IS_USER (user), NULL);
-
-        return user->home_dir;
-}
-
-/**
- * gdm_user_get_shell:
- * @user: the user object to examine.
- *
- * Retrieves the login shell of @user.
- *
- * Returns: a pointer to an array of characters which must not be modified or
- *  freed, or %NULL.
- *
- * Since: 1.0
- **/
-
-G_CONST_RETURN gchar *
-gdm_user_get_shell (GdmUser *user)
-{
-        g_return_val_if_fail (GDM_IS_USER (user), NULL);
-
-        return user->shell;
 }
 
 gulong
@@ -573,62 +342,6 @@ gdm_user_get_login_frequency (GdmUser *user)
         return user->login_frequency;
 }
 
-/**
- * _gdm_user_show_full_display_name:
- * @user: the user object to examine.
- *
- * Updates the unique display name of @user to "Real Name (username)".
- *
- * Since: 1.0
- **/
-void
-_gdm_user_show_full_display_name (GdmUser *user)
-{
-        char *uniq_name;
-
-        g_return_if_fail (GDM_IS_USER (user));
-
-        if (user->real_name != NULL) {
-                uniq_name = g_strdup_printf ("%s (%s)",
-                                             user->real_name,
-                                             user->user_name);
-        } else {
-                uniq_name = NULL;
-        }
-
-        if ((user->real_name && !user->display_name) ||
-            (!user->real_name && user->display_name) ||
-            (user->real_name &&
-             user->display_name &&
-             strcmp (uniq_name, user->display_name) != 0)) {
-                g_free (user->display_name);
-                user->display_name = uniq_name;
-                g_object_notify (G_OBJECT (user), "display-name");
-        } else {
-                g_free (uniq_name);
-        }
-}
-
-/**
- * _gdm_user_show_short_display_name:
- * @user: the user object to examine.
- *
- * Resets the unique display name of @user.
- *
- * Since: 1.0
- **/
-void
-_gdm_user_show_short_display_name (GdmUser *user)
-{
-        g_return_if_fail (GDM_IS_USER (user));
-
-        if (user->display_name) {
-                g_free (user->display_name);
-                user->display_name = NULL;
-                g_object_notify (G_OBJECT (user), "display-name");
-        }
-}
-
 int
 gdm_user_collate (GdmUser *user1,
                   GdmUser *user2)
@@ -637,10 +350,36 @@ gdm_user_collate (GdmUser *user1,
         const char *str2;
         gulong      num1;
         gulong      num2;
+        guint       len1;
+        guint       len2;
 
         g_return_val_if_fail (GDM_IS_USER (user1), 0);
         g_return_val_if_fail (GDM_IS_USER (user2), 0);
 
+        num1 = user1->login_frequency;
+        num2 = user2->login_frequency;
+
+        if (num1 > num2) {
+                return -1;
+        }
+
+        if (num1 < num2) {
+                return 1;
+        }
+
+
+        len1 = g_list_length (user1->sessions);
+        len2 = g_list_length (user2->sessions);
+
+        if (len1 > len2) {
+                return -1;
+        }
+
+        if (len1 < len2) {
+                return 1;
+        }
+
+        /* if login frequency is equal try names */
         if (user1->real_name != NULL) {
                 str1 = user1->real_name;
         } else {
@@ -653,18 +392,6 @@ gdm_user_collate (GdmUser *user1,
                 str2 = user2->user_name;
         }
 
-        num1 = user1->login_frequency;
-        num2 = user2->login_frequency;
-        g_debug ("Login freq 1=%u 2=%u", (guint)num1, (guint)num2);
-        if (num1 > num2) {
-                return -1;
-        }
-
-        if (num1 < num2) {
-                return 1;
-        }
-
-        /* if login frequency is equal try names */
         if (str1 == NULL && str2 != NULL) {
                 return -1;
         }
@@ -681,67 +408,27 @@ gdm_user_collate (GdmUser *user1,
 }
 
 static gboolean
-check_user_file (const char *filename,
-                 gssize      max_file_size)
+check_user_file (const char *filename)
 {
+        gssize      max_file_size = MAX_FILE_SIZE;
         struct stat fileinfo;
-
-        if (max_file_size < 0) {
-                max_file_size = G_MAXSIZE;
-        }
 
         /* Exists/Readable? */
         if (stat (filename, &fileinfo) < 0) {
-                g_debug ("File does not exist");
                 return FALSE;
         }
 
         /* Is a regular file */
         if (G_UNLIKELY (!S_ISREG (fileinfo.st_mode))) {
-                g_debug ("File is not a regular file");
                 return FALSE;
         }
 
         /* Size is kosher? */
         if (G_UNLIKELY (fileinfo.st_size > max_file_size)) {
-                g_debug ("File is too large");
                 return FALSE;
         }
 
         return TRUE;
-}
-
-static char *
-get_filesystem_type (const char *path)
-{
-        GFile      *file;
-        GFileInfo  *file_info;
-        GError     *error;
-        char       *filesystem_type;
-
-        file = g_file_new_for_path (path);
-        error = NULL;
-        file_info = g_file_query_filesystem_info (file,
-                                                  G_FILE_ATTRIBUTE_FILESYSTEM_TYPE,
-                                                  NULL,
-                                                  &error);
-        if (file_info == NULL) {
-                g_warning ("Unable to query filesystem type for %s: %s", path, error->message);
-                g_error_free (error);
-                g_object_unref (file);
-                return NULL;
-        }
-
-        filesystem_type = g_strdup (g_file_info_get_attribute_string (file_info,
-                                                                      G_FILE_ATTRIBUTE_FILESYSTEM_TYPE));
-        if (filesystem_type == NULL) {
-                g_warning ("GIO returned NULL filesystem type for %s", path);
-        }
-
-        g_object_unref (file);
-        g_object_unref (file_info);
-
-        return filesystem_type;
 }
 
 static GdkPixbuf *
@@ -750,13 +437,10 @@ render_icon_from_cache (GdmUser *user,
 {
         GdkPixbuf  *retval;
         char       *path;
-        gboolean    is_autofs;
         gboolean    res;
-        char       *filesystem_type;
 
         path = g_build_filename (GDM_CACHE_DIR, user->user_name, "face", NULL);
-        res = check_user_file (path,
-                               MAX_FILE_SIZE);
+        res = check_user_file (path);
         if (res) {
                 retval = gdk_pixbuf_new_from_file_at_size (path,
                                                            icon_size,
@@ -992,6 +676,12 @@ frame_pixbuf (GdkPixbuf *source)
         return dest;
 }
 
+gboolean
+gdm_user_is_logged_in (GdmUser *user)
+{
+        return user->sessions != NULL;
+}
+
 GdkPixbuf *
 gdm_user_render_icon (GdmUser   *user,
                       gint       icon_size)
@@ -1014,8 +704,7 @@ gdm_user_render_icon (GdmUser   *user,
 
         /* Try ${GlobalFaceDir}/${username} */
         path = g_build_filename (GLOBAL_FACEDIR, user->user_name, NULL);
-        res = check_user_file (path,
-                               MAX_FILE_SIZE);
+        res = check_user_file (path);
         if (res) {
                 pixbuf = gdk_pixbuf_new_from_file_at_size (path,
                                                            icon_size,
@@ -1035,8 +724,7 @@ gdm_user_render_icon (GdmUser   *user,
         tmp = g_strconcat (user->user_name, ".png", NULL);
         path = g_build_filename (GLOBAL_FACEDIR, tmp, NULL);
         g_free (tmp);
-        res = check_user_file (path,
-                               MAX_FILE_SIZE);
+        res = check_user_file (path);
         if (res) {
                 pixbuf = gdk_pixbuf_new_from_file_at_size (path,
                                                            icon_size,
@@ -1059,3 +747,17 @@ gdm_user_render_icon (GdmUser   *user,
 
         return pixbuf;
 }
+
+const char *
+gdm_user_get_primary_session_id (GdmUser *user)
+{
+        if (!gdm_user_is_logged_in (user)) {
+                g_debug ("User %s is not logged in, so has no primary session",
+                         gdm_user_get_user_name (user));
+                return NULL;
+        }
+
+        /* FIXME: better way to choose? */
+        return user->sessions->data;
+}
+

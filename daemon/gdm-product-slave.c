@@ -809,6 +809,13 @@ on_relay_start_conversation (GdmProductSlave *slave,
 }
 
 static void
+on_relay_open_session (GdmProductSlave *slave,
+                        DBusMessage     *message)
+{
+        gdm_session_open_session (GDM_SESSION (slave->priv->session));
+}
+
+static void
 on_relay_start_session (GdmProductSlave *slave,
                         DBusMessage     *message)
 {
@@ -847,6 +854,7 @@ create_new_session (GdmProductSlave *slave)
         g_free (display_id);
         g_free (display_name);
         g_free (display_hostname);
+        g_free (display_x11_authority_file);
         g_free (display_device);
 
         g_signal_connect (slave->priv->session,
@@ -1014,6 +1022,8 @@ relay_dbus_handle_message (DBusConnection *connection,
                 on_relay_layout_selected (slave, message);
         } else if (dbus_message_is_signal (message, RELAY_SERVER_DBUS_INTERFACE, "UserSelected")) {
                 on_relay_user_selected (slave, message);
+        } else if (dbus_message_is_signal (message, RELAY_SERVER_DBUS_INTERFACE, "OpenSession")) {
+                on_relay_open_session (slave, message);
         } else if (dbus_message_is_signal (message, RELAY_SERVER_DBUS_INTERFACE, "StartSession")) {
                 on_relay_start_session (slave, message);
         } else if (dbus_message_is_signal (message, RELAY_SERVER_DBUS_INTERFACE, "StartConversation")) {
@@ -1249,6 +1259,8 @@ gdm_product_slave_finalize (GObject *object)
         g_return_if_fail (slave->priv != NULL);
 
         gdm_product_slave_stop (GDM_SLAVE (slave));
+
+        g_free (slave->priv->relay_address);
 
         G_OBJECT_CLASS (gdm_product_slave_parent_class)->finalize (object);
 }

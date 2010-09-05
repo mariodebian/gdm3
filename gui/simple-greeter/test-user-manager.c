@@ -34,10 +34,20 @@
 #include "gdm-settings-client.h"
 
 static GdmUserManager *manager = NULL;
+static GMainLoop      *main_loop = NULL;
+
+static gboolean     do_monitor       = FALSE;
+static gboolean     fatal_warnings   = FALSE;
+static GOptionEntry entries []   = {
+        { "fatal-warnings", 0, 0, G_OPTION_ARG_NONE, &fatal_warnings, "Make all warnings fatal", NULL },
+        { "monitor", 0, 0, G_OPTION_ARG_NONE, &do_monitor, "Monitor changes", NULL },
+        { NULL }
+};
 
 static void
-on_users_loaded (GdmUserManager *manager,
-                 gpointer        data)
+on_is_loaded_changed (GdmUserManager *manager,
+                      GParamSpec     *pspec,
+                      gpointer        data)
 {
         GSList *users;
 
@@ -49,6 +59,9 @@ on_users_loaded (GdmUserManager *manager,
                 users = g_slist_delete_link (users, users);
         }
 
+        if (! do_monitor) {
+                g_main_loop_quit (main_loop);
+        }
 }
 
 static void
@@ -70,6 +83,9 @@ on_user_removed (GdmUserManager *manager,
 int
 main (int argc, char *argv[])
 {
+        GOptionContext *context;
+        GError         *error;
+        gboolean        res;
 
         bindtextdomain (GETTEXT_PACKAGE, GNOMELOCALEDIR);
         bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
@@ -77,7 +93,30 @@ main (int argc, char *argv[])
 
         setlocale (LC_ALL, "");
 
-        gtk_init (&argc, &argv);
+        g_type_init ();
+
+        g_type_init ();
+
+        context = g_option_context_new ("GNOME Display Manager");
+        g_option_context_add_main_entries (context, entries, NULL);
+        g_option_context_set_ignore_unknown_options (context, TRUE);
+
+        error = NULL;
+        res = g_option_context_parse (context, &argc, &argv, &error);
+        g_option_context_free (context);
+        if (! res) {
+                g_warning ("%s", error->message);
+                g_error_free (error);
+                return 0;
+        }
+
+        if (fatal_warnings) {
+                GLogLevelFlags fatal_mask;
+
+                fatal_mask = g_log_set_always_fatal (G_LOG_FATAL_MASK);
+                fatal_mask |= G_LOG_LEVEL_WARNING | G_LOG_LEVEL_CRITICAL;
+                g_log_set_always_fatal (fatal_mask);
+        }
 
         if (! gdm_settings_client_init (GDMCONFDIR "/gdm.schemas", "/")) {
                 g_critical ("Unable to initialize settings client");
@@ -85,9 +124,10 @@ main (int argc, char *argv[])
         }
 
         manager = gdm_user_manager_ref_default ();
+        g_object_set (manager, "include-all", TRUE, NULL);
         g_signal_connect (manager,
-                          "users-loaded",
-                          G_CALLBACK (on_users_loaded),
+                          "notify::is-loaded",
+                          G_CALLBACK (on_is_loaded_changed),
                           NULL);
         g_signal_connect (manager,
                           "user-added",
@@ -97,8 +137,15 @@ main (int argc, char *argv[])
                           "user-removed",
                           G_CALLBACK (on_user_removed),
                           NULL);
+        gdm_user_manager_queue_load (manager);
 
-        gtk_main ();
+        main_loop = g_main_loop_new (NULL, FALSE);
+
+        g_main_loop_run (main_loop);
+        if (main_loop != NULL) {
+                g_main_loop_unref (main_loop);
+        }
+        g_object_unref (manager);
 
         return 0;
 }

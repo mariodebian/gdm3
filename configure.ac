@@ -1,7 +1,7 @@
 
 AC_PREREQ([2.60])
 AC_INIT([gdm],
-        [2.30.2],
+        [2.30.5],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=gdm])
 
 AC_CONFIG_SRCDIR([daemon/gdm-manager.c])
@@ -147,6 +147,7 @@ AC_SUBST(SIMPLE_CHOOSER_CFLAGS)
 AC_SUBST(SIMPLE_CHOOSER_LIBS)
 
 PKG_CHECK_MODULES(APPLET,
+        dbus-glib-1 >= $DBUS_GLIB_REQUIRED_VERSION
         gtk+-2.0 >= $GTK_REQUIRED_VERSION
         libpanelapplet-2.0 >= $GNOME_PANEL_REQUIRED_VERSION)
 AC_SUBST(APPLET_CFLAGS)
@@ -941,6 +942,12 @@ dnl check for backtrace support
 dnl ---------------------------------------------------------------------------
 
 AC_CHECK_HEADERS(execinfo.h)
+
+dnl ---------------------------------------------------------------------------
+dnl check for process control
+dnl ---------------------------------------------------------------------------
+
+AC_CHECK_HEADERS(sys/prctl.h)
 
 dnl ---------------------------------------------------------------------------
 dnl - Define some variables to represent the directories we use.

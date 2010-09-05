@@ -46,16 +46,14 @@ typedef struct
 {
         GObjectClass   parent_class;
 
-        void          (* loading_users)             (GdmUserManager *user_manager);
-        void          (* users_loaded)              (GdmUserManager *user_manager);
         void          (* user_added)                (GdmUserManager *user_manager,
                                                      GdmUser        *user);
         void          (* user_removed)              (GdmUserManager *user_manager,
                                                      GdmUser        *user);
         void          (* user_is_logged_in_changed) (GdmUserManager *user_manager,
                                                      GdmUser        *user);
-        void          (* user_login_frequency_changed) (GdmUserManager *user_manager,
-                                                        GdmUser        *user);
+        void          (* user_changed)              (GdmUserManager *user_manager,
+                                                     GdmUser        *user);
 } GdmUserManagerClass;
 
 typedef enum
@@ -71,11 +69,12 @@ GType               gdm_user_manager_get_type              (void);
 
 GdmUserManager *    gdm_user_manager_ref_default           (void);
 
+void                gdm_user_manager_queue_load            (GdmUserManager *manager);
 GSList *            gdm_user_manager_list_users            (GdmUserManager *manager);
 GdmUser *           gdm_user_manager_get_user              (GdmUserManager *manager,
                                                             const char     *user_name);
 GdmUser *           gdm_user_manager_get_user_by_uid       (GdmUserManager *manager,
-                                                            uid_t           uid);
+                                                            gulong          uid);
 
 gboolean            gdm_user_manager_activate_user_session (GdmUserManager *manager,
                                                             GdmUser        *user);
