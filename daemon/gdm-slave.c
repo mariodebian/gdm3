@@ -47,6 +47,7 @@
 #include <X11/Xatom.h>
 
 #include "gdm-common.h"
+#include "gdm-xerrors.h"
 
 #include "gdm-slave.h"
 #include "gdm-slave-glue.h"
@@ -200,7 +201,7 @@ get_script_environment (GdmSlave   *slave,
                 g_hash_table_insert (hash, g_strdup ("USERNAME"),
                                      g_strdup (username));
 
-                pwent = getpwnam (username);
+                gdm_get_pwent_for_name (username, &pwent);
                 if (pwent != NULL) {
                         if (pwent->pw_dir != NULL && pwent->pw_dir[0] != '\0') {
                                 g_hash_table_insert (hash, g_strdup ("HOME"),
@@ -331,6 +332,7 @@ gdm_slave_run_script (GdmSlave   *slave,
 
         g_ptr_array_foreach (env, (GFunc)g_free, NULL);
         g_ptr_array_free (env, TRUE);
+        g_strfreev (argv);
 
         if (! res) {
                 g_warning ("GdmSlave: Unable to run script: %s", error->message);
@@ -511,8 +513,14 @@ gdm_slave_connect_to_x11_display (GdmSlave *slave)
                  * display independent of current hostname
                  */
                 gdm_slave_setup_xhost_auth (host_entries, si_entries);
+
+                gdm_error_trap_push ();
                 XAddHosts (slave->priv->server_display, host_entries,
                            G_N_ELEMENTS (host_entries));
+                XSync (slave->priv->server_display, False);
+                if (gdm_error_trap_pop ()) {
+                        g_warning ("Failed to give slave programs access to the display. Trying to proceed.");
+                }
 
                 gdm_slave_set_windowpath (slave);
         } else {
@@ -853,86 +861,103 @@ gdm_slave_add_user_authorization (GdmSlave   *slave,
          * user session is starting.
          */
         gdm_slave_setup_xhost_auth (host_entries, si_entries);
+        gdm_error_trap_push ();
         XRemoveHosts (slave->priv->server_display, host_entries,
                       G_N_ELEMENTS (host_entries));
+        XSync (slave->priv->server_display, False);
+        if (gdm_error_trap_pop ()) {
+                g_warning ("Failed to remove slave program access to the display. Trying to proceed.");
+        }
+
 
         return res;
 }
 
-static gchar *
-gdm_slave_parse_enriched_login (GdmSlave *slave,
-                                char *username,
-                                char *display_name)
+static char *
+gdm_slave_parse_enriched_login (GdmSlave   *slave,
+                                const char *username,
+                                const char *display_name)
 {
-        char in_buffer[20];
-        char **argv = NULL;
-        gint pipe1[2], in_buffer_len;
-        int  username_length;
-        pid_t pid;
+        char     **argv;
+        int        username_len;
+        GPtrArray *env;
+        GError    *error;
+        gboolean   res;
+        char      *parsed_username;
+        char      *command;
+        char      *std_output;
+        char      *std_error;
 
-        if (username == NULL)
-                return (NULL);
+        parsed_username = NULL;
+
+        if (username == NULL || username[0] == '\0') {
+                return NULL;
+        }
 
         /* A script may be used to generate the automatic/timed login name
            based on the display/host by ending the name with the pipe symbol
            '|'. */
 
-        username_length = strlen (username);
-        if (username_length > 0 && username[username_length-1] == '|') {
-                GPtrArray *env;
-                GError    *error;
-                gboolean   res;
-                char     **argv;
-                char      *std_output;
-                char      *std_error;
-
-                /* Remove the pipe symbol */
-                username[username_length-1] = '\0';
-
-                argv = NULL;
-                error = NULL;
-                if (! g_shell_parse_argv (username, NULL, &argv, &error)) {
-                      g_warning ("Could not parse command: %s", error->message);
-                      return (NULL);
-                }
-
-                g_debug ("Calling script %s to acquire auto/timed username",
-                         username);
-
-                env = get_script_environment (slave, NULL);
-                error = NULL;
-                res = g_spawn_sync (NULL,
-                                    argv,
-                                    (char **)env->pdata,
-                                    G_SPAWN_SEARCH_PATH,
-                                    NULL,
-                                    NULL,
-                                    &std_output,
-                                    &std_error,
-                                    NULL,
-                                    &error);
-
-                g_ptr_array_foreach (env, (GFunc)g_free, NULL);
-                g_ptr_array_free (env, TRUE);
-                g_strfreev (argv);
-
-                if (! res) {
-                        g_warning ("Unable to launch auto/timed login script: %s", error->message);
-                        g_error_free (error);
-	        } else {
-                        if (std_output != NULL) {
-                                g_strchomp (std_output);
-                                if (std_output[0] != '\0') {
-                                        return (g_strdup (std_output));
-                                }
-                        }
-                        return NULL;
-                }
-        } else {
-                return (g_strdup (username));
+        username_len = strlen (username);
+        if (username[username_len - 1] != '|') {
+                return g_strdup (username);
         }
 
-	return NULL;
+        /* Remove the pipe symbol */
+        command = g_strndup (username, username_len - 1);
+
+        argv = NULL;
+        error = NULL;
+        if (! g_shell_parse_argv (command, NULL, &argv, &error)) {
+                g_warning ("GdmSlave: Could not parse command '%s': %s", command, error->message);
+                g_error_free (error);
+
+                g_free (command);
+                goto out;
+        }
+
+        g_debug ("GdmSlave: running '%s' to acquire auto/timed username", command);
+        g_free (command);
+
+        env = get_script_environment (slave, NULL);
+
+        error = NULL;
+        std_output = NULL;
+        std_error = NULL;
+        res = g_spawn_sync (NULL,
+                            argv,
+                            (char **)env->pdata,
+                            G_SPAWN_SEARCH_PATH,
+                            NULL,
+                            NULL,
+                            &std_output,
+                            &std_error,
+                            NULL,
+                            &error);
+
+        g_ptr_array_foreach (env, (GFunc)g_free, NULL);
+        g_ptr_array_free (env, TRUE);
+        g_strfreev (argv);
+
+        if (! res) {
+                g_warning ("GdmSlave: Unable to launch auto/timed login script '%s': %s", username, error->message);
+                g_error_free (error);
+
+                g_free (std_output);
+                g_free (std_error);
+                goto out;
+        }
+
+        if (std_output != NULL) {
+                g_strchomp (std_output);
+                if (std_output[0] != '\0') {
+                        parsed_username = g_strdup (std_output);
+                }
+        }
+
+ out:
+
+        return parsed_username;
 }
 
 gboolean
@@ -977,7 +1002,8 @@ gdm_slave_get_timed_login_details (GdmSlave   *slave,
 
         if (usernamep != NULL) {
                 *usernamep = gdm_slave_parse_enriched_login (slave,
-                        username, slave->priv->display_name);
+                                                             username,
+                                                             slave->priv->display_name);
         } else {
                 g_free (username);
 
@@ -992,7 +1018,7 @@ gdm_slave_get_timed_login_details (GdmSlave   *slave,
         g_free (username);
 
         if (usernamep != NULL && *usernamep != NULL) {
-                pwent = getpwnam (*usernamep);
+                gdm_get_pwent_for_name (*usernamep, &pwent);
                 if (pwent == NULL) {
                         g_debug ("Invalid username %s for auto/timed login",
                                  *usernamep);
@@ -1026,7 +1052,7 @@ _get_uid_and_gid_for_user (const char *username,
         g_assert (username != NULL);
 
         errno = 0;
-        passwd_entry = getpwnam (username);
+        gdm_get_pwent_for_name (username, &passwd_entry);
 
         if (passwd_entry == NULL) {
                 return FALSE;
@@ -1665,7 +1691,9 @@ gdm_slave_finalize (GObject *object)
         g_free (slave->priv->parent_display_name);
         g_free (slave->priv->parent_display_x11_authority_file);
         g_free (slave->priv->windowpath);
-        g_array_free (slave->priv->display_x11_cookie, TRUE);
+        if (slave->priv->display_x11_cookie != NULL) {
+                g_array_free (slave->priv->display_x11_cookie, TRUE);
+        }
 
         G_OBJECT_CLASS (gdm_slave_parent_class)->finalize (object);
 }

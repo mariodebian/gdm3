@@ -104,7 +104,6 @@ enum {
         LANGUAGE_SELECTED,
         LAYOUT_SELECTED,
         SESSION_SELECTED,
-        DIALOG_HIDDEN,
         NUMBER_OF_SIGNALS
 };
 
@@ -134,10 +133,13 @@ gdm_greeter_panel_set_monitor (GdmGreeterPanel *panel,
 }
 
 static void
-_gdm_greeter_panel_set_display_is_local (GdmGreeterPanel       *panel,
-                                         gboolean               is)
+_gdm_greeter_panel_set_display_is_local (GdmGreeterPanel *panel,
+                                         gboolean         is)
 {
-        panel->priv->display_is_local = is;
+        if (panel->priv->display_is_local != is) {
+                panel->priv->display_is_local = is;
+                g_object_notify (G_OBJECT (panel), "display-is-local");
+        }
 }
 
 static void
@@ -184,24 +186,6 @@ gdm_greeter_panel_get_property (GObject        *object,
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
         }
-}
-
-static GObject *
-gdm_greeter_panel_constructor (GType                  type,
-                               guint                  n_construct_properties,
-                               GObjectConstructParam *construct_properties)
-{
-        GdmGreeterPanel      *greeter_panel;
-
-        gdm_profile_start (NULL);
-
-        greeter_panel = GDM_GREETER_PANEL (G_OBJECT_CLASS (gdm_greeter_panel_parent_class)->constructor (type,
-                                                                                                         n_construct_properties,
-                                                                                                         construct_properties));
-
-        gdm_profile_end (NULL);
-
-        return G_OBJECT (greeter_panel);
 }
 
 static void
@@ -252,6 +236,8 @@ gdm_greeter_panel_real_realize (GtkWidget *widget)
         if (GTK_WIDGET_CLASS (gdm_greeter_panel_parent_class)->realize) {
                 GTK_WIDGET_CLASS (gdm_greeter_panel_parent_class)->realize (widget);
         }
+
+        gdk_window_set_geometry_hints (widget->window, NULL, GDK_HINT_POS);
 
         gdm_greeter_panel_move_resize_window (GDM_GREETER_PANEL (widget), TRUE, TRUE);
 
@@ -385,16 +371,16 @@ gdm_greeter_panel_real_size_request (GtkWidget      *widget,
         panel = GDM_GREETER_PANEL (widget);
         bin = GTK_BIN (widget);
 
-        if (bin->child && GTK_WIDGET_VISIBLE (bin->child)) {
-                gtk_widget_size_request (bin->child, requisition);
-        }
-
         old_geometry = panel->priv->geometry;
 
         update_geometry (panel, requisition);
 
         requisition->width  = panel->priv->geometry.width;
         requisition->height = panel->priv->geometry.height;
+
+        if (bin->child && GTK_WIDGET_VISIBLE (bin->child)) {
+                gtk_widget_size_request (bin->child, requisition);
+        }
 
         if (! GTK_WIDGET_REALIZED (widget)) {
                 return;
@@ -412,6 +398,7 @@ gdm_greeter_panel_real_size_request (GtkWidget      *widget,
 
         gdm_greeter_panel_move_resize_window (panel, position_changed, size_changed);
 }
+
 static void
 gdm_greeter_panel_real_show (GtkWidget *widget)
 {
@@ -447,88 +434,6 @@ gdm_greeter_panel_real_hide (GtkWidget *widget)
 }
 
 static void
-gdm_greeter_panel_class_init (GdmGreeterPanelClass *klass)
-{
-        GObjectClass   *object_class = G_OBJECT_CLASS (klass);
-        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-        object_class->get_property = gdm_greeter_panel_get_property;
-        object_class->set_property = gdm_greeter_panel_set_property;
-        object_class->constructor = gdm_greeter_panel_constructor;
-        object_class->dispose = gdm_greeter_panel_dispose;
-        object_class->finalize = gdm_greeter_panel_finalize;
-
-        widget_class->realize = gdm_greeter_panel_real_realize;
-        widget_class->unrealize = gdm_greeter_panel_real_unrealize;
-        widget_class->size_request = gdm_greeter_panel_real_size_request;
-        widget_class->show = gdm_greeter_panel_real_show;
-        widget_class->hide = gdm_greeter_panel_real_hide;
-
-        signals[LANGUAGE_SELECTED] =
-                g_signal_new ("language-selected",
-                              G_TYPE_FROM_CLASS (object_class),
-                              G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (GdmGreeterPanelClass, language_selected),
-                              NULL,
-                              NULL,
-                              g_cclosure_marshal_VOID__STRING,
-                              G_TYPE_NONE,
-                              1, G_TYPE_STRING);
-
-        signals[LAYOUT_SELECTED] =
-                g_signal_new ("layout-selected",
-                              G_TYPE_FROM_CLASS (object_class),
-                              G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (GdmGreeterPanelClass, layout_selected),
-                              NULL,
-                              NULL,
-                              g_cclosure_marshal_VOID__STRING,
-                              G_TYPE_NONE,
-                              1, G_TYPE_STRING);
-
-        signals[SESSION_SELECTED] =
-                g_signal_new ("session-selected",
-                              G_TYPE_FROM_CLASS (object_class),
-                              G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (GdmGreeterPanelClass, session_selected),
-                              NULL,
-                              NULL,
-                              g_cclosure_marshal_VOID__STRING,
-                              G_TYPE_NONE,
-                              1, G_TYPE_STRING);
-
-        signals[DIALOG_HIDDEN] =
-                g_signal_new ("dialog-hidden",
-                              G_TYPE_FROM_CLASS (object_class),
-                              G_SIGNAL_RUN_LAST,
-                              G_STRUCT_OFFSET (GdmGreeterPanelClass, dialog_hidden),
-                              NULL,
-                              NULL,
-                              g_cclosure_marshal_VOID__VOID,
-                              G_TYPE_NONE,
-                              0);
-
-        g_object_class_install_property (object_class,
-                                         PROP_MONITOR,
-                                         g_param_spec_int ("monitor",
-                                                           "Xinerama monitor",
-                                                           "The monitor (in terms of Xinerama) which the window is on",
-                                                           0,
-                                                           G_MAXINT,
-                                                           0,
-                                                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-        g_object_class_install_property (object_class,
-                                         PROP_DISPLAY_IS_LOCAL,
-                                         g_param_spec_boolean ("display-is-local",
-                                                               "display is local",
-                                                               "display is local",
-                                                               FALSE,
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
-
-        g_type_class_add_private (klass, sizeof (GdmGreeterPanelPrivate));
-}
-
-static void
 on_language_activated (GdmLanguageOptionWidget *widget,
                        GdmGreeterPanel         *panel)
 {
@@ -544,14 +449,6 @@ on_language_activated (GdmLanguageOptionWidget *widget,
         g_signal_emit (panel, signals[LANGUAGE_SELECTED], 0, language);
 
         g_free (language);
-}
-
-static void
-on_language_dialog_hidden(GdmLanguageOptionWidget *widget,
-                          GdmGreeterPanel         *panel)
-{
-
-        g_signal_emit (panel, signals[DIALOG_HIDDEN], 0);
 }
 
 static void
@@ -574,15 +471,6 @@ on_layout_activated (GdmLayoutOptionWidget *widget,
 
         g_free (layout);
 }
-
-static void
-on_layout_dialog_hidden (GdmLayoutOptionWidget *widget,
-                         GdmGreeterPanel         *panel)
-{
-
-        g_signal_emit (panel, signals[DIALOG_HIDDEN], 0);
-}
-
 static void
 on_session_activated (GdmSessionOptionWidget *widget,
                       GdmGreeterPanel        *panel)
@@ -832,15 +720,13 @@ on_shutdown_menu_deactivate (GdmGreeterPanel *panel)
 }
 
 static void
-gdm_greeter_panel_init (GdmGreeterPanel *panel)
+setup_panel (GdmGreeterPanel *panel)
 {
         NaTray    *tray;
         GtkWidget *spacer;
-        int padding;
+        int        padding;
 
         gdm_profile_start (NULL);
-
-        panel->priv = GDM_GREETER_PANEL_GET_PRIVATE (panel);
 
         GTK_WIDGET_SET_FLAGS (GTK_WIDGET (panel), GTK_CAN_FOCUS);
 
@@ -872,7 +758,7 @@ gdm_greeter_panel_init (GdmGreeterPanel *panel)
         spacer = gtk_label_new ("");
         gtk_box_pack_start (GTK_BOX (panel->priv->option_hbox), spacer, TRUE, TRUE, 6);
         gtk_widget_show (spacer);
-    
+
         panel->priv->client = gconf_client_get_default ();
 
         gdm_profile_start ("creating option widget");
@@ -880,9 +766,6 @@ gdm_greeter_panel_init (GdmGreeterPanel *panel)
         g_signal_connect (G_OBJECT (panel->priv->language_option_widget),
                           "language-activated",
                           G_CALLBACK (on_language_activated), panel);
-        g_signal_connect (G_OBJECT (panel->priv->language_option_widget),
-                          "dialog-hidden",
-                          G_CALLBACK (on_language_dialog_hidden), panel);
         gtk_box_pack_start (GTK_BOX (panel->priv->option_hbox), panel->priv->language_option_widget, FALSE, FALSE, 6);
         gdm_profile_end ("creating option widget");
 
@@ -890,9 +773,6 @@ gdm_greeter_panel_init (GdmGreeterPanel *panel)
         g_signal_connect (G_OBJECT (panel->priv->layout_option_widget),
                           "layout-activated",
                           G_CALLBACK (on_layout_activated), panel);
-        g_signal_connect (G_OBJECT (panel->priv->layout_option_widget),
-                          "dialog-hidden",
-                          G_CALLBACK (on_layout_dialog_hidden), panel);
         gtk_box_pack_start (GTK_BOX (panel->priv->option_hbox), panel->priv->layout_option_widget, FALSE, FALSE, 6);
 
         panel->priv->session_option_widget = gdm_session_option_widget_new ();
@@ -936,7 +816,7 @@ gdm_greeter_panel_init (GdmGreeterPanel *panel)
                 gtk_widget_show (image);
                 gtk_container_add (GTK_CONTAINER (panel->priv->shutdown_button), image);
 
-                if (panel->priv->display_is_local) {
+                if (! panel->priv->display_is_local) {
                         menu_item = gtk_menu_item_new_with_label ("Disconnect");
                         g_signal_connect (G_OBJECT (menu_item), "activate", G_CALLBACK (do_disconnect), NULL);
                         gtk_menu_shell_append (GTK_MENU_SHELL (panel->priv->shutdown_menu), menu_item);
@@ -985,6 +865,33 @@ gdm_greeter_panel_init (GdmGreeterPanel *panel)
         gdm_profile_end (NULL);
 }
 
+static GObject *
+gdm_greeter_panel_constructor (GType                  type,
+                               guint                  n_construct_properties,
+                               GObjectConstructParam *construct_properties)
+{
+        GdmGreeterPanel      *greeter_panel;
+
+        gdm_profile_start (NULL);
+
+        greeter_panel = GDM_GREETER_PANEL (G_OBJECT_CLASS (gdm_greeter_panel_parent_class)->constructor (type,
+                                                                                                         n_construct_properties,
+                                                                                                         construct_properties));
+
+        setup_panel (greeter_panel);
+
+        gdm_profile_end (NULL);
+
+        return G_OBJECT (greeter_panel);
+}
+
+static void
+gdm_greeter_panel_init (GdmGreeterPanel *panel)
+{
+        panel->priv = GDM_GREETER_PANEL_GET_PRIVATE (panel);
+
+}
+
 static void
 gdm_greeter_panel_finalize (GObject *object)
 {
@@ -1000,7 +907,82 @@ gdm_greeter_panel_finalize (GObject *object)
         g_signal_handlers_disconnect_by_func (object, on_animation_tick, greeter_panel);
         g_object_unref (greeter_panel->priv->animation_timer);
 
+        if (greeter_panel->priv->client != NULL) {
+                g_object_unref (greeter_panel->priv->client);
+        }
+
         G_OBJECT_CLASS (gdm_greeter_panel_parent_class)->finalize (object);
+}
+
+static void
+gdm_greeter_panel_class_init (GdmGreeterPanelClass *klass)
+{
+        GObjectClass   *object_class = G_OBJECT_CLASS (klass);
+        GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+        object_class->get_property = gdm_greeter_panel_get_property;
+        object_class->set_property = gdm_greeter_panel_set_property;
+        object_class->constructor = gdm_greeter_panel_constructor;
+        object_class->dispose = gdm_greeter_panel_dispose;
+        object_class->finalize = gdm_greeter_panel_finalize;
+
+        widget_class->realize = gdm_greeter_panel_real_realize;
+        widget_class->unrealize = gdm_greeter_panel_real_unrealize;
+        widget_class->size_request = gdm_greeter_panel_real_size_request;
+        widget_class->show = gdm_greeter_panel_real_show;
+        widget_class->hide = gdm_greeter_panel_real_hide;
+
+        signals[LANGUAGE_SELECTED] =
+                g_signal_new ("language-selected",
+                              G_TYPE_FROM_CLASS (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (GdmGreeterPanelClass, language_selected),
+                              NULL,
+                              NULL,
+                              g_cclosure_marshal_VOID__STRING,
+                              G_TYPE_NONE,
+                              1, G_TYPE_STRING);
+
+        signals[LAYOUT_SELECTED] =
+                g_signal_new ("layout-selected",
+                              G_TYPE_FROM_CLASS (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (GdmGreeterPanelClass, layout_selected),
+                              NULL,
+                              NULL,
+                              g_cclosure_marshal_VOID__STRING,
+                              G_TYPE_NONE,
+                              1, G_TYPE_STRING);
+
+        signals[SESSION_SELECTED] =
+                g_signal_new ("session-selected",
+                              G_TYPE_FROM_CLASS (object_class),
+                              G_SIGNAL_RUN_LAST,
+                              G_STRUCT_OFFSET (GdmGreeterPanelClass, session_selected),
+                              NULL,
+                              NULL,
+                              g_cclosure_marshal_VOID__STRING,
+                              G_TYPE_NONE,
+                              1, G_TYPE_STRING);
+
+        g_object_class_install_property (object_class,
+                                         PROP_MONITOR,
+                                         g_param_spec_int ("monitor",
+                                                           "Xinerama monitor",
+                                                           "The monitor (in terms of Xinerama) which the window is on",
+                                                           0,
+                                                           G_MAXINT,
+                                                           0,
+                                                           G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+        g_object_class_install_property (object_class,
+                                         PROP_DISPLAY_IS_LOCAL,
+                                         g_param_spec_boolean ("display-is-local",
+                                                               "display is local",
+                                                               "display is local",
+                                                               FALSE,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
+
+        g_type_class_add_private (klass, sizeof (GdmGreeterPanelPrivate));
 }
 
 GtkWidget *
@@ -1013,7 +995,7 @@ gdm_greeter_panel_new (GdkScreen *screen,
         object = g_object_new (GDM_TYPE_GREETER_PANEL,
                                "screen", screen,
                                "monitor", monitor,
-                               "display-is-local", is_local,                               
+                               "display-is-local", is_local,
                                NULL);
 
         return GTK_WIDGET (object);
@@ -1041,8 +1023,8 @@ gdm_greeter_panel_hide_user_options (GdmGreeterPanel *panel)
 void
 gdm_greeter_panel_reset (GdmGreeterPanel *panel)
 {
+        gdm_greeter_panel_set_keyboard_layout (panel, NULL);
         gdm_greeter_panel_set_default_language_name (panel, NULL);
-        gdm_greeter_panel_set_default_layout_name (panel, NULL);
         gdm_greeter_panel_set_default_session_name (panel, NULL);
         gdm_greeter_panel_hide_user_options (panel);
 }
@@ -1075,8 +1057,8 @@ gdm_greeter_panel_set_default_language_name (GdmGreeterPanel *panel,
 }
 
 void
-gdm_greeter_panel_set_default_layout_name (GdmGreeterPanel *panel,
-                                           const char      *layout_name)
+gdm_greeter_panel_set_keyboard_layout (GdmGreeterPanel *panel,
+                                       const char      *layout_name)
 {
 #ifdef HAVE_LIBXKLAVIER
         g_return_if_fail (GDM_IS_GREETER_PANEL (panel));
@@ -1102,6 +1084,8 @@ gdm_greeter_panel_set_default_layout_name (GdmGreeterPanel *panel,
                                                    layout_name);
         }
 
+        gdm_option_widget_set_active_item (GDM_OPTION_WIDGET (panel->priv->layout_option_widget),
+                                           layout_name);
         gdm_option_widget_set_default_item (GDM_OPTION_WIDGET (panel->priv->layout_option_widget),
                                             layout_name);
 

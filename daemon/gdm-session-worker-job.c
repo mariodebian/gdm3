@@ -32,6 +32,9 @@
 #include <pwd.h>
 #include <grp.h>
 #include <signal.h>
+#ifdef HAVE_SYS_PRCTL_H
+#include <sys/prctl.h>
+#endif
 
 #include <glib.h>
 #include <glib/gi18n.h>
@@ -84,6 +87,10 @@ G_DEFINE_TYPE (GdmSessionWorkerJob, gdm_session_worker_job, G_TYPE_OBJECT)
 static void
 session_worker_job_child_setup (GdmSessionWorkerJob *session_worker_job)
 {
+        /* Terminate the process when the parent dies */
+#ifdef HAVE_SYS_PRCTL_H
+        prctl (PR_SET_PDEATHSIG, SIGTERM);
+#endif
 }
 
 static void
@@ -438,6 +445,9 @@ gdm_session_worker_job_finalize (GObject *object)
         g_return_if_fail (session_worker_job->priv != NULL);
 
         gdm_session_worker_job_stop (session_worker_job);
+
+        g_free (session_worker_job->priv->command);
+        g_free (session_worker_job->priv->server_address);
 
         G_OBJECT_CLASS (gdm_session_worker_job_parent_class)->finalize (object);
 }

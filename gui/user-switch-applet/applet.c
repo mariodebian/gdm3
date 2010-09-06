@@ -20,6 +20,7 @@
 
 #include "config.h"
 
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -75,12 +76,9 @@ typedef struct _GdmAppletData
         GtkWidget      *login_screen_item;
         GtkWidget      *quit_session_item;
 
-        gboolean        has_other_users;
-
         guint           client_notify_lockdown_id;
 
         guint           current_status;
-        guint           user_icon_changed_id;
         guint           user_notify_id;
         gint8           pixel_size;
         gint            panel_size;
@@ -482,7 +480,6 @@ gdm_applet_data_free (GdmAppletData *adata)
         gconf_client_notify_remove (adata->client, adata->client_notify_lockdown_id);
 
         g_signal_handler_disconnect (adata->user, adata->user_notify_id);
-        g_signal_handler_disconnect (adata->user, adata->user_icon_changed_id);
 
 #ifdef BUILD_PRESENSE_STUFF
         if (adata->presence_proxy != NULL) {
@@ -581,11 +578,12 @@ menuitem_style_set_cb (GtkWidget     *menuitem,
 }
 
 static void
-user_notify_display_name_cb (GObject       *object,
-                             GParamSpec    *pspec,
-                             GdmAppletData *adata)
+on_user_changed (GdmUser         *user,
+                 GdmAppletData   *adata)
 {
+        g_debug ("user changed");
         update_label (adata);
+        reset_icon (adata);
 }
 
 /* Called every time the menu is displayed (and also for some reason
@@ -702,18 +700,15 @@ do_switch (GdmAppletData *adata,
 static void
 update_switch_user (GdmAppletData *adata)
 {
-        GSList *users;
         gboolean can_switch;
+        gboolean has_other_users;
 
         can_switch = gdm_user_manager_can_switch (adata->manager);
-        users = gdm_user_manager_list_users (adata->manager);
-        adata->has_other_users = FALSE;
-        if (users != NULL) {
-                adata->has_other_users = (g_slist_length (users) > 1);
-        }
-        g_slist_free (users);
+        g_object_get (adata->manager,
+                      "has-multiple-users", &has_other_users,
+                      NULL);
 
-        if (can_switch && adata->has_other_users) {
+        if (can_switch && has_other_users) {
                 gtk_widget_show (adata->login_screen_item);
         } else {
 
@@ -722,24 +717,17 @@ update_switch_user (GdmAppletData *adata)
 }
 
 static void
-on_manager_user_added (GdmUserManager *manager,
-                       GdmUser        *user,
-                       GdmAppletData  *adata)
+on_manager_is_loaded_changed (GdmUserManager *manager,
+                              GParamSpec     *pspec,
+                              GdmAppletData  *adata)
 {
         update_switch_user (adata);
 }
 
 static void
-on_manager_user_removed (GdmUserManager *manager,
-                         GdmUser        *user,
-                         GdmAppletData  *adata)
-{
-        update_switch_user (adata);
-}
-
-static void
-on_manager_users_loaded (GdmUserManager *manager,
-                         GdmAppletData  *adata)
+on_manager_has_multiple_users_changed (GdmUserManager       *manager,
+                                       GParamSpec           *pspec,
+                                       GdmAppletData        *adata)
 {
         update_switch_user (adata);
 }
@@ -984,11 +972,11 @@ update_label (GdmAppletData *adata)
 
 #ifdef BUILD_PRESENSE_STUFF
         markup = g_strdup_printf ("<b>%s</b> <small>(%s)</small>",
-                                  gdm_user_get_display_name (GDM_USER (adata->user)),
+                                  gdm_user_get_real_name (GDM_USER (adata->user)),
                                   _(statuses[adata->current_status].display_name));
 #else
         markup = g_strdup_printf ("<b>%s</b>",
-                                  gdm_user_get_display_name (GDM_USER (adata->user)));
+                                  gdm_user_get_real_name (GDM_USER (adata->user)));
 #endif
         gtk_label_set_markup (GTK_LABEL (label), markup);
         g_free (markup);
@@ -1061,19 +1049,6 @@ create_sub_menu (GdmAppletData *adata)
         g_signal_connect (adata->menu, "show",
                           G_CALLBACK (menu_expose_cb), adata);
         gtk_widget_show (adata->menu);
-
-        g_signal_connect (adata->manager,
-                          "users-loaded",
-                          G_CALLBACK (on_manager_users_loaded),
-                          adata);
-        g_signal_connect (adata->manager,
-                          "user-added",
-                          G_CALLBACK (on_manager_user_added),
-                          adata);
-        g_signal_connect (adata->manager,
-                          "user-removed",
-                          G_CALLBACK (on_manager_user_added),
-                          adata);
 
 #ifdef BUILD_PRESENSE_STUFF
         adata->user_item = gdm_entry_menu_item_new ();
@@ -1196,13 +1171,6 @@ static void
 destroy_sub_menu (GdmAppletData *adata)
 {
         gtk_menu_item_set_submenu (GTK_MENU_ITEM (adata->menuitem), NULL);
-
-        g_signal_handlers_disconnect_by_func (adata->manager,
-                                              G_CALLBACK (on_manager_user_added),
-                                              adata);
-        g_signal_handlers_disconnect_by_func (adata->manager,
-                                              G_CALLBACK (on_manager_user_removed),
-                                              adata);
 }
 
 static void
@@ -1283,14 +1251,6 @@ reset_icon (GdmAppletData *adata)
 }
 
 static void
-on_user_icon_changed (GdmUser         *user,
-                      GdmAppletData   *adata)
-{
-        g_debug ("User icon changed");
-        reset_icon (adata);
-}
-
-static void
 setup_current_user (GdmAppletData *adata)
 {
         const char *name;
@@ -1318,16 +1278,11 @@ setup_current_user (GdmAppletData *adata)
         if (adata->user != NULL) {
                 reset_icon (adata);
 
-                adata->user_icon_changed_id =
-                        g_signal_connect (adata->user,
-                                          "icon-changed",
-                                          G_CALLBACK (on_user_icon_changed),
-                                          adata);
                 adata->user_notify_id =
                         g_signal_connect (adata->user,
-                                         "notify::display-name",
-                                         G_CALLBACK (user_notify_display_name_cb),
-                                         adata);
+                                          "changed",
+                                          G_CALLBACK (on_user_changed),
+                                          adata);
         }
 }
 
@@ -1420,16 +1375,17 @@ fill_applet (PanelApplet *applet)
                                      "widget \"*.gdm-user-switch-applet\" style \"gdm-user-switch-applet-style\"\n");
                 gtk_window_set_default_icon_name ("stock_people");
                 g_set_application_name (_("User Switch Applet"));
+
+                if (! gdm_settings_client_init (GDMCONFDIR "/gdm.schemas", "/")) {
+                        g_critical ("Unable to initialize settings client");
+                        exit (1);
+                }
+
         }
 
         adata = g_new0 (GdmAppletData, 1);
         adata->applet = applet;
         adata->panel_size = 24;
-
-        if (! gdm_settings_client_init (GDMCONFDIR "/gdm.schemas", "/")) {
-                g_critical ("Unable to initialize settings client");
-                exit (1);
-        }
 
         adata->client = gconf_client_get_default ();
 
@@ -1515,6 +1471,17 @@ fill_applet (PanelApplet *applet)
         gtk_widget_show (adata->menubar);
 
         adata->manager = gdm_user_manager_ref_default ();
+        g_object_set (adata->manager, "include-all", TRUE, NULL);
+        g_signal_connect (adata->manager,
+                          "notify::is-loaded",
+                          G_CALLBACK (on_manager_is_loaded_changed),
+                          adata);
+        g_signal_connect (adata->manager,
+                          "notify::has-multiple-users",
+                          G_CALLBACK (on_manager_has_multiple_users_changed),
+                          adata);
+
+        gdm_user_manager_queue_load (adata->manager);
         setup_current_user (adata);
 
         gconf_client_add_dir (adata->client,

@@ -138,8 +138,8 @@ on_default_layout_name_changed (GdmGreeterClient  *client,
                                 GdmGreeterSession *session)
 {
         g_debug ("GdmGreeterSession: default layout name changed: %s", text);
-        gdm_greeter_panel_set_default_layout_name (GDM_GREETER_PANEL (session->priv->panel),
-                                                   text);
+        gdm_greeter_panel_set_keyboard_layout (GDM_GREETER_PANEL (session->priv->panel),
+                                               text);
 }
 
 static void
@@ -249,12 +249,6 @@ on_select_layout (GdmGreeterSession      *session,
 }
 
 static void
-on_dialog_hidden (GdmGreeterSession     *session)
-{
-        gtk_window_present (GTK_WINDOW (session->priv->login_window));
-}
-
-static void
 on_select_user (GdmGreeterLoginWindow *login_window,
                 const char            *text,
                 GdmGreeterSession     *session)
@@ -355,11 +349,6 @@ toggle_panel (GdmGreeterSession *session,
                 g_signal_connect_swapped (session->priv->panel,
                                           "session-selected",
                                           G_CALLBACK (on_select_session),
-                                          session);
-
-                g_signal_connect_swapped (session->priv->panel,
-                                          "dialog-hidden",
-                                          G_CALLBACK (on_dialog_hidden),
                                           session);
 
                 gtk_widget_show (session->priv->panel);

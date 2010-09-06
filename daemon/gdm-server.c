@@ -34,6 +34,10 @@
 #include <signal.h>
 #include <sys/resource.h>
 
+#ifdef HAVE_SYS_PRCTL_H
+#include <sys/prctl.h>
+#endif
+
 #include <glib.h>
 #include <glib/gi18n.h>
 #include <glib/gstdio.h>
@@ -356,7 +360,7 @@ change_user (GdmServer *server)
                 return;
         }
 
-        pwent = getpwnam (server->priv->user_name);
+        gdm_get_pwent_for_name (server->priv->user_name, &pwent);
         if (pwent == NULL) {
                 g_warning (_("Server was to be spawned by user %s but that user doesn't exist"),
                            server->priv->user_name);
@@ -464,6 +468,11 @@ server_child_setup (GdmServer *server)
         sigemptyset (&mask);
         sigprocmask (SIG_SETMASK, &mask, NULL);
 
+        /* Terminate the process when the parent dies */
+#ifdef HAVE_SYS_PRCTL_H
+        prctl (PR_SET_PDEATHSIG, SIGTERM);
+#endif
+
         if (server->priv->priority != 0) {
                 if (setpriority (PRIO_PROCESS, 0, server->priv->priority)) {
                         g_warning (_("%s: Server priority couldn't be set to %d: %s"),
@@ -503,6 +512,7 @@ get_server_environment (GdmServer *server)
                 char **str;
                 str = g_strsplit (*l, "=", 2);
                 g_hash_table_insert (hash, str[0], str[1]);
+                g_free (str);
         }
 
         /* modify environment here */
@@ -521,7 +531,7 @@ get_server_environment (GdmServer *server)
         if (server->priv->user_name != NULL) {
                 struct passwd *pwent;
 
-                pwent = getpwnam (server->priv->user_name);
+                gdm_get_pwent_for_name (server->priv->user_name, &pwent);
 
                 if (pwent->pw_dir != NULL
                     && g_file_test (pwent->pw_dir, G_FILE_TEST_EXISTS)) {
@@ -952,6 +962,17 @@ gdm_server_finalize (GObject *object)
         remove_ready_handler (server);
 
         gdm_server_stop (server);
+
+        g_free (server->priv->command);
+        g_free (server->priv->user_name);
+        g_free (server->priv->session_args);
+        g_free (server->priv->log_dir);
+        g_free (server->priv->display_name);
+        g_free (server->priv->display_device);
+        g_free (server->priv->auth_file);
+        g_free (server->priv->parent_display_name);
+        g_free (server->priv->parent_auth_file);
+        g_free (server->priv->chosen_hostname);
 
         G_OBJECT_CLASS (gdm_server_parent_class)->finalize (object);
 }

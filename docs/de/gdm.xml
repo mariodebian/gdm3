@@ -120,11 +120,7 @@
 
     <para>XDMCP - X Displaymanager-Protokoll</para>
 
-    <para>
-      Xserver - An implementation of the X Window System.  For example the
-      Xorg Xserver provided by the X.org Foundation
-      <ulink type="http" url="http://www.x.org/">http://www.x.org</ulink>.
-    </para>
+    <para>Xserver - Eine Implementierung des »X Window System«. Beispielsweise der Xorg Xserver, der durch die »X.org Foundation« (<ulink type="http" url="http://www.x.org/">http://www.x.org</ulink>) bereit gestellt wird.</para>
 
     <para>Pfade, die mit einem Wort in eckigen Klammern beginnen, sind relativ zum Installations-Präfix. Beispielsweise bezieht sich <filename>&lt;share&gt;/pixmaps/</filename> auf <filename>/usr/share/pixmaps</filename>, wenn GDM mit <command>--prefix=/usr</command> konfiguriert wurde.</para>
   </sect1>
@@ -736,14 +732,7 @@ gdm:.my.domain
             <term>PingIntervalSeconds</term>
             <listitem>
               <synopsis>PingIntervalSeconds=60</synopsis>
-              <para>
-                If the Xserver does not respond in the specified number of
-                seconds, then the connection is stopped and the session ended.
-                When this happens the slave daemon dies with an ALARM signal.
-                Note that GDM 2.20 and earlier multiplied this setting by 2,
-                so it may be necessary to increase the timeout if upgrading
-                from GDM 2.20 and earlier to a newer version.
-              </para>
+              <para>Wenn der Xserver nicht in der festgelegten Anzahl Sekunden antwortet, dann wird die Verbindung unterbrochen und die Sitzung beendet. In diesem Fall wird der Slave-Daemon mit einem ALARM-Signal beendet. Beachten Sie, dass GDM 2.20 und ältere diese Einstellung mit 2 multiplizierten, d.h. es kann erforderlich sein, dass der Zeitablauf bei einer Aktualisierung von GDM 2.20 oder älteren auf eine neuere Version erhöht werden muss.</para>
 
               <para>Beachten Sie, dass in der Vergangenheit GDM einen Konfigurationsschlüssel »<filename>PingInterval</filename>« hatte, der auch die Einheit Minuten hatte. Für die meisten Zwecke kann diese Einstellung kleiner als eine Minute gewählt werden. Jedoch würde in den meisten Fällen, in denen XDMCP verwendet wird (wie in Terminal-Laboren), eine Verzögerung von mehr als etwa 15 Sekunden dazu führen, dass das Terminal ausgeschaltet oder neu gestartet wird, und man die Sitzung beenden möchte.</para>
             </listitem>

@@ -411,6 +411,14 @@ create_socket (struct addrinfo *ai)
                 return sock;
         }
 
+#if defined(ENABLE_IPV6) && defined(IPV6_V6ONLY)
+	if (ai->ai_family == AF_INET6) {
+		int zero = 0;
+		if (setsockopt(sock, IPPROTO_IPV6, IPV6_V6ONLY, &zero, sizeof(zero)) < 0)
+			g_warning("setsockopt(IPV6_V6ONLY): %s", g_strerror(errno));
+	}
+#endif
+
         if (bind (sock, ai->ai_addr, ai->ai_addrlen) < 0) {
                 g_warning ("bind: %s", g_strerror (errno));
                 close (sock);
@@ -2345,8 +2353,10 @@ gdm_xdmcp_handle_request (GdmXdmcpDisplayFactory *factory,
                                 GArray *cookie;
                                 char   *name;
 
+                                cookie = NULL;
                                 gdm_display_get_x11_cookie (display, &cookie, NULL);
 
+                                name = NULL;
                                 gdm_display_get_x11_display_name (display, &name, NULL);
 
                                 g_debug ("GdmXdmcpDisplayFactory: Sending authorization key for display %s", name ? name : "(null)");
@@ -2879,12 +2889,13 @@ decode_packet (GIOChannel             *source,
                 return TRUE;
         }
 
+        ss_len = (int)gdm_sockaddr_len (&clnt_ss);
+
         res = XdmcpFill (factory->priv->socket_fd, &factory->priv->buf, (XdmcpNetaddr)&clnt_ss, &ss_len);
         if G_UNLIKELY (! res) {
                 g_debug ("GdmXdmcpDisplayFactory: Could not create XDMCP buffer!");
                 return TRUE;
         }
-        ss_len = (int)gdm_sockaddr_len (&clnt_ss);
 
         res = XdmcpReadHeader (&factory->priv->buf, &header);
         if G_UNLIKELY (! res) {

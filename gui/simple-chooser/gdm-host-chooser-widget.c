@@ -208,12 +208,13 @@ decode_packet (GIOChannel           *source,
                 return TRUE;
         }
 
+        ss_len = (int)gdm_sockaddr_len (&clnt_ss);
+
         res = XdmcpFill (widget->priv->socket_fd, &buf, (XdmcpNetaddr)&clnt_ss, &ss_len);
         if G_UNLIKELY (! res) {
                 g_debug (_("XDMCP: Could not create XDMCP buffer!"));
                 return TRUE;
         }
-        ss_len = (int)gdm_sockaddr_len (&clnt_ss);
 
         res = XdmcpReadHeader (&buf, &header);
         if G_UNLIKELY (! res) {
@@ -544,6 +545,13 @@ xdmcp_init (GdmHostChooserWidget *widget)
         widget->priv->socket_fd = socket (AF_INET6, SOCK_DGRAM, 0);
         if (widget->priv->socket_fd != -1) {
                 widget->priv->have_ipv6 = TRUE;
+#ifdef IPV6_V6ONLY
+		{
+			int zero = 0;
+			if (setsockopt(widget->priv->socket_fd, IPPROTO_IPV6, IPV6_V6ONLY, &zero, sizeof(zero)) < 0)
+				g_warning("setsockopt(IPV6_V6ONLY): %s", g_strerror(errno));
+		}
+#endif
         }
 #endif
         if (! widget->priv->have_ipv6) {

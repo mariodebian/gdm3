@@ -30,15 +30,16 @@
 
 G_BEGIN_DECLS
 
-void _gdm_user_update           (GdmUser             *user,
-                                 const struct passwd *pwent);
+void _gdm_user_update_from_pwent (GdmUser             *user,
+                                  const struct passwd *pwent);
+
+void _gdm_user_update_login_frequency (GdmUser *user,
+                                       guint64  login_frequency);
+
 void _gdm_user_add_session      (GdmUser             *user,
                                  const char          *session_id);
 void _gdm_user_remove_session   (GdmUser             *user,
                                  const char          *session_id);
-
-void _gdm_user_show_full_display_name (GdmUser   *user);
-void _gdm_user_show_short_display_name  (GdmUser   *user);
 
 G_END_DECLS
 
