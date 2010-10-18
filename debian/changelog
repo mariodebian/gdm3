@@ -1,3 +1,41 @@
+gdm3 (2.30.5-4tcos1) unstable; urgency=low
+
+  * Add 26_enable_remote_timedlogin.patch
+
+ -- Mario Izquierdo Rodríguez (Thinetic Systems SLNE) <mario.izquierdo@thinetic.es>  Mon, 18 Oct 2010 17:21:16 +0200
+
+gdm3 (2.30.5-4) unstable; urgency=low
+
+  * 21_schemas_usr.patch: add some comments in the daemon.conf file to 
+    explain the available options. Thanks Joey Hess. Closes: #598666.
+  * gdm3.init: drop hal and acpid. Closes: #599015.
+  * Pass --enable-debug with DEB_BUILD_OPTIONS=debug.
+  * 20_endsession_respawn.patch: fix typo introduced in 2.30.5-2 that 
+    turns the feature completely off.
+  * 18_switch_kill_greeter.patch: ensure that the slave process dies 
+    too. Avoids leaking gdm-simple-slave processes around.
+  * 24_show_user_other.patch: dropped. It is not necessary anymore, the 
+    case without any user is handled correctly now. Furthermore it was 
+    causing the infamous focus bug. Closes: #596359.
+  * 11_xephyr_nested.patch: fix implicit pointer conversion. Thanks Dann 
+    Frazier for the report. Closes: #599104.
+
+ -- Josselin Mouette <joss@debian.org>  Wed, 06 Oct 2010 00:10:48 +0200
+
+gdm3 (2.30.5-3) unstable; urgency=low
+
+  [ Josselin Mouette ]
+  * pt_BR.po: new Brazilian Portuguese translation by Sérgio Cipolla.
+    Closes: #597669.
+  * 26_username_escape.patch: stolen in upstream git (2.30 branch). Fix 
+    escaping in the user list.
+
+  [ Luca Bruno ]
+  * 13_gdmsetup.patch: refresh and fix user-manager loading according
+    to upstream changes. Closes: #598034.
+
+ -- Josselin Mouette <joss@debian.org>  Sat, 02 Oct 2010 18:41:24 +0200
+
 gdm3 (2.30.5-2) unstable; urgency=low
 
   * 03_ipv6.patch: new patch from Julien Cristau, thanks a lot for 
