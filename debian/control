@@ -36,10 +36,10 @@ Build-Depends: gnome-pkg-tools (>= 0.16.3),
                libxft-dev,
                libxi-dev,
                libxinerama-dev,
-               libselinux1-dev,
-               libattr1-dev,
+               libselinux1-dev [linux-any],
+               libattr1-dev [linux-any],
                iso-codes,
-               libaudit-dev,
+               libaudit-dev [linux-any],
                docbook-xml
 Standards-Version: 3.9.0
 Vcs-Svn: svn://svn.debian.org/pkg-gnome/desktop/unstable/gdm3/
@@ -66,7 +66,8 @@ Recommends: zenity,
             at-spi,
             gnome-power-manager (>= 2.28),
             gnome-settings-daemon,
-            gnome-icon-theme
+            gnome-icon-theme,
+            desktop-base (>= 6)
 Suggests: libpam-gnome-keyring,
           metacity,
           gnome-mag,
