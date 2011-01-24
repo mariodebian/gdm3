@@ -1,8 +1,20 @@
-gdm3 (2.30.5-6.tcos1) unstable; urgency=low
+gdm3 (2.30.5-7) unstable; urgency=low
 
-  * Re-add 26_enable_remote_timedlogin.patch
+  [ Josselin Mouette ]
+  * gdm3.init: chown the configuration to Debian-gdm, to avoid umask 
+    issues. Closes: #603510.
+  * gdm3.postrm: handle deluser/delgroup failures gracefully.
+    Closes: #603753.
+  * 29_grep_path.patch: new patch. Don’t hardcode grep to a wrong 
+    location. Closes: #607664.
+  * 30_utf8_locale.patch: new patch. Pass locale.UTF-8 instead of 
+    locale.utf8. Closes: #607753.
 
- -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Tue, 16 Nov 2010 12:20:50 +0100
+  [ Emilio Pozuelo Monfort ]
+  * debian/gdm3.8.pod:
+    + Fix typo, thanks Yury V. Zaytsev. Closes: #610723.
+
+ -- Josselin Mouette <joss@debian.org>  Mon, 24 Jan 2011 22:56:35 +0100
 
 gdm3 (2.30.5-6) unstable; urgency=low
 
