@@ -1,3 +1,9 @@
+gdm3 (2.30.5-8tcos1) unstable; urgency=low
+
+  * Re-add 26_enable_remote_timedlogin
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Mon, 14 Mar 2011 11:37:07 +0100
+
 gdm3 (2.30.5-8) unstable; urgency=low
 
   * README.Debian: document the xauth stuff. Closes: #614972.
