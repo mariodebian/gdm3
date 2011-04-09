@@ -1,8 +1,12 @@
-gdm3 (2.30.5-8tcos1) unstable; urgency=low
+gdm3 (2.30.5-9) unstable; urgency=high
 
-  * Re-add 26_enable_remote_timedlogin
+  * README.Debian: remove reference to GDM 2.26. Closes: #616603.
+  * gdm3.8.pod: patch from Vincent Lefevre to document XAUTHORITY. 
+    Closes: #616612.
+  * 32_CVE-2011-0727.patch: patch from Ray Strode to fix local root 
+    privilege escalation. Closes: #620184, CVE-2011-0727.
 
- -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Mon, 14 Mar 2011 11:37:07 +0100
+ -- Josselin Mouette <joss@debian.org>  Sat, 09 Apr 2011 12:09:35 +0200
 
 gdm3 (2.30.5-8) unstable; urgency=low
 
