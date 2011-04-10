@@ -1,3 +1,10 @@
+gdm3 (2.30.5-9tcos1) unstable; urgency=low
+
+  * Add 26_enable_remote_timedlogin.patch
+  * Remove linux-any in debian/control
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sun, 10 Apr 2011 12:30:27 +0200
+
 gdm3 (2.30.5-9) unstable; urgency=high
 
   * README.Debian: remove reference to GDM 2.26. Closes: #616603.
