@@ -1,9 +1,11 @@
-gdm3 (2.30.5-9tcos1) unstable; urgency=low
+gdm3 (2.30.5-10) unstable; urgency=low
 
-  * Add 26_enable_remote_timedlogin.patch
-  * Remove linux-any in debian/control
+  * 33_reset_signal_handler.patch: stolen upstream. Reset SIGPIPE 
+    handler before starting the session.
+  * 34_postsession_shutdown.patch: stolen upstream. Execute the 
+    PostSession script even when GDM is killed or shut down.
 
- -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Sun, 10 Apr 2011 12:30:27 +0200
+ -- Josselin Mouette <joss@debian.org>  Wed, 20 Apr 2011 19:57:09 +0200
 
 gdm3 (2.30.5-9) unstable; urgency=high
 
