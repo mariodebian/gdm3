@@ -1,3 +1,10 @@
+gdm3 (2.30.5-10tcos1) unstable; urgency=low
+
+  * Add 26_enable_remote_timedlogin.patch
+  * Remove linux-any in debian/control
+
+ -- Mario Izquierdo (mariodebian) <mariodebian@gmail.com>  Thu, 21 Apr 2011 14:49:55 +0200
+
 gdm3 (2.30.5-10) unstable; urgency=low
 
   * 33_reset_signal_handler.patch: stolen upstream. Reset SIGPIPE 
